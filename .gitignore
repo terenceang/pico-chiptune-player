@@ -11,6 +11,7 @@
 _autosave-*
 *.tmp
 *.log
+*.dxf
 
 # Editor & Tool directories
 .claude/
