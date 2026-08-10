@@ -831,6 +831,249 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Amplifier_Audio:PAM8302AAS"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "U"
+				(at 7.62 11.43 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "PAM8302AAS"
+				(at 7.62 8.89 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "https://www.diodes.com/assets/Datasheets/PAM8302A.pdf"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "2.5W Filterless Class-D Mono Audio Amplifier, MSOP-8"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "audio amplifier class d"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "MSOP*3x3mm*P0.65mm* SOIC*3.9x4.9mm*P1.27mm*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "PAM8302AAS_0_1"
+				(rectangle
+					(start -7.62 7.62)
+					(end 7.62 -7.62)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "PAM8302AAS_1_1"
+				(pin input line
+					(at -10.16 -5.08 0)
+					(length 2.54)
+					(name "~{SD}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 7.62 -5.08 180)
+					(length 2.54)
+					(hide yes)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 5.08 0)
+					(length 2.54)
+					(name "IN+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 0 0)
+					(length 2.54)
+					(name "IN-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 10.16 5.08 180)
+					(length 2.54)
+					(name "OUT+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 10.16 270)
+					(length 2.54)
+					(name "VDD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -10.16 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 10.16 0 180)
+					(length 2.54)
+					(name "OUT-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Connector:Conn_01x02_Pin"
 			(pin_names
 				(offset 1.016)
@@ -1300,6 +1543,207 @@
 						(effects
 							(font
 								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:R_Potentiometer_Small"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "RV"
+				(at -4.445 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "R_Potentiometer_Small"
+				(at -2.54 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Potentiometer"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Sim.Device" "R"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Sim.Type" "POT"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Sim.Pins" "1=r0 2=wiper 3=r1"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "resistor variable"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Potentiometer*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "R_Potentiometer_Small_0_1"
+				(rectangle
+					(start 0.762 1.8034)
+					(end -0.762 -1.8034)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.889 0) (xy 0.635 0) (xy 1.651 0.381) (xy 1.651 -0.381) (xy 0.635 0) (xy 0.889 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+			)
+			(symbol "R_Potentiometer_Small_1_1"
+				(pin passive line
+					(at 0 2.54 270)
+					(length 0.635)
+					(name "1"
+						(effects
+							(font
+								(size 0.635 0.635)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 0.635 0.635)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 0 180)
+					(length 0.9906)
+					(name "2"
+						(effects
+							(font
+								(size 0.635 0.635)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 0.635 0.635)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 90)
+					(length 0.635)
+					(name "3"
+						(effects
+							(font
+								(size 0.635 0.635)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 0.635 0.635)
 							)
 						)
 					)
@@ -3664,164 +4108,9 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Amplifier_Audio:PAM8302A"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "U"
-				(at 0 11.43 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "PAM8302A"
-				(at 0 -11.43 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
-				(at 0 -13.97 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" "https://www.diodes.com/assets/Datasheets/PAM8302A.pdf"
-				(at 0 -16.51 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "2.5W Filterless Mono Class-D Audio Amplifier, MSOP-8"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "PAM8302A_0_1"
-				(rectangle
-					(start -10.16 8.89)
-					(end 10.16 -8.89)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(symbol "PAM8302A_1_1"
-				(pin input line
-					(at -15.24 6.35 0)
-					(length 5.08)
-					(name "IN+"
-						(effects (font (size 1.27 1.27)))
-					)
-					(number "1"
-						(effects (font (size 1.27 1.27)))
-					)
-				)
-				(pin input line
-					(at -15.24 2.54 0)
-					(length 5.08)
-					(name "~{SD}"
-						(effects (font (size 1.27 1.27)))
-					)
-					(number "2"
-						(effects (font (size 1.27 1.27)))
-					)
-				)
-				(pin input line
-					(at -15.24 -2.54 0)
-					(length 5.08)
-					(name "IN-"
-						(effects (font (size 1.27 1.27)))
-					)
-					(number "3"
-						(effects (font (size 1.27 1.27)))
-					)
-				)
-				(pin power_in line
-					(at -15.24 -6.35 0)
-					(length 5.08)
-					(name "GND"
-						(effects (font (size 1.27 1.27)))
-					)
-					(number "4"
-						(effects (font (size 1.27 1.27)))
-					)
-				)
-				(pin output line
-					(at 15.24 6.35 180)
-					(length 5.08)
-					(name "VO+"
-						(effects (font (size 1.27 1.27)))
-					)
-					(number "5"
-						(effects (font (size 1.27 1.27)))
-					)
-				)
-				(pin power_in line
-					(at 15.24 2.54 180)
-					(length 5.08)
-					(name "VDD"
-						(effects (font (size 1.27 1.27)))
-					)
-					(number "6"
-						(effects (font (size 1.27 1.27)))
-					)
-				)
-				(pin output line
-					(at 15.24 -2.54 180)
-					(length 5.08)
-					(name "VO-"
-						(effects (font (size 1.27 1.27)))
-					)
-					(number "7"
-						(effects (font (size 1.27 1.27)))
-					)
-				)
-				(pin power_in line
-					(at 15.24 -6.35 180)
-					(length 5.08)
-					(name "GND"
-						(effects (font (size 1.27 1.27)))
-					)
-					(number "8"
-						(effects (font (size 1.27 1.27)))
-					)
-				)
-			)
-		)
 	)
 	(junction
-		(at 144.78 146.05)
+		(at 143.51 151.13)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0b5d7943-03a3-4ff1-b84c-ff5e1dba1bed")
@@ -3831,12 +4120,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "18f492f0-a46f-49dd-9f55-a820b8c9e265")
-	)
-	(junction
-		(at 215.9 130.81)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "190b5728-07bf-46dd-b967-6106ec2ef817")
 	)
 	(junction
 		(at 196.85 96.52)
@@ -3857,19 +4140,19 @@
 		(uuid "37bdd3c0-52a1-4203-b446-9747a26cef5a")
 	)
 	(junction
-		(at 224.79 130.81)
+		(at 195.58 132.08)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "53d46fc6-5d00-4293-ab1b-76f9196e6e1f")
 	)
 	(junction
-		(at 27.94 161.29)
+		(at 43.18 167.64)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "57835faa-b50e-458f-b2f5-5c69af620d2b")
 	)
 	(junction
-		(at 138.43 134.62)
+		(at 137.16 139.7)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6a6daace-2acf-4a6d-8bb4-8becf925c4eb")
@@ -3893,13 +4176,13 @@
 		(uuid "88b37d94-f5d8-4851-9c11-02494cced863")
 	)
 	(junction
-		(at 144.78 157.48)
+		(at 143.51 162.56)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a7594bd7-64f5-4e45-a16a-af288d5ca07d")
 	)
 	(junction
-		(at 138.43 157.48)
+		(at 137.16 162.56)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ade6a7c5-a854-42fa-813f-1d568cec5014")
@@ -3917,13 +4200,19 @@
 		(uuid "d5de4159-bc64-4a41-bc1d-79772c47cc98")
 	)
 	(junction
-		(at 138.43 146.05)
+		(at 189.23 132.08)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d8c40043-04fe-4c5d-923a-22b22d08bf7c")
+	)
+	(junction
+		(at 137.16 151.13)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f129ac8b-b798-4c08-b357-119e1fa80f9e")
 	)
 	(junction
-		(at 208.28 130.81)
+		(at 184.15 132.08)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f96b2a61-a061-4e0d-b7c4-ae5e0595f546")
@@ -3969,7 +4258,7 @@
 		(uuid "59d430ea-d19f-481d-9afe-3267bcca2c2e")
 	)
 	(no_connect
-		(at 46.99 153.67)
+		(at 62.23 160.02)
 		(uuid "5d0a8eee-1cdd-4448-a090-e3257858cfba")
 	)
 	(no_connect
@@ -4033,7 +4322,7 @@
 		(uuid "cbdd290c-2d42-4897-bfce-35d64d6d738d")
 	)
 	(no_connect
-		(at 46.99 135.89)
+		(at 62.23 142.24)
 		(uuid "e23554b4-e975-4a4b-ad89-1b7b2affdd70")
 	)
 	(no_connect
@@ -4046,7 +4335,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 134.62) (xy 128.27 134.62)
+			(xy 120.65 139.7) (xy 127 139.7)
 		)
 		(stroke
 			(width 0)
@@ -4056,13 +4345,23 @@
 	)
 	(wire
 		(pts
-			(xy 215.9 147.32) (xy 215.9 151.13)
+			(xy 189.23 148.59) (xy 189.23 152.4)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "07065f1b-de77-4db9-8ef3-e0352643cb21")
+	)
+	(wire
+		(pts
+			(xy 214.63 132.08) (xy 214.63 133.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0b4e7dcf-1d25-4a3a-a7cc-cf806ab8c642")
 	)
 	(wire
 		(pts
@@ -4076,13 +4375,23 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 161.29) (xy 27.94 165.1)
+			(xy 43.18 167.64) (xy 43.18 171.45)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "0dfa5797-7279-449f-a15e-55e2a542b093")
+	)
+	(wire
+		(pts
+			(xy 252.73 139.7) (xy 254 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "125c2c7f-d984-47a7-9558-b57e76e62295")
 	)
 	(wire
 		(pts
@@ -4096,7 +4405,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 130.81) (xy 208.28 137.16)
+			(xy 184.15 132.08) (xy 184.15 138.43)
 		)
 		(stroke
 			(width 0)
@@ -4106,7 +4415,7 @@
 	)
 	(wire
 		(pts
-			(xy 246.38 78.74) (xy 248.92 78.74)
+			(xy 232.41 78.74) (xy 234.95 78.74)
 		)
 		(stroke
 			(width 0)
@@ -4116,7 +4425,7 @@
 	)
 	(wire
 		(pts
-			(xy 191.77 137.16) (xy 189.23 137.16)
+			(xy 173.99 138.43) (xy 171.45 138.43)
 		)
 		(stroke
 			(width 0)
@@ -4146,13 +4455,23 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 157.48) (xy 144.78 160.02)
+			(xy 143.51 162.56) (xy 143.51 165.1)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "1fdd662a-8609-4d03-ba2d-d7ee0c556820")
+	)
+	(wire
+		(pts
+			(xy 252.73 137.16) (xy 254 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2132baef-c431-4ed6-9245-a9ce6a77e614")
 	)
 	(wire
 		(pts
@@ -4176,6 +4495,16 @@
 	)
 	(wire
 		(pts
+			(xy 33.02 156.21) (xy 33.02 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2b987cc5-c314-4f43-a451-1c2fd3e3c435")
+	)
+	(wire
+		(pts
 			(xy 71.12 22.86) (xy 71.12 31.75)
 		)
 		(stroke
@@ -4183,6 +4512,16 @@
 			(type default)
 		)
 		(uuid "2e0666cd-e9c9-45dc-a812-5adb3ffd2bae")
+	)
+	(wire
+		(pts
+			(xy 219.71 146.05) (xy 223.52 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "31116b0d-c543-4ef0-8627-96517a87ad87")
 	)
 	(wire
 		(pts
@@ -4216,7 +4555,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 146.05) (xy 144.78 157.48)
+			(xy 143.51 151.13) (xy 143.51 162.56)
 		)
 		(stroke
 			(width 0)
@@ -4226,7 +4565,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 146.05) (xy 144.78 146.05)
+			(xy 137.16 151.13) (xy 143.51 151.13)
 		)
 		(stroke
 			(width 0)
@@ -4236,7 +4575,7 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 157.48) (xy 46.99 157.48)
+			(xy 59.69 163.83) (xy 62.23 163.83)
 		)
 		(stroke
 			(width 0)
@@ -4256,7 +4595,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 134.62) (xy 144.78 134.62)
+			(xy 137.16 139.7) (xy 143.51 139.7)
 		)
 		(stroke
 			(width 0)
@@ -4296,13 +4635,23 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 140.97) (xy 46.99 140.97)
+			(xy 59.69 147.32) (xy 62.23 147.32)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "43cd13d6-baa0-4945-89f9-fb29b89fc8a2")
+	)
+	(wire
+		(pts
+			(xy 252.73 139.7) (xy 252.73 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "45ab6a39-2387-4b16-aec8-6e9aaaa19606")
 	)
 	(wire
 		(pts
@@ -4316,7 +4665,17 @@
 	)
 	(wire
 		(pts
-			(xy 215.9 130.81) (xy 228.6 130.81)
+			(xy 233.68 151.13) (xy 233.68 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4c7145fc-6ea3-4815-a202-f1d18ba06658")
+	)
+	(wire
+		(pts
+			(xy 189.23 132.08) (xy 200.66 132.08)
 		)
 		(stroke
 			(width 0)
@@ -4356,7 +4715,7 @@
 	)
 	(wire
 		(pts
-			(xy 234.95 69.85) (xy 234.95 83.82)
+			(xy 220.98 69.85) (xy 220.98 83.82)
 		)
 		(stroke
 			(width 0)
@@ -4386,7 +4745,7 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 143.51) (xy 46.99 143.51)
+			(xy 43.18 149.86) (xy 62.23 149.86)
 		)
 		(stroke
 			(width 0)
@@ -4436,6 +4795,16 @@
 	)
 	(wire
 		(pts
+			(xy 252.73 135.89) (xy 252.73 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5dcf7cfc-4bf5-4b13-bd5b-195fb43e8159")
+	)
+	(wire
+		(pts
 			(xy 180.34 86.36) (xy 191.77 86.36)
 		)
 		(stroke
@@ -4466,17 +4835,17 @@
 	)
 	(wire
 		(pts
-			(xy 242.57 133.35) (xy 240.03 133.35)
+			(xy 33.02 147.32) (xy 33.02 148.59)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "67e1cb35-f772-4f2f-aa3d-f1cea94f4ce1")
+		(uuid "66cdd410-cd27-4ed0-ba7a-161aa393dd7b")
 	)
 	(wire
 		(pts
-			(xy 44.45 146.05) (xy 46.99 146.05)
+			(xy 59.69 152.4) (xy 62.23 152.4)
 		)
 		(stroke
 			(width 0)
@@ -4506,13 +4875,23 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 161.29) (xy 46.99 161.29)
+			(xy 43.18 167.64) (xy 62.23 167.64)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "6dec971d-a77f-4695-9da3-ace3db39af4f")
+	)
+	(wire
+		(pts
+			(xy 219.71 132.08) (xy 219.71 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "715f5d7b-af83-40b4-a940-8a218dc80f74")
 	)
 	(wire
 		(pts
@@ -4526,7 +4905,7 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 151.13) (xy 46.99 151.13)
+			(xy 59.69 157.48) (xy 62.23 157.48)
 		)
 		(stroke
 			(width 0)
@@ -4546,7 +4925,7 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 138.43) (xy 46.99 138.43)
+			(xy 59.69 144.78) (xy 62.23 144.78)
 		)
 		(stroke
 			(width 0)
@@ -4556,7 +4935,7 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 146.05) (xy 138.43 146.05)
+			(xy 132.08 151.13) (xy 137.16 151.13)
 		)
 		(stroke
 			(width 0)
@@ -4576,7 +4955,7 @@
 	)
 	(wire
 		(pts
-			(xy 246.38 76.2) (xy 248.92 76.2)
+			(xy 232.41 76.2) (xy 234.95 76.2)
 		)
 		(stroke
 			(width 0)
@@ -4626,7 +5005,7 @@
 	)
 	(wire
 		(pts
-			(xy 199.39 137.16) (xy 208.28 137.16)
+			(xy 181.61 138.43) (xy 184.15 138.43)
 		)
 		(stroke
 			(width 0)
@@ -4686,7 +5065,7 @@
 	)
 	(wire
 		(pts
-			(xy 191.77 124.46) (xy 189.23 124.46)
+			(xy 173.99 125.73) (xy 171.45 125.73)
 		)
 		(stroke
 			(width 0)
@@ -4696,7 +5075,7 @@
 	)
 	(wire
 		(pts
-			(xy 224.79 139.7) (xy 224.79 130.81)
+			(xy 195.58 140.97) (xy 195.58 132.08)
 		)
 		(stroke
 			(width 0)
@@ -4716,7 +5095,7 @@
 	)
 	(wire
 		(pts
-			(xy 224.79 147.32) (xy 224.79 151.13)
+			(xy 195.58 148.59) (xy 195.58 152.4)
 		)
 		(stroke
 			(width 0)
@@ -4726,7 +5105,7 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 134.62) (xy 27.94 143.51)
+			(xy 43.18 140.97) (xy 43.18 149.86)
 		)
 		(stroke
 			(width 0)
@@ -4746,7 +5125,7 @@
 	)
 	(wire
 		(pts
-			(xy 199.39 124.46) (xy 208.28 124.46)
+			(xy 181.61 125.73) (xy 184.15 125.73)
 		)
 		(stroke
 			(width 0)
@@ -4756,7 +5135,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 157.48) (xy 144.78 157.48)
+			(xy 137.16 162.56) (xy 143.51 162.56)
 		)
 		(stroke
 			(width 0)
@@ -4796,7 +5175,7 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 134.62) (xy 138.43 134.62)
+			(xy 132.08 139.7) (xy 137.16 139.7)
 		)
 		(stroke
 			(width 0)
@@ -4816,7 +5195,7 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 148.59) (xy 27.94 161.29)
+			(xy 43.18 154.94) (xy 43.18 167.64)
 		)
 		(stroke
 			(width 0)
@@ -4826,7 +5205,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 134.62) (xy 144.78 146.05)
+			(xy 143.51 139.7) (xy 143.51 151.13)
 		)
 		(stroke
 			(width 0)
@@ -4846,7 +5225,17 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 83.82) (xy 234.95 83.82)
+			(xy 208.28 132.08) (xy 214.63 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "acf4e074-6633-4edd-80d5-28c22e91d327")
+	)
+	(wire
+		(pts
+			(xy 234.95 83.82) (xy 220.98 83.82)
 		)
 		(stroke
 			(width 0)
@@ -4856,7 +5245,7 @@
 	)
 	(wire
 		(pts
-			(xy 199.39 130.81) (xy 208.28 130.81)
+			(xy 181.61 132.08) (xy 184.15 132.08)
 		)
 		(stroke
 			(width 0)
@@ -4886,7 +5275,7 @@
 	)
 	(wire
 		(pts
-			(xy 241.3 81.28) (xy 241.3 91.44)
+			(xy 227.33 81.28) (xy 227.33 91.44)
 		)
 		(stroke
 			(width 0)
@@ -4903,16 +5292,6 @@
 			(type default)
 		)
 		(uuid "b069ac09-f22f-4a9a-81bd-b46590729eaf")
-	)
-	(wire
-		(pts
-			(xy 240.03 133.35) (xy 240.03 138.43)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b1f73512-2e00-413c-b3c3-cdb11b522d70")
 	)
 	(wire
 		(pts
@@ -4936,7 +5315,7 @@
 	)
 	(wire
 		(pts
-			(xy 241.3 81.28) (xy 248.92 81.28)
+			(xy 227.33 81.28) (xy 234.95 81.28)
 		)
 		(stroke
 			(width 0)
@@ -4946,7 +5325,7 @@
 	)
 	(wire
 		(pts
-			(xy 215.9 130.81) (xy 215.9 139.7)
+			(xy 189.23 132.08) (xy 189.23 140.97)
 		)
 		(stroke
 			(width 0)
@@ -4976,7 +5355,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 157.48) (xy 128.27 157.48)
+			(xy 120.65 162.56) (xy 127 162.56)
 		)
 		(stroke
 			(width 0)
@@ -4996,7 +5375,17 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 130.81) (xy 215.9 130.81)
+			(xy 252.73 140.97) (xy 243.84 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c6ff8554-d836-48c8-a314-e2b967263f1a")
+	)
+	(wire
+		(pts
+			(xy 184.15 132.08) (xy 189.23 132.08)
 		)
 		(stroke
 			(width 0)
@@ -5006,7 +5395,7 @@
 	)
 	(wire
 		(pts
-			(xy 191.77 130.81) (xy 189.23 130.81)
+			(xy 173.99 132.08) (xy 171.45 132.08)
 		)
 		(stroke
 			(width 0)
@@ -5016,7 +5405,17 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 124.46) (xy 208.28 130.81)
+			(xy 220.98 140.97) (xy 220.98 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cf914276-0aee-4b46-8b42-5e53b8137649")
+	)
+	(wire
+		(pts
+			(xy 184.15 125.73) (xy 184.15 132.08)
 		)
 		(stroke
 			(width 0)
@@ -5026,7 +5425,7 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 157.48) (xy 138.43 157.48)
+			(xy 132.08 162.56) (xy 137.16 162.56)
 		)
 		(stroke
 			(width 0)
@@ -5076,6 +5475,16 @@
 	)
 	(wire
 		(pts
+			(xy 233.68 124.46) (xy 233.68 130.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dbebe569-0e5a-4747-9939-bd646399fb56")
+	)
+	(wire
+		(pts
 			(xy 49.53 67.31) (xy 53.34 67.31)
 		)
 		(stroke
@@ -5083,6 +5492,16 @@
 			(type default)
 		)
 		(uuid "dc5da9a7-3e06-405e-8ea5-a98d18e2db57")
+	)
+	(wire
+		(pts
+			(xy 243.84 135.89) (xy 252.73 135.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dffd58f6-550f-43fa-bf8a-0d7037c4a7a6")
 	)
 	(wire
 		(pts
@@ -5116,7 +5535,27 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 148.59) (xy 46.99 148.59)
+			(xy 217.17 135.89) (xy 223.52 135.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e51277d9-de16-4285-8f17-a4c757a8103f")
+	)
+	(wire
+		(pts
+			(xy 214.63 138.43) (xy 214.63 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e7380b9f-9556-43d6-974c-c63c79b2b465")
+	)
+	(wire
+		(pts
+			(xy 43.18 154.94) (xy 62.23 154.94)
 		)
 		(stroke
 			(width 0)
@@ -5133,16 +5572,6 @@
 			(type default)
 		)
 		(uuid "ef030023-132b-4cc2-b91d-16ecad085e26")
-	)
-	(wire
-		(pts
-			(xy 236.22 130.81) (xy 242.57 130.81)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f5ea0504-8281-4436-a9ee-7667dfe9f705")
 	)
 	(wire
 		(pts
@@ -5196,7 +5625,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 146.05) (xy 128.27 146.05)
+			(xy 120.65 151.13) (xy 127 151.13)
 		)
 		(stroke
 			(width 0)
@@ -5213,6 +5642,16 @@
 			(type default)
 		)
 		(uuid "ff058fb0-633b-4a21-a332-d6bb41ebd009")
+	)
+	(wire
+		(pts
+			(xy 223.52 140.97) (xy 220.98 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ffa9a8fe-2fa5-4520-a8f8-f8bb38b0b4fe")
 	)
 	(label "DA7"
 		(at 182.88 81.28 0)
@@ -5285,7 +5724,7 @@
 		(uuid "1d2fbe50-3709-4ccd-8deb-062230c13beb")
 	)
 	(label "SD_CS"
-		(at 44.45 138.43 180)
+		(at 59.69 144.78 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5325,7 +5764,7 @@
 		(uuid "2b16df8e-4fab-4cd6-8fe4-55697ae1f638")
 	)
 	(label "ANALOG_B"
-		(at 189.23 130.81 180)
+		(at 171.45 132.08 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5345,7 +5784,7 @@
 		(uuid "3fb43931-a52f-4728-ac0b-ef78037b3afd")
 	)
 	(label "SD_MISO"
-		(at 44.45 151.13 180)
+		(at 59.69 157.48 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5385,7 +5824,7 @@
 		(uuid "52dfac65-8b8a-4ef2-88a6-9e909dce0696")
 	)
 	(label "ANALOG_C"
-		(at 189.23 137.16 180)
+		(at 171.45 138.43 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5395,7 +5834,7 @@
 		(uuid "600cf7a6-19ca-4aa1-b3c1-c37d32446323")
 	)
 	(label "OLED_SDA"
-		(at 246.38 76.2 180)
+		(at 232.41 76.2 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5455,7 +5894,7 @@
 		(uuid "89b59b6f-c9d2-43c3-9a3f-e8fd7f3ae918")
 	)
 	(label "ANALOG_A"
-		(at 189.23 124.46 180)
+		(at 171.45 125.73 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5465,7 +5904,7 @@
 		(uuid "90fac669-213d-4f75-8fb0-543279d67a19")
 	)
 	(label "SD_SCK"
-		(at 44.45 146.05 180)
+		(at 59.69 152.4 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5485,7 +5924,7 @@
 		(uuid "96840e61-7c2f-4ab4-9e0b-631a74cdac96")
 	)
 	(label "SD_MOSI"
-		(at 44.45 140.97 180)
+		(at 59.69 147.32 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5545,7 +5984,7 @@
 		(uuid "bfb76d43-f38d-4ecd-a650-ee97ddb05638")
 	)
 	(label "SW_NEXT"
-		(at 121.92 146.05 180)
+		(at 120.65 151.13 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5575,7 +6014,7 @@
 		(uuid "ca69048f-845c-49e6-be7c-b39353cdbf82")
 	)
 	(label "SD_Card_Detect"
-		(at 44.45 157.48 180)
+		(at 59.69 163.83 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5585,7 +6024,7 @@
 		(uuid "d81e25c9-9aa0-4c72-ba72-1a7eca941e36")
 	)
 	(label "SW_PREV"
-		(at 121.92 157.48 180)
+		(at 120.65 162.56 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5595,7 +6034,7 @@
 		(uuid "d912047b-c191-4f89-b4fa-453156c0d346")
 	)
 	(label "OLED_SCL"
-		(at 246.38 78.74 180)
+		(at 232.41 78.74 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5655,7 +6094,7 @@
 		(uuid "f3776c4b-292f-4f38-9d20-d0c8d67e1894")
 	)
 	(label "SW_PLAY"
-		(at 121.92 134.62 180)
+		(at 120.65 139.7 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5716,7 +6155,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 234.95 69.85 0)
+		(at 220.98 69.85 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5726,8 +6165,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "08a61e69-0d43-4f83-894f-cc05296f4143")
-		(property "Reference" "#PWR017"
-			(at 234.95 73.66 0)
+		(property "Reference" "#PWR023"
+			(at 220.98 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5738,7 +6177,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 234.95 64.77 0)
+			(at 220.98 64.77 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5748,7 +6187,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 234.95 69.85 0)
+			(at 220.98 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5759,7 +6198,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 234.95 69.85 0)
+			(at 220.98 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5770,7 +6209,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 234.95 69.85 0)
+			(at 220.98 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5786,7 +6225,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR017")
+					(reference "#PWR023")
 					(unit 1)
 				)
 			)
@@ -5803,7 +6242,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "0acb259e-c3b1-4910-8a14-db60e0b3793c")
-		(property "Reference" "#PWR014"
+		(property "Reference" "#PWR020"
 			(at 204.47 66.04 0)
 			(hide yes)
 			(show_name no)
@@ -5863,15 +6302,15 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR014")
+					(reference "#PWR020")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 241.3 91.44 0)
+		(lib_id "power:+3.3V")
+		(at 33.02 147.32 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5879,9 +6318,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "105df2a6-9c8c-4272-88f3-5125e08d6e9d")
-		(property "Reference" "#PWR019"
-			(at 241.3 97.79 0)
+		(uuid "0f140cf5-20e0-41ac-b4d4-bb4d49ca3770")
+		(property "Reference" "#PWR01"
+			(at 33.02 151.13 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5891,8 +6330,8 @@
 				)
 			)
 		)
-		(property "Value" "GND"
-			(at 241.3 96.012 0)
+		(property "Value" "+3.3V"
+			(at 33.02 143.256 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5902,7 +6341,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 241.3 91.44 0)
+			(at 33.02 147.32 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5913,7 +6352,84 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 241.3 91.44 0)
+			(at 33.02 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 33.02 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a83f2359-11e9-4179-b22d-53255aa34b78")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "#PWR01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 227.33 91.44 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "105df2a6-9c8c-4272-88f3-5125e08d6e9d")
+		(property "Reference" "#PWR024"
+			(at 227.33 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 227.33 96.012 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 227.33 91.44 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 227.33 91.44 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5924,7 +6440,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 241.3 91.44 0)
+			(at 227.33 91.44 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5940,7 +6456,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR019")
+					(reference "#PWR024")
 					(unit 1)
 				)
 			)
@@ -5948,7 +6464,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 195.58 130.81 90)
+		(at 177.8 132.08 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5957,8 +6473,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "138e0ea9-6c1d-45c5-897d-12e85240ba0a")
-		(property "Reference" "R4"
-			(at 195.326 130.81 90)
+		(property "Reference" "R5"
+			(at 177.546 132.08 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5968,7 +6484,7 @@
 			)
 		)
 		(property "Value" "1k"
-			(at 195.58 133.35 90)
+			(at 177.8 134.62 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5978,7 +6494,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 195.58 130.81 0)
+			(at 177.8 132.08 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5989,7 +6505,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 195.58 130.81 0)
+			(at 177.8 132.08 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5999,7 +6515,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 195.58 130.81 0)
+			(at 177.8 132.08 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6018,7 +6534,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "R4")
+					(reference "R5")
 					(unit 1)
 				)
 			)
@@ -6036,7 +6552,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1b7593d7-abf4-4f7d-ad4e-c5a040744a7e")
-		(property "Reference" "#PWR011"
+		(property "Reference" "#PWR015"
 			(at 191.77 111.76 0)
 			(hide yes)
 			(show_name no)
@@ -6096,7 +6612,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR011")
+					(reference "#PWR015")
 					(unit 1)
 				)
 			)
@@ -6104,7 +6620,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 195.58 124.46 90)
+		(at 177.8 125.73 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6113,8 +6629,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "2019dbba-04fd-4217-8c9e-2ec331305666")
-		(property "Reference" "R3"
-			(at 195.58 124.46 90)
+		(property "Reference" "R4"
+			(at 177.8 125.73 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6124,7 +6640,7 @@
 			)
 		)
 		(property "Value" "1k"
-			(at 195.58 126.746 90)
+			(at 177.8 128.016 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6134,7 +6650,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 195.58 124.46 0)
+			(at 177.8 125.73 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6145,7 +6661,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 195.58 124.46 0)
+			(at 177.8 125.73 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6155,7 +6671,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 195.58 124.46 0)
+			(at 177.8 125.73 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6174,7 +6690,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "R3")
+					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -6182,7 +6698,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x02_Pin")
-		(at 247.65 133.35 180)
+		(at 259.08 139.7 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6193,7 +6709,7 @@
 		(fields_autoplaced yes)
 		(uuid "25667d3c-4f0b-43d5-98d3-45160bf13eb9")
 		(property "Reference" "J2"
-			(at 248.92 130.8099 0)
+			(at 260.35 137.1599 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6203,8 +6719,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "Audio Out"
-			(at 248.92 133.3499 0)
+		(property "Value" "Speaker Out"
+			(at 260.35 139.6999 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6215,7 +6731,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinSocket_1.27mm:PinSocket_2x01_P1.27mm_Vertical"
-			(at 247.65 133.35 0)
+			(at 259.08 139.7 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6226,7 +6742,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 247.65 133.35 0)
+			(at 259.08 139.7 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6237,7 +6753,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 247.65 133.35 0)
+			(at 259.08 139.7 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6264,7 +6780,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 27.94 165.1 0)
+		(at 220.98 152.4 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6273,9 +6789,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "3b9105ed-1c63-4be1-860f-fa3a85893509")
-		(property "Reference" "#PWR02"
-			(at 27.94 171.45 0)
+		(uuid "2eb8a4c9-e0a6-4754-9d2f-eb85c45fe092")
+		(property "Reference" "#PWR016"
+			(at 220.98 158.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6286,7 +6802,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 27.94 170.18 0)
+			(at 220.98 157.48 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6296,7 +6812,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 27.94 165.1 0)
+			(at 220.98 152.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6307,7 +6823,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 27.94 165.1 0)
+			(at 220.98 152.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6318,7 +6834,163 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 27.94 165.1 0)
+			(at 220.98 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ceb183dd-7d97-4f9e-9936-f8f785c1757f")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "#PWR016")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 233.68 152.4 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3b473fe0-581d-42e9-8505-884e60f0ec27")
+		(property "Reference" "#PWR022"
+			(at 233.68 158.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 233.68 157.48 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 233.68 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 233.68 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 233.68 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "99176e7f-90a6-4079-8900-270d7e815a45")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "#PWR022")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 43.18 171.45 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3b9105ed-1c63-4be1-860f-fa3a85893509")
+		(property "Reference" "#PWR05"
+			(at 43.18 177.8 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 43.18 176.53 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 43.18 171.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 43.18 171.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 43.18 171.45 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6334,7 +7006,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR02")
+					(reference "#PWR05")
 					(unit 1)
 				)
 			)
@@ -6351,7 +7023,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "3c3e6317-4364-4c7d-8ef4-ac1399035bd1")
-		(property "Reference" "C2"
+		(property "Reference" "C5"
 			(at 211.328 46.99 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6415,7 +7087,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "C2")
+					(reference "C5")
 					(unit 1)
 				)
 			)
@@ -6423,7 +7095,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 133.35 146.05 0)
+		(at 132.08 151.13 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6433,7 +7105,7 @@
 		(dnp no)
 		(uuid "4114dac8-f20c-4a02-83fa-3403a93241ea")
 		(property "Reference" "SW2"
-			(at 133.096 141.224 0)
+			(at 131.826 146.304 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6443,7 +7115,7 @@
 			)
 		)
 		(property "Value" "Next"
-			(at 133.35 148.082 0)
+			(at 132.08 153.162 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6453,7 +7125,7 @@
 			)
 		)
 		(property "Footprint" "Button_Switch_THT:SW_PUSH_6mm"
-			(at 133.35 140.97 0)
+			(at 132.08 146.05 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6464,7 +7136,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 133.35 140.97 0)
+			(at 132.08 146.05 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6475,7 +7147,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 133.35 146.05 0)
+			(at 132.08 151.13 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6608,8 +7280,9 @@
 		)
 	)
 	(symbol
-		(lib_id "terence:MicroSD")
-		(at 68.58 127 0)
+		(lib_id "Device:R_Potentiometer_Small")
+		(at 214.63 135.89 0)
+		(mirror x)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6617,31 +7290,31 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "59d5bcaf-36bc-420f-a88d-7dd3aa601c35")
-		(property "Reference" "J1"
-			(at 59.182 131.826 0)
+		(uuid "59ac95d0-23f4-4cd3-981b-e1730052e2b7")
+		(property "Reference" "RV1"
+			(at 212.09 134.6199 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Value" "MicroSD"
-			(at 65.532 159.258 0)
+		(property "Value" "20K"
+			(at 212.09 137.1599 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "terence:MicroSD"
-			(at 68.58 127 0)
+		(property "Footprint" ""
+			(at 214.63 135.89 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6652,7 +7325,124 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 68.58 127 0)
+			(at 214.63 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Potentiometer"
+			(at 214.63 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Device" "R"
+			(at 214.63 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Type" "POT"
+			(at 214.63 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Pins" "1=r0 2=wiper 3=r1"
+			(at 214.63 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "3"
+			(uuid "d7b853a1-e82f-4609-9cbe-8fe6256a323b")
+		)
+		(pin "2"
+			(uuid "5a0ecf46-64c1-41d9-a667-ffc17ad56abb")
+		)
+		(pin "1"
+			(uuid "cb2609dd-209d-475f-8b36-2c926118cddd")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "RV1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "terence:MicroSD")
+		(at 83.82 133.35 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "59d5bcaf-36bc-420f-a88d-7dd3aa601c35")
+		(property "Reference" "J1"
+			(at 74.422 138.176 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MicroSD"
+			(at 80.772 165.608 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "terence:MicroSD"
+			(at 83.82 133.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 83.82 133.35 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6663,7 +7453,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 68.58 127 0)
+			(at 83.82 133.35 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6724,7 +7514,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "60f01fd0-ef18-4d92-af66-8bd84cc1102d")
-		(property "Reference" "#PWR07"
+		(property "Reference" "#PWR09"
 			(at 118.11 46.99 0)
 			(hide yes)
 			(show_name no)
@@ -6784,7 +7574,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR07")
+					(reference "#PWR09")
 					(unit 1)
 				)
 			)
@@ -6801,7 +7591,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "61712747-1758-4439-8de3-d856aef6b70f")
-		(property "Reference" "C1"
+		(property "Reference" "C4"
 			(at 196.85 46.736 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6861,7 +7651,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "C1")
+					(reference "C4")
 					(unit 1)
 				)
 			)
@@ -6869,7 +7659,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 27.94 134.62 0)
+		(at 43.18 140.97 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6878,8 +7668,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "67c10952-5a5f-44fe-ad3d-3720a1c8ba0e")
-		(property "Reference" "#PWR01"
-			(at 27.94 138.43 0)
+		(property "Reference" "#PWR04"
+			(at 43.18 144.78 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6890,7 +7680,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 27.94 130.302 0)
+			(at 43.18 136.652 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6900,7 +7690,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 27.94 134.62 0)
+			(at 43.18 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6911,7 +7701,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 27.94 134.62 0)
+			(at 43.18 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6922,7 +7712,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 27.94 134.62 0)
+			(at 43.18 140.97 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6938,7 +7728,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR01")
+					(reference "#PWR04")
 					(unit 1)
 				)
 			)
@@ -6946,7 +7736,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 215.9 151.13 0)
+		(at 189.23 152.4 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6956,8 +7746,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "68067d37-70cf-4130-85f2-60bc67d0e796")
-		(property "Reference" "#PWR015"
-			(at 215.9 157.48 0)
+		(property "Reference" "#PWR011"
+			(at 189.23 158.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6968,7 +7758,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 215.9 156.21 0)
+			(at 189.23 157.48 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6978,7 +7768,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 215.9 151.13 0)
+			(at 189.23 152.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6989,7 +7779,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 215.9 151.13 0)
+			(at 189.23 152.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7000,7 +7790,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 215.9 151.13 0)
+			(at 189.23 152.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7016,7 +7806,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR015")
+					(reference "#PWR011")
 					(unit 1)
 				)
 			)
@@ -7034,7 +7824,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "71ee3c27-fa4f-42aa-81f0-0a2a1bde0496")
-		(property "Reference" "#PWR06"
+		(property "Reference" "#PWR08"
 			(at 81.28 26.67 0)
 			(hide yes)
 			(show_name no)
@@ -7094,7 +7884,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR06")
+					(reference "#PWR08")
 					(unit 1)
 				)
 			)
@@ -7112,7 +7902,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "74d132ab-1669-4201-bd56-8fbf2efdf657")
-		(property "Reference" "R2"
+		(property "Reference" "R3"
 			(at 120.65 50.7999 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7176,7 +7966,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "R2")
+					(reference "R3")
 					(unit 1)
 				)
 			)
@@ -7193,7 +7983,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "751162c6-32c0-45ee-a3a3-68f2ccbce8f2")
-		(property "Reference" "R7"
+		(property "Reference" "R2"
 			(at 41.148 76.454 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7257,7 +8047,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "R7")
+					(reference "R2")
 					(unit 1)
 				)
 			)
@@ -7458,8 +8248,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 195.58 137.16 90)
+		(lib_id "power:+5V")
+		(at 219.71 124.46 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7467,9 +8257,10 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "9108be26-e344-4bfb-91dc-3b3b7cdc3973")
-		(property "Reference" "R5"
-			(at 195.58 137.16 90)
+		(uuid "7edb5bac-4816-4f62-a61e-ccb8121b91ae")
+		(property "Reference" "#PWR018"
+			(at 219.71 128.27 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7478,8 +8269,8 @@
 				)
 			)
 		)
-		(property "Value" "1k"
-			(at 195.58 139.7 90)
+		(property "Value" "+5V"
+			(at 219.71 120.65 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7488,8 +8279,8 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 195.58 137.16 0)
+		(property "Footprint" ""
+			(at 219.71 124.46 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7500,7 +8291,83 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 195.58 137.16 0)
+			(at 219.71 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 219.71 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c425c5c8-4e04-4fec-9708-1858443c684c")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "#PWR018")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 177.8 138.43 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "9108be26-e344-4bfb-91dc-3b3b7cdc3973")
+		(property "Reference" "R6"
+			(at 177.8 138.43 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1k"
+			(at 177.8 140.97 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 177.8 138.43 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 177.8 138.43 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7510,7 +8377,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 189.992 143.51 0)
+			(at 172.212 144.78 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7529,15 +8396,15 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "R5")
+					(reference "R6")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Switch:SW_Push")
-		(at 133.35 134.62 0)
+		(lib_id "power:GND")
+		(at 214.63 152.4 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7545,9 +8412,11 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "990753c9-c3b5-4331-be2c-a2af89598d58")
-		(property "Reference" "SW1"
-			(at 133.35 129.54 0)
+		(fields_autoplaced yes)
+		(uuid "92f65f2d-5113-4585-a511-b492788f52f6")
+		(property "Reference" "#PWR025"
+			(at 214.63 158.75 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7556,8 +8425,8 @@
 				)
 			)
 		)
-		(property "Value" "Play / Pause"
-			(at 133.35 136.652 0)
+		(property "Value" "GND"
+			(at 214.63 157.48 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7566,8 +8435,8 @@
 				)
 			)
 		)
-		(property "Footprint" "Button_Switch_THT:SW_PUSH_6mm"
-			(at 133.35 129.54 0)
+		(property "Footprint" ""
+			(at 214.63 152.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7578,7 +8447,83 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 133.35 129.54 0)
+			(at 214.63 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 214.63 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "6decfb0e-d272-40ea-ba39-e4ad6bf1a979")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "#PWR025")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Push")
+		(at 132.08 139.7 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "990753c9-c3b5-4331-be2c-a2af89598d58")
+		(property "Reference" "SW1"
+			(at 132.08 134.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Play / Pause"
+			(at 132.08 141.732 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Button_Switch_THT:SW_PUSH_6mm"
+			(at 132.08 134.62 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 132.08 134.62 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7589,7 +8534,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 133.35 134.62 0)
+			(at 132.08 139.7 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7616,7 +8561,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 215.9 143.51 0)
+		(at 189.23 144.78 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7625,8 +8570,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "9fbb6e43-e51a-46b8-946d-787db4b44136")
-		(property "Reference" "R6"
-			(at 210.566 141.732 0)
+		(property "Reference" "R7"
+			(at 183.896 143.002 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7637,7 +8582,7 @@
 			)
 		)
 		(property "Value" "1K"
-			(at 211.074 144.272 0)
+			(at 184.404 145.542 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7648,7 +8593,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 214.122 143.51 90)
+			(at 187.452 144.78 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7659,7 +8604,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 215.9 143.51 0)
+			(at 189.23 144.78 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7670,7 +8615,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 215.9 143.51 0)
+			(at 189.23 144.78 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7689,7 +8634,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "R6")
+					(reference "R7")
 					(unit 1)
 				)
 			)
@@ -7697,7 +8642,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 224.79 151.13 0)
+		(at 195.58 152.4 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7707,8 +8652,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a5f9a166-b8e3-4bd8-b2b1-dc0e58dcbd8f")
-		(property "Reference" "#PWR016"
-			(at 224.79 157.48 0)
+		(property "Reference" "#PWR013"
+			(at 195.58 158.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7719,7 +8664,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 224.79 156.21 0)
+			(at 195.58 157.48 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7729,7 +8674,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 224.79 151.13 0)
+			(at 195.58 152.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7740,7 +8685,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 224.79 151.13 0)
+			(at 195.58 152.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7751,7 +8696,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 224.79 151.13 0)
+			(at 195.58 152.4 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7767,7 +8712,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR016")
+					(reference "#PWR013")
 					(unit 1)
 				)
 			)
@@ -7785,7 +8730,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "aef43fe4-4ad6-4c54-8beb-5ccc1291ae7c")
-		(property "Reference" "#PWR05"
+		(property "Reference" "#PWR07"
 			(at 76.2 120.65 0)
 			(hide yes)
 			(show_name no)
@@ -7845,7 +8790,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR05")
+					(reference "#PWR07")
 					(unit 1)
 				)
 			)
@@ -7853,7 +8798,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 144.78 160.02 0)
+		(at 143.51 165.1 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7863,8 +8808,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b35c2e7b-b833-4b72-888e-f28880f40516")
-		(property "Reference" "#PWR08"
-			(at 144.78 166.37 0)
+		(property "Reference" "#PWR010"
+			(at 143.51 171.45 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7875,7 +8820,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 144.78 165.1 0)
+			(at 143.51 170.18 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7885,7 +8830,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 144.78 160.02 0)
+			(at 143.51 165.1 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7896,7 +8841,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 144.78 160.02 0)
+			(at 143.51 165.1 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7907,7 +8852,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 144.78 160.02 0)
+			(at 143.51 165.1 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7923,7 +8868,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR08")
+					(reference "#PWR010")
 					(unit 1)
 				)
 			)
@@ -7931,7 +8876,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 133.35 157.48 0)
+		(at 132.08 162.56 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7941,7 +8886,7 @@
 		(dnp no)
 		(uuid "b36195f8-ef0a-44f2-baf0-101710e88e48")
 		(property "Reference" "SW3"
-			(at 133.35 153.162 0)
+			(at 132.08 158.242 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7951,7 +8896,7 @@
 			)
 		)
 		(property "Value" "Previous"
-			(at 133.35 159.766 0)
+			(at 132.08 164.846 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7961,7 +8906,7 @@
 			)
 		)
 		(property "Footprint" "Button_Switch_THT:SW_PUSH_6mm"
-			(at 133.35 152.4 0)
+			(at 132.08 157.48 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7972,7 +8917,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 133.35 152.4 0)
+			(at 132.08 157.48 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7983,7 +8928,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 133.35 157.48 0)
+			(at 132.08 162.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8020,7 +8965,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bad72ab0-2b0e-428f-8f31-3e2eb4a1fab8")
-		(property "Reference" "#PWR010"
+		(property "Reference" "#PWR014"
 			(at 191.77 77.47 0)
 			(hide yes)
 			(show_name no)
@@ -8080,7 +9025,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR010")
+					(reference "#PWR014")
 					(unit 1)
 				)
 			)
@@ -8098,7 +9043,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bc0ebcd5-a8a1-4345-973e-eca3ac51087c")
-		(property "Reference" "#PWR04"
+		(property "Reference" "#PWR06"
 			(at 71.12 26.67 0)
 			(hide yes)
 			(show_name no)
@@ -8158,7 +9103,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR04")
+					(reference "#PWR06")
 					(unit 1)
 				)
 			)
@@ -8176,7 +9121,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c27c5278-9bf1-4c0c-b83f-6e00069cd8f6")
-		(property "Reference" "#PWR012"
+		(property "Reference" "#PWR017"
 			(at 196.85 86.36 0)
 			(hide yes)
 			(show_name no)
@@ -8236,7 +9181,84 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR012")
+					(reference "#PWR017")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+5V")
+		(at 233.68 124.46 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c35d7897-a491-4de3-9e25-58bb569d255f")
+		(property "Reference" "#PWR021"
+			(at 233.68 128.27 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+5V"
+			(at 233.68 120.65 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 233.68 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 233.68 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 233.68 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b68574f9-0075-49ea-822f-1e5a639ea405")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "#PWR021")
 					(unit 1)
 				)
 			)
@@ -8321,8 +9343,8 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 240.03 138.43 0)
+		(lib_id "Device:C")
+		(at 33.02 152.4 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8331,30 +9353,31 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "cc7f061a-d626-4328-8ab6-5d8fd0da5780")
-		(property "Reference" "#PWR018"
-			(at 240.03 144.78 0)
-			(hide yes)
+		(uuid "c726b698-b9d7-46bb-9c4d-082b056f9a61")
+		(property "Reference" "C1"
+			(at 36.83 151.1299 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
-		(property "Value" "GND"
-			(at 240.03 143.51 0)
+		(property "Value" "10nF"
+			(at 36.83 153.6699 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 240.03 138.43 0)
+			(at 33.9852 156.21 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8365,83 +9388,8 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 240.03 138.43 0)
+			(at 33.02 152.4 0)
 			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 240.03 138.43 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "67f87966-e424-49a3-8e3d-54e6e26f6ae8")
-		)
-		(instances
-			(project "pico chiptune player"
-				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR018")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 232.41 130.81 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "ccb82c25-9928-4805-952f-6484cf9d3ead")
-		(property "Reference" "C4"
-			(at 229.87 129.032 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10uF"
-			(at 236.474 132.842 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 232.41 130.81 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 232.41 130.81 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8451,7 +9399,85 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 243.586 147.32 0)
+			(at 33.02 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "090d76b8-7de8-4fe5-bfc6-d416f3c22ec4")
+		)
+		(pin "1"
+			(uuid "eaaf7625-1ae7-49cc-b927-3dcbe6c059ff")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "C1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 204.47 132.08 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ccb82c25-9928-4805-952f-6484cf9d3ead")
+		(property "Reference" "C3"
+			(at 201.93 130.302 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1uF"
+			(at 200.914 133.858 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
+			(at 204.47 132.08 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 204.47 132.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 215.646 148.59 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8470,7 +9496,88 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "C4")
+					(reference "C3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 219.71 128.27 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ccd1d09d-beb7-4dec-8531-5741bb04bfcc")
+		(property "Reference" "R8"
+			(at 221.742 127 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10K"
+			(at 221.488 129.032 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 217.932 128.27 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 219.71 128.27 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 219.71 128.27 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f97a2692-6812-4add-8049-1b85730a9b98")
+		)
+		(pin "2"
+			(uuid "da832661-4a36-496f-a9e6-fcd690439465")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "R8")
 					(unit 1)
 				)
 			)
@@ -8488,7 +9595,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d042d795-e86c-43d5-a411-2955d1377cfd")
-		(property "Reference" "#PWR09"
+		(property "Reference" "#PWR012"
 			(at 181.61 50.8 0)
 			(hide yes)
 			(show_name no)
@@ -8548,7 +9655,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR09")
+					(reference "#PWR012")
 					(unit 1)
 				)
 			)
@@ -8556,7 +9663,7 @@
 	)
 	(symbol
 		(lib_id "terence:0.96{dblquote}OLED_I2C")
-		(at 251.46 91.44 90)
+		(at 237.49 91.44 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8565,8 +9672,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "d176a783-4650-4380-8121-2d550a9aa33d")
-		(property "Reference" "U2"
-			(at 253.238 66.04 90)
+		(property "Reference" "U3"
+			(at 239.268 66.04 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8577,7 +9684,7 @@
 			)
 		)
 		(property "Value" "0.96\"OLED_I2C"
-			(at 252.73 93.98 90)
+			(at 238.76 93.98 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8588,7 +9695,7 @@
 			)
 		)
 		(property "Footprint" "terence:0.96OLED I2C"
-			(at 273.05 80.01 0)
+			(at 259.08 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8599,7 +9706,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 251.46 91.44 0)
+			(at 237.49 91.44 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8610,7 +9717,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 251.46 91.44 0)
+			(at 237.49 91.44 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8635,7 +9742,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "U2")
+					(reference "U3")
 					(unit 1)
 				)
 			)
@@ -8929,7 +10036,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "ed8b3599-55db-406b-ad0f-472d59a62fcb")
-		(property "Reference" "#PWR013"
+		(property "Reference" "#PWR019"
 			(at 204.47 43.18 0)
 			(hide yes)
 			(show_name no)
@@ -8989,7 +10096,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR013")
+					(reference "#PWR019")
 					(unit 1)
 				)
 			)
@@ -9070,8 +10177,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 224.79 143.51 0)
+		(lib_id "power:GND")
+		(at 33.02 157.48 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -9079,9 +10186,11 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "f93d6cb9-b600-4b99-ac93-6a5eebea941e")
-		(property "Reference" "C3"
-			(at 223.012 140.97 0)
+		(fields_autoplaced yes)
+		(uuid "f098ac0d-1edd-4f4a-bf2f-39639a37b4a3")
+		(property "Reference" "#PWR02"
+			(at 33.02 163.83 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9090,8 +10199,8 @@
 				)
 			)
 		)
-		(property "Value" "10nF"
-			(at 227.33 145.796 0)
+		(property "Value" "GND"
+			(at 33.02 162.56 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9100,8 +10209,8 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 224.79 143.51 0)
+		(property "Footprint" ""
+			(at 33.02 157.48 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9112,7 +10221,183 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 224.79 143.51 0)
+			(at 33.02 157.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 33.02 157.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "6e4f28f6-e172-481d-8385-2c7f3da789e7")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "#PWR02")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Audio:PAM8302AAS")
+		(at 233.68 140.97 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f1d56688-6fca-466f-a211-2b7e0e03298d")
+		(property "Reference" "U2"
+			(at 235.8233 128.27 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "PAM8302AAS"
+			(at 235.8233 130.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 233.68 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/PAM8302A.pdf"
+			(at 233.68 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "2.5W Filterless Class-D Mono Audio Amplifier, MSOP-8"
+			(at 233.68 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "7"
+			(uuid "8f77b76b-c5db-4a20-abdd-ce2509ee8eca")
+		)
+		(pin "2"
+			(uuid "5979d81d-8601-4e75-819d-09e4a52af419")
+		)
+		(pin "6"
+			(uuid "f1d8a410-c28c-42f0-b55d-107e18438c8e")
+		)
+		(pin "4"
+			(uuid "8296a31b-10d4-41e6-a4ab-4769302c65a3")
+		)
+		(pin "5"
+			(uuid "405a4ef1-18e7-40f9-95bd-9709f20dc0a6")
+		)
+		(pin "1"
+			(uuid "21841629-712e-4c68-9b82-45be38bb3515")
+		)
+		(pin "8"
+			(uuid "7376d22b-af7f-4806-ae77-3277030f7cd8")
+		)
+		(pin "3"
+			(uuid "fb83c4d2-1dbe-4cdb-b375-2ce876b78a19")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "U2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 195.58 144.78 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "f93d6cb9-b600-4b99-ac93-6a5eebea941e")
+		(property "Reference" "C2"
+			(at 193.802 142.24 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10nF"
+			(at 198.12 147.066 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
+			(at 195.58 144.78 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 195.58 144.78 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9122,7 +10407,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 237.998 153.67 0)
+			(at 208.788 154.94 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9141,250 +10426,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "C3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Amplifier_Audio:PAM8302A")
-		(at 245.11 133.35 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "a513f8b1-3829-4e78-b112-9c47e8011234")
-		(property "Reference" "U3"
-			(at 245.11 120.65 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "PAM8302A"
-			(at 245.11 146.05 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
-			(at 245.11 133.35 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/PAM8302A.pdf"
-			(at 245.11 133.35 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "2.5W Filterless Mono Class-D Audio Amplifier, MSOP-8"
-			(at 245.11 133.35 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1" (uuid "e1234567-89ab-4cde-8001-000000000001"))
-		(pin "2" (uuid "e1234567-89ab-4cde-8001-000000000002"))
-		(pin "3" (uuid "e1234567-89ab-4cde-8001-000000000003"))
-		(pin "4" (uuid "e1234567-89ab-4cde-8001-000000000004"))
-		(pin "5" (uuid "e1234567-89ab-4cde-8001-000000000005"))
-		(pin "6" (uuid "e1234567-89ab-4cde-8001-000000000006"))
-		(pin "7" (uuid "e1234567-89ab-4cde-8001-000000000007"))
-		(pin "8" (uuid "e1234567-89ab-4cde-8001-000000000008"))
-		(instances
-			(project "pico chiptune player"
-				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "U3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 228.6 139.7 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "b613f8b1-3829-4e78-b112-9c47e8011235")
-		(property "Reference" "C5"
-			(at 228.6 137.16 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Value" "1uF"
-			(at 228.6 142.24 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 228.6 139.7 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Datasheet" ""
-			(at 228.6 139.7 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Description" "Input coupling capacitor for IN-"
-			(at 228.6 139.7 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects (font (size 1.27 1.27)))
-		)
-		(pin "1" (uuid "e1234567-89ab-4cde-8001-000000000009"))
-		(pin "2" (uuid "e1234567-89ab-4cde-8001-000000000010"))
-		(instances
-			(project "pico chiptune player"
-				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "C5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 260.35 139.7 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "c713f8b1-3829-4e78-b112-9c47e8011236")
-		(property "Reference" "C6"
-			(at 260.35 137.16 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Value" "10uF"
-			(at 260.35 142.24 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 260.35 139.7 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Datasheet" ""
-			(at 260.35 139.7 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Description" "VDD decoupling bulk capacitor"
-			(at 260.35 139.7 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects (font (size 1.27 1.27)))
-		)
-		(pin "1" (uuid "e1234567-89ab-4cde-8001-000000000011"))
-		(pin "2" (uuid "e1234567-89ab-4cde-8001-000000000012"))
-		(instances
-			(project "pico chiptune player"
-				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "C6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 228.6 124.46 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "d813f8b1-3829-4e78-b112-9c47e8011237")
-		(property "Reference" "R8"
-			(at 228.6 121.92 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Value" "10k"
-			(at 228.6 127.0 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 228.6 124.46 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Datasheet" ""
-			(at 228.6 124.46 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Description" "Shutdown pull-up resistor"
-			(at 228.6 124.46 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects (font (size 1.27 1.27)))
-		)
-		(pin "1" (uuid "e1234567-89ab-4cde-8001-000000000013"))
-		(pin "2" (uuid "e1234567-89ab-4cde-8001-000000000014"))
-		(instances
-			(project "pico chiptune player"
-				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "R8")
+					(reference "C2")
 					(unit 1)
 				)
 			)
