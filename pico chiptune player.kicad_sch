@@ -9139,7 +9139,6 @@
 			(uuid "2754e4de-71e6-414e-bf5f-13e42e96673a")
 		)
 		(instances
-		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
 					(reference "C3")
