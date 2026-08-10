@@ -1,0 +1,13 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+A2,RaspberryPi_Pico_Common,1,RaspberryPi_Pico,
+"C2, C5",0805,2,10uF,
+"C3, C4",0805,2,10nF,
+J2,MicroSD,1,MicroSD,
+J3,PinSocket_2x01_P1.27mm_Vertical,1,Audio Out,
+"R2, R3",0805,2,10K,
+"R4, R5, R6, R7",0805,4,1k,
+SW2,SW_PUSH_6mm,1,Play / Pause,
+SW3,SW_PUSH_6mm,1,Next,
+SW4,SW_PUSH_6mm,1,Previous,
+U2,DIP-40_W15.24mm,1,AY-3-8910,
+U3,0.96OLED I2C,1,"0.96""OLED_I2C",

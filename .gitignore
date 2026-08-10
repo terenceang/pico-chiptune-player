@@ -1,0 +1,25 @@
+# KiCad Backup & Lock files
+*.bak
+*.cd_bak
+*.final_bak
+*.fix_bak
+*.sd_bak
+*.kicad_pcb-bak
+*.kicad_sch-bak
+~*.lck
+*-backups/
+_autosave-*
+*.tmp
+*.log
+
+# Editor & Tool directories
+.claude/
+.history/
+.vscode/
+.idea/
+.gemini/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
