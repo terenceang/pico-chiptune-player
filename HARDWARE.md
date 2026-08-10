@@ -166,7 +166,17 @@ It features passive 3-channel mono audio summing, YM2149F clock division jumper 
   * *Position 2–3:* Internal clock divided by 2 (1:2 mode for YM2149F).
   * *Open:* Floating for standard AY-3-8910.
 
-### 3. Passive Mono Audio Summer & Coupling
-* **Passive Summing**: `ANALOG_A` (R3 = 1kΩ) + `ANALOG_B` (R4 = 1kΩ) + `ANALOG_C` (R5 = 1kΩ)
-* **Load & Low-Pass Filtering**: Resistor load `R6` = 1kΩ to GND, Capacitor `C3` = 10nF to GND.
-* **AC Output Coupling**: Capacitor `C4` (10µF) in series to Pin 1 of 2-pin Audio Header `J2`. Pin 2 of `J2` is tied to `GND`.
+### 3. Audio Stage & PAM8302A Mono Class-D Amplifier
+* **Passive Mono Summer**: `ANALOG_A` (R3 = 1kΩ) + `ANALOG_B` (R4 = 1kΩ) + `ANALOG_C` (R5 = 1kΩ)
+* **Passive Low-Pass Filter**: Resistor load `R6` = 1kΩ to GND, Capacitor `C3` = 10nF LPF to GND.
+* **Volume Attenuator**: 10kΩ Potentiometer / Resistor Divider before amplifier input (`IN+`).
+* **Amplifier (PAM8302A - 2.5W Mono Class-D)**:
+  * **Pin 1 (`IN+`)**: AC-coupled audio input via `C4` (1µF ceramic).
+  * **Pin 2 (`~SD`)**: Shutdown Control (Active Low). Pulled up to `+5V` via 10kΩ resistor (or connected to RP2040 GPIO for pop-free mute control).
+  * **Pin 3 (`IN-`)**: AC-coupled to GND via 1µF ceramic capacitor for differential noise rejection / high PSRR.
+  * **Pin 4, 8 (`GND`)**: System Ground.
+  * **Pin 5 (`VO+`)**: Positive Bridge-Tied Load (BTL) Speaker Output to `J2` Pin 1.
+  * **Pin 6 (`VDD`)**: +5V Power Supply (Decoupled by 10µF electrolytic `C5` + 0.1µF ceramic `C6`).
+  * **Pin 7 (`VO-`)**: Negative Bridge-Tied Load (BTL) Speaker Output to `J2` Pin 2 (Do NOT ground!).
+* **Speaker Output Header (`J2`)**: 2-pin header for 4Ω or 8Ω mono speaker (`VO+` on Pin 1, `VO-` on Pin 2).
+

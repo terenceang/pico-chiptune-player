@@ -12,7 +12,7 @@ A standalone hardware chiptune music player powered by the **Raspberry Pi Pico (
 - **Display:** 4-pin I2C OLED header (0.96" SSD1306/SH1106).
 - **Controls:** 3 onboard pushbuttons (Play/Pause, Next Track, Previous Track).
 - **Clock Mode Selector:** Hardware jumper (`JP1`) for YM2149F clock division mode selection (1:1 or 1:2 clock divider).
-- **Audio Output:** Passive 3-channel (Channels A, B, C) mono summer, low-pass filter, and AC-coupled line output header (`J2`).
+- **Audio Output:** Passive 3-channel (Channels A, B, C) mono summer, low-pass filter, and **PAM8302A 2.5W Mono Class-D Audio Amplifier** driving speaker output header (`J2`).
 
 ---
 
