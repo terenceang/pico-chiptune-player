@@ -6,8 +6,8 @@
 	(paper "A4")
 	(title_block
 		(title "Pico Chiptune Player")
-		(date "2026-08-08")
-		(rev "0.1")
+		(date "2026-08-10")
+		(rev "0.01")
 		(company "MotionFxDesign")
 		(comment 1 "Terence Ang / MotionFxDesign")
 		(comment 2 "Hardware AY-3-8910 / YM2149 Chiptune Player")

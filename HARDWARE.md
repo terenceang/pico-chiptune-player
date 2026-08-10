@@ -3,8 +3,8 @@
 **Title:** Pico Chiptune Player  
 **Author:** Terence Ang / MotionFxDesign  
 **Company:** MotionFxDesign  
-**Revision:** 0.1  
-**Date:** 2026-08-08  
+**Revision:** 0.01  
+**Date:** 2026-08-10  
 
 ---
 
