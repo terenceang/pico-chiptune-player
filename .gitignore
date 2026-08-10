@@ -15,6 +15,7 @@ _autosave-*
 # Editor & Tool directories
 .claude/
 .history/
+**/.history/
 .vscode/
 .idea/
 .gemini/
