@@ -3,8 +3,8 @@
 **Title:** Pico Chiptune Player  
 **Author:** Terence Ang / MotionFxDesign  
 **Company:** MotionFxDesign  
-**Revision:** 0.01  
-**Date:** 2026-08-10  
+**Revision:** 0.2  
+**Date:** 2026-08-12  
 
 ---
 
@@ -99,7 +99,8 @@ It features passive 3-channel mono audio summing, YM2149F clock division jumper 
 | **Pin 28** | **GND** | `GND` | Ground Plane | System Ground |
 | **Pin 29** | **GPIO22** | `SD_Card_Detect` | MicroSD J1 Pin 9 | MicroSD Card Detect (Internal Pull-up) |
 | **Pin 36** | **3V3** | `+3V3` | MicroSD J1 Pin 4, OLED U3 Pin 1 | 3.3V Power Out |
-| **Pin 39** | **VSYS** | `+5V` | AY-3-8910 Pin 40 (+5V) | 5V Power Input (USB via VSYS) |
+| **Pin 39** | **VSYS** | `N/C` | — | Not Connected (external supply input, unused) |
+| **Pin 40** | **VBUS** | `+5V` | AY-3-8910 Pin 40 (VCC), PAM8302 U2 Pin 6 (VDD), pull-ups | 5V rail — sourced directly from USB VBUS (board is USB-powered only) |
 
 ---
 
@@ -159,8 +160,13 @@ It features passive 3-channel mono audio summing, YM2149F clock division jumper 
 ## Power Supply & Audio Stage Specification
 
 ### 1. Power Supply & Decoupling
-* **`C1`**: 10nF ceramic decoupling capacitor on `+5V` (adjacent to AY-3-8910 VCC Pin 40).
-* **`C2`**: 10nF ceramic decoupling capacitor on the audio mixer output / LPF node.
+* **Power source**: The `+5V` rail is sourced from the Raspberry Pi Pico 2 **VBUS pin (Pin 40)** — i.e. USB bus voltage. **VSYS (Pin 39) is Not Connected**; the board is designed to be USB-powered only. Do **not** feed an external 5 V into the `+5V` rail while USB is connected, as it will backfeed into VBUS.
+* **`C1`**: 10nF MLCC ceramic (0805) decoupling capacitor on `+5V` (adjacent to AY-3-8910 VCC Pin 40).
+* **`C2`**: 10nF MLCC ceramic (0805) decoupling capacitor on the audio mixer output / LPF node.
+* **Pull-up resistors**:
+  * **`R1`** = 10kΩ pull-down to GND on `~RESET` (AY-3-8910 Pin 23), for boot-time high-Z safety before the Pico drives the pin.
+  * **`R3`** = 10kΩ pull-up to `+3.3V` on `SD_CS` (Pico GPIO18 / MicroSD J1 Pin 2), ensures SD card sees CS high before Pico configures the GPIO (avoids the card entering SD-mode on power-up).
+  * **`R8`** = 10kΩ pull-up to `+5V` on PAM8302 `~SD` (U2 Pin 1), keeps the amplifier enabled by default. Can optionally be driven low by an RP2350 GPIO for pop-free mute.
 
 ### 2. YM2149F Jumper Header (`JP1`)
 * **Pin 1**: `+5V`
@@ -172,14 +178,24 @@ It features passive 3-channel mono audio summing, YM2149F clock division jumper 
 
 ### 3. Audio Stage & PAM8302A Mono Class-D Amplifier (`U2`)
 * **Passive Mono Summer**: `ANALOG_A` (R4 = 1kΩ) + `ANALOG_B` (R5 = 1kΩ) + `ANALOG_C` (R6 = 1kΩ)
-* **Passive Low-Pass Filter**: Resistor load `R7` = 1kΩ to GND, Capacitor `C2` = 10nF LPF to GND.
-* **Volume Attenuator**: Potentiometer `RV1` (10kΩ) as a resistor divider before amplifier input (`IN+`).
-* **Amplifier (PAM8302A - 2.5W Mono Class-D)**:
-  * **Pin 1 (`IN+`)**: AC-coupled audio input via `C3` (1µF ceramic).
-  * **Pin 2 (`~SD`)**: Shutdown Control (Active Low). Pulled up to `+5V` via 10kΩ resistor `R3` (or connected to RP2350 GPIO for pop-free mute control).
-  * **Pin 3 (`IN-`)**: AC-coupled to GND via `C5` (10nF ceramic) for differential noise rejection / high PSRR.
-  * **Pin 4, 8 (`GND`)**: System Ground.
-  * **Pin 5 (`VO+`)**: Positive Bridge-Tied Load (BTL) Speaker Output to `J2` Pin 1.
-  * **Pin 6 (`VDD`)**: +5V Power Supply (Decoupled by `C4` 10µF electrolytic).
-  * **Pin 7 (`VO-`)**: Negative Bridge-Tied Load (BTL) Speaker Output to `J2` Pin 2 (Do NOT ground!).
-* **Speaker Output Header (`J2`)**: 2-pin header for 4Ω or 8Ω mono speaker (`VO+` on Pin 1, `VO-` on Pin 2).
+* **Passive Low-Pass Filter**: Resistor load `R7` = 1kΩ to GND, Capacitor `C2` = 10nF MLCC ceramic (0805) LPF to GND.
+* **Volume Attenuator**: Potentiometer `RV1` (Bourns 3224W, 10kΩ) as a resistor divider before amplifier input.
+* **Amplifier (PAM8302AAS - 2.5W Mono Class-D, SOIC-8 footprint)** — pin mapping per KiCad `Amplifier_Audio:PAM8302AAS` library symbol:
+  * **Pin 1 (`~SD`)**: Shutdown control (active low). Pulled up to `+5V` via 10kΩ `R8`. Can optionally be driven by an RP2350 GPIO for pop-free mute.
+  * **Pin 2 (`NC`)**: Not connected (hidden in symbol).
+  * **Pin 3 (`IN+`)**: AC-coupled audio input via `C3` = 1µF polarized aluminum electrolytic (`CP_Elec_3x5.4` footprint) — positive terminal to signal side.
+  * **Pin 4 (`IN-`)**: AC-coupled to GND via `C5` = 10nF MLCC ceramic (0805). Note: matching PAM8302 datasheet recommends this cap equal `C3` (1µF) for a flat audio HPF; the 10nF here creates a bass roll-off (intentional or accidental — verify).
+  * **Pin 5 (`OUT+`)**: Positive Bridge-Tied Load (BTL) speaker output to `J2` Pin 1.
+  * **Pin 6 (`VDD`)**: +5V power supply, decoupled by `C4` = 10µF MLCC ceramic (0805, `C_0805` footprint).
+  * **Pin 7 (`GND`)**: System ground.
+  * **Pin 8 (`OUT-`)**: Negative Bridge-Tied Load (BTL) speaker output to `J2` Pin 2 (**do NOT ground!**).
+* **Speaker Output Header (`J2`)**: 2-pin 1.27 mm pin socket for 4Ω or 8Ω mono speaker (`OUT+` on Pin 1, `OUT-` on Pin 2).
+
+---
+
+## Revision History
+
+| Rev  | Date       | Notes |
+| :--- | :--------- | :---- |
+| 0.2  | 2026-08-12 | Corrected `+5V` source from Pico Pin 39 (VSYS) to Pin 40 (VBUS); documented `R8` pull-up on PAM8302 `~SD`; corrected `R3` role to `SD_CS` pull-up; re-mapped PAM8302 pinout to match KiCad `Amplifier_Audio:PAM8302AAS` library symbol; updated capacitor types (`C3` polarized electrolytic, `C4` MLCC ceramic) to match schematic footprints. Schematic-side: added `no_connect` markers on unused Pico + AY-3-8910 pins; set `C1` footprint. Schematic is the single source of truth. |
+| 0.1  | 2026-08-08 | Initial hardware documentation release. |

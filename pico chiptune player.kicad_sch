@@ -6,8 +6,8 @@
 	(paper "A4")
 	(title_block
 		(title "Pico Chiptune Player")
-		(date "2026-08-08")
-		(rev "0.1")
+		(date "2026-08-12")
+		(rev "0.2")
 		(company "MotionFxDesign")
 		(comment 1 "Terence Ang / MotionFxDesign")
 		(comment 2 "Hardware AY-3-8910 / YM2149 Chiptune Player")
@@ -4269,12 +4269,6 @@
 		(uuid "57835faa-b50e-458f-b2f5-5c69af620d2b")
 	)
 	(junction
-		(at 137.16 139.7)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "6a6daace-2acf-4a6d-8bb4-8becf925c4eb")
-	)
-	(junction
 		(at 217.17 45.72)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4287,12 +4281,6 @@
 		(uuid "a7594bd7-64f5-4e45-a16a-af288d5ca07d")
 	)
 	(junction
-		(at 137.16 162.56)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ade6a7c5-a854-42fa-813f-1d568cec5014")
-	)
-	(junction
 		(at 22.86 74.93)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4303,12 +4291,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d8c40043-04fe-4c5d-923a-22b22d08bf7c")
-	)
-	(junction
-		(at 137.16 151.13)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f129ac8b-b798-4c08-b357-119e1fa80f9e")
 	)
 	(junction
 		(at 173.99 116.84)
@@ -4335,10 +4317,6 @@
 	(no_connect
 		(at 149.86 49.53)
 		(uuid "2befbcc9-deb3-4be2-83b5-f7688a9e5869")
-	)
-	(no_connect
-		(at 53.34 85.09)
-		(uuid "4405c528-2f7c-49ed-92d0-8ed47b0ac9ef")
 	)
 	(no_connect
 		(at 149.86 74.93)
@@ -4407,6 +4385,10 @@
 	(no_connect
 		(at 53.34 95.25)
 		(uuid "c347cb26-9ab9-4103-ba8d-3d1fef14e284")
+	)
+	(no_connect
+		(at 53.34 85.09)
+		(uuid "c62f9339-8ae7-42c6-9234-f0827ee89644")
 	)
 	(no_connect
 		(at 149.86 64.77)
@@ -5044,16 +5026,6 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 151.13) (xy 137.16 151.13)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "78e079b0-69a5-44bb-8cc9-9c62ce8ed140")
-	)
-	(wire
-		(pts
 			(xy 22.86 74.93) (xy 22.86 82.55)
 		)
 		(stroke
@@ -5274,16 +5246,6 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 139.7) (xy 137.16 139.7)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a629e466-d69b-4ffa-9278-ea03f7dc138b")
-	)
-	(wire
-		(pts
 			(xy 217.17 31.75) (xy 222.25 31.75)
 		)
 		(stroke
@@ -5501,16 +5463,6 @@
 			(type default)
 		)
 		(uuid "d23d0577-3c10-414f-bd00-9009fb68b43b")
-	)
-	(wire
-		(pts
-			(xy 132.08 162.56) (xy 137.16 162.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d3e85c45-72c8-4e13-8d75-f186b8e201a5")
 	)
 	(wire
 		(pts
@@ -6717,7 +6669,6 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "1fe8ca34-a329-412c-97db-da7e57f13932")
 		(property "Reference" "C3"
 			(at 193.421 109.22 90)
@@ -6740,7 +6691,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:CP_Elec_3x5.4"
-			(at 198.12 115.8748 0)
+			(at 195.326 105.156 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7202,7 +7153,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10nF"
+		(property "Value" "100nF"
 			(at 224.282 40.64 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7683,7 +7634,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_3x5.3"
 			(at 212.09 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -9370,7 +9321,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
 			(at 33.9852 156.21 0)
 			(hide yes)
 			(show_name no)
@@ -10286,7 +10237,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_SO:SOIC-8_5.3x5.3mm_P1.27mm"
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 227.33 129.54 0)
 			(hide yes)
 			(show_name no)
