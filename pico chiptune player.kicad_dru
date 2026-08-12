@@ -1,38 +1,35 @@
 # JLCPCB Design Rules for KiCad
-# Specifications: JLCPCB Standard Process (2-Layer / 4-Layer)
 
 (version 1)
 
-(rule "JLCPCB Minimum Clearance"
-	(description "JLCPCB minimum 5mil (0.127mm) copper clearance")
-	(constraint clearance (min 0.127mm)))
+(rule "JLCPCB Trace Clearance"
+	(constraint clearance (min 0.127mm))
+	(condition "A.type == 'track'"))
 
-(rule "JLCPCB Minimum Track Width"
-	(description "JLCPCB minimum 5mil (0.127mm) trace width")
-	(constraint track_width (min 0.127mm)))
+(rule "JLCPCB Track Width"
+	(constraint track_width (min 0.127mm))
+	(condition "A.type == 'track'"))
 
-(rule "JLCPCB Minimum Via Hole"
-	(description "JLCPCB minimum 0.3mm via drill size")
-	(constraint hole (min 0.3mm))
+(rule "JLCPCB Via Hole Size"
+	(constraint hole_size (min 0.3mm))
 	(condition "A.type == 'via'"))
 
-(rule "JLCPCB Minimum Via Diameter"
-	(description "JLCPCB minimum 0.5mm via pad diameter")
+(rule "JLCPCB Via Diameter"
 	(constraint via_diameter (min 0.5mm))
 	(condition "A.type == 'via'"))
 
 (rule "JLCPCB Hole to Hole Clearance"
-	(description "JLCPCB minimum 0.254mm (10mil) hole-to-hole clearance")
-	(constraint hole_to_hole (min 0.254mm)))
+	(constraint hole_to_hole (min 0.254mm))
+	(condition "A.type == 'pad' || A.type == 'via'"))
 
 (rule "JLCPCB Board Edge Clearance"
-	(description "JLCPCB minimum 0.3mm copper-to-board-edge clearance")
-	(constraint edge_clearance (min 0.3mm)))
+	(constraint edge_clearance (min 0.3mm))
+	(condition "A.type == 'track' || A.type == 'via' || A.type == 'pad'"))
 
 (rule "JLCPCB Silkscreen Text Height"
-	(description "JLCPCB minimum 0.8mm silk text height for legibility")
-	(constraint text_height (min 0.8mm)))
+	(constraint text_height (min 0.8mm))
+	(condition "A.type == 'text'"))
 
 (rule "JLCPCB Silkscreen Text Line Width"
-	(description "JLCPCB minimum 0.15mm silk stroke width")
-	(constraint text_thickness (min 0.15mm)))
+	(constraint text_thickness (min 0.15mm))
+	(condition "A.type == 'text'"))

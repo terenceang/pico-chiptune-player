@@ -9638,7 +9638,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "RaspberryPi_Pico"
+		(property "Value" "RaspberryPi_Pico 2"
 			(at 78.3433 111.76 0)
 			(show_name no)
 			(do_not_autoplace no)
