@@ -571,7 +571,6 @@
 			)
 		)
 		(property ki_fp_filters "RaspberryPi?Pico?Common* RaspberryPi?Pico?Original*")
-		(path "/e5c02884-ceab-49dc-af57-ffa4fb5b093f")
 		(sheetname "/")
 		(sheetfile "pico chiptune player.kicad_sch")
 		(units
@@ -3826,7 +3825,7 @@
 				)
 			)
 		)
-		(property "Value" "Spk Out"
+		(property "Value" "Speaker Out"
 			(at -0.5 1.75 0)
 			(layer "B.SilkS")
 			(uuid "ce131577-f0f9-400b-adbc-369caefa584c")
@@ -7502,7 +7501,7 @@
 			(size 1.2 1.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.208333)
-			(net "Net-(A1-GPIO11)")
+			(net "Net-(R2-Pad2)")
 			(pintype "passive")
 			(uuid "956d8f33-3c5a-4c90-97df-f734ed7a4161")
 		)
@@ -7570,7 +7569,6 @@
 			)
 		)
 		(property ki_fp_filters "DIP*W15.24mm*")
-		(path "/7ae340fe-fabc-4d5c-8adb-b5cd039ce884")
 		(sheetname "/")
 		(sheetfile "pico chiptune player.kicad_sch")
 		(units
