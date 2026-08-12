@@ -10,7 +10,7 @@
 
 ## Overview
 
-The **Pico Chiptune Player** is a hardware chiptune music player powered by a **Raspberry Pi Pico (RP2040)** microcontroller driving a dedicated **General Instrument AY-3-8910** (or **Yamaha YM2149F**) 3-voice Programmable Sound Generator (PSG).
+The **Pico Chiptune Player** is a hardware chiptune music player powered by a **Raspberry Pi Pico 2 (RP2350)** microcontroller driving a dedicated **General Instrument AY-3-8910** (or **Yamaha YM2149F**) 3-voice Programmable Sound Generator (PSG).
 
 It features passive 3-channel mono audio summing, YM2149F clock division jumper selection, an SPI microSD card interface with hardware Card Detect, an I2C OLED display header (`U3`), and navigation pushbuttons.
 
@@ -21,7 +21,7 @@ It features passive 3-channel mono audio summing, YM2149F clock division jumper 
 ```
                              +-------------------+
                              |  Raspberry Pi     |
-                             |  Pico (RP2040)    |
+                             | Pico 2 (RP2350)   |
                              +--+---+---+---+----+
                                 |   |   |   |
           +---------------------+   |   |   +-----------------------+
@@ -65,7 +65,7 @@ It features passive 3-channel mono audio summing, YM2149F clock division jumper 
 
 ## Complete Pinout & Wiring Table
 
-### 1. Raspberry Pi Pico (A1) Pin Connections
+### 1. Raspberry Pi Pico 2 (A1) Pin Connections
 
 | Pico Pin | GPIO Pin | Function / Net Name | Connected To | Signal Description |
 | :--- | :--- | :--- | :--- | :--- |
@@ -176,11 +176,10 @@ It features passive 3-channel mono audio summing, YM2149F clock division jumper 
 * **Volume Attenuator**: Potentiometer `RV1` (10kΩ) as a resistor divider before amplifier input (`IN+`).
 * **Amplifier (PAM8302A - 2.5W Mono Class-D)**:
   * **Pin 1 (`IN+`)**: AC-coupled audio input via `C3` (1µF ceramic).
-  * **Pin 2 (`~SD`)**: Shutdown Control (Active Low). Pulled up to `+5V` via 10kΩ resistor `R3` (or connected to RP2040 GPIO for pop-free mute control).
+  * **Pin 2 (`~SD`)**: Shutdown Control (Active Low). Pulled up to `+5V` via 10kΩ resistor `R3` (or connected to RP2350 GPIO for pop-free mute control).
   * **Pin 3 (`IN-`)**: AC-coupled to GND via `C5` (10nF ceramic) for differential noise rejection / high PSRR.
   * **Pin 4, 8 (`GND`)**: System Ground.
   * **Pin 5 (`VO+`)**: Positive Bridge-Tied Load (BTL) Speaker Output to `J2` Pin 1.
   * **Pin 6 (`VDD`)**: +5V Power Supply (Decoupled by `C4` 10µF electrolytic).
   * **Pin 7 (`VO-`)**: Negative Bridge-Tied Load (BTL) Speaker Output to `J2` Pin 2 (Do NOT ground!).
 * **Speaker Output Header (`J2`)**: 2-pin header for 4Ω or 8Ω mono speaker (`VO+` on Pin 1, `VO-` on Pin 2).
-
