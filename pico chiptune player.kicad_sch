@@ -6583,6 +6583,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C17513"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
@@ -6662,6 +6673,17 @@
 			(uuid "b90ac8b0-4dd2-4afb-b3e0-7b746d23ba5b")
 		)
 		(property "LCSC Part #" "C15848"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C15848"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -6761,6 +6783,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C17513"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
@@ -6840,6 +6873,17 @@
 			(uuid "f05bae34-d014-4912-9899-bed0a1da0975")
 		)
 		(property "LCSC Part #" "C12437"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C12437"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -7177,6 +7221,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C49678"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
@@ -7259,6 +7314,17 @@
 			(uuid "ce798590-54e7-4bce-a413-29c8e21eb879")
 		)
 		(property "LCSC Part #" "C81348"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C81348"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -7398,6 +7464,17 @@
 		(pin "2"
 			(uuid "1eee6304-d588-47f6-b366-6fee4cc27deb")
 		)
+		(property "LCSC" "C12740"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
@@ -7478,6 +7555,17 @@
 			(uuid "08db7759-91e4-4d8c-a186-5e45b11384d0")
 		)
 		(property "LCSC Part #" "C114217"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C114217"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -8177,6 +8265,17 @@
 		(pin "1"
 			(uuid "c56f9efe-340c-41cf-a246-b32729b1c62e")
 		)
+		(property "LCSC" "C17631"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
@@ -8459,6 +8558,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C17513"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
@@ -8626,6 +8736,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C12740"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
@@ -8706,6 +8827,17 @@
 			(uuid "c7ef08a4-b1d3-4b68-9452-8c336671e6f4")
 		)
 		(property "LCSC Part #" "C17513"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C17513"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -9032,6 +9164,17 @@
 			(uuid "50b0feca-b5f7-4ed3-a002-489a01e61a79")
 		)
 		(property "LCSC Part #" "C12740"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C12740"
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -9443,6 +9586,17 @@
 		(pin "1"
 			(uuid "f1ff5172-2f03-4f2a-8c03-0bdb0d1f500b")
 		)
+		(property "LCSC" "C1710"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
@@ -9627,6 +9781,17 @@
 		)
 		(pin "2"
 			(uuid "da832661-4a36-496f-a9e6-fcd690439465")
+		)
+		(property "LCSC" "C17414"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
 		(instances
 			(project "pico chiptune player"
@@ -10080,6 +10245,17 @@
 		)
 		(pin "1"
 			(uuid "823818a5-7844-4c6b-8154-be264c86c8c2")
+		)
+		(property "LCSC" "C17414"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
 		(instances
 			(project "pico chiptune player"
