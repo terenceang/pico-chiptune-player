@@ -6206,7 +6206,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "08a61e69-0d43-4f83-894f-cc05296f4143")
-		(property "Reference" "#PWR023"
+		(property "Reference" "#PWR07"
 			(at 245.11 55.88 0)
 			(hide yes)
 			(show_name no)
@@ -6266,7 +6266,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR023")
+					(reference "#PWR07")
 					(unit 1)
 				)
 			)
@@ -6283,7 +6283,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "0acb259e-c3b1-4910-8a14-db60e0b3793c")
-		(property "Reference" "#PWR020"
+		(property "Reference" "#PWR06"
 			(at 217.17 54.61 0)
 			(hide yes)
 			(show_name no)
@@ -6343,7 +6343,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR020")
+					(reference "#PWR06")
 					(unit 1)
 				)
 			)
@@ -6360,7 +6360,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "0f140cf5-20e0-41ac-b4d4-bb4d49ca3770")
-		(property "Reference" "#PWR01"
+		(property "Reference" "#PWR021"
 			(at 33.02 151.13 0)
 			(hide yes)
 			(show_name no)
@@ -6420,7 +6420,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR01")
+					(reference "#PWR021")
 					(unit 1)
 				)
 			)
@@ -6437,7 +6437,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "105df2a6-9c8c-4272-88f3-5125e08d6e9d")
-		(property "Reference" "#PWR024"
+		(property "Reference" "#PWR09"
 			(at 251.46 80.01 0)
 			(hide yes)
 			(show_name no)
@@ -6497,7 +6497,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR024")
+					(reference "#PWR09")
 					(unit 1)
 				)
 			)
@@ -6593,7 +6593,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1b7593d7-abf4-4f7d-ad4e-c5a040744a7e")
-		(property "Reference" "#PWR015"
+		(property "Reference" "#PWR010"
 			(at 196.85 92.71 0)
 			(hide yes)
 			(show_name no)
@@ -6653,7 +6653,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR015")
+					(reference "#PWR010")
 					(unit 1)
 				)
 			)
@@ -6827,7 +6827,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "25667d3c-4f0b-43d5-98d3-45160bf13eb9")
-		(property "Reference" "J2"
+		(property "Reference" "J1"
 			(at 254 125.7299 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6891,7 +6891,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "J2")
+					(reference "J1")
 					(unit 1)
 				)
 			)
@@ -6909,7 +6909,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2eb8a4c9-e0a6-4754-9d2f-eb85c45fe092")
-		(property "Reference" "#PWR016"
+		(property "Reference" "#PWR019"
 			(at 214.63 147.32 0)
 			(hide yes)
 			(show_name no)
@@ -6969,7 +6969,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR016")
+					(reference "#PWR019")
 					(unit 1)
 				)
 			)
@@ -6987,7 +6987,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3b473fe0-581d-42e9-8505-884e60f0ec27")
-		(property "Reference" "#PWR022"
+		(property "Reference" "#PWR020"
 			(at 227.33 147.32 0)
 			(hide yes)
 			(show_name no)
@@ -7047,7 +7047,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR022")
+					(reference "#PWR020")
 					(unit 1)
 				)
 			)
@@ -7065,7 +7065,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3b9105ed-1c63-4be1-860f-fa3a85893509")
-		(property "Reference" "#PWR05"
+		(property "Reference" "#PWR024"
 			(at 43.18 177.8 0)
 			(hide yes)
 			(show_name no)
@@ -7125,7 +7125,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR05")
+					(reference "#PWR024")
 					(unit 1)
 				)
 			)
@@ -7142,7 +7142,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "3c3e6317-4364-4c7d-8ef4-ac1399035bd1")
-		(property "Reference" "C5"
+		(property "Reference" "C2"
 			(at 224.028 35.56 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7206,7 +7206,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "C5")
+					(reference "C2")
 					(unit 1)
 				)
 			)
@@ -7431,7 +7431,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "59d5bcaf-36bc-420f-a88d-7dd3aa601c35")
-		(property "Reference" "J1"
+		(property "Reference" "J2"
 			(at 74.422 138.176 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7519,7 +7519,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "J1")
+					(reference "J2")
 					(unit 1)
 				)
 			)
@@ -7537,7 +7537,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "60f01fd0-ef18-4d92-af66-8bd84cc1102d")
-		(property "Reference" "#PWR09"
+		(property "Reference" "#PWR05"
 			(at 118.11 46.99 0)
 			(hide yes)
 			(show_name no)
@@ -7597,7 +7597,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR09")
+					(reference "#PWR05")
 					(unit 1)
 				)
 			)
@@ -7614,7 +7614,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "61712747-1758-4439-8de3-d856aef6b70f")
-		(property "Reference" "C4"
+		(property "Reference" "C1"
 			(at 209.55 35.306 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7674,7 +7674,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "C4")
+					(reference "C1")
 					(unit 1)
 				)
 			)
@@ -7691,7 +7691,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "67c10952-5a5f-44fe-ad3d-3720a1c8ba0e")
-		(property "Reference" "#PWR04"
+		(property "Reference" "#PWR017"
 			(at 43.18 144.78 0)
 			(hide yes)
 			(show_name no)
@@ -7751,7 +7751,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR04")
+					(reference "#PWR017")
 					(unit 1)
 				)
 			)
@@ -7769,7 +7769,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "68067d37-70cf-4130-85f2-60bc67d0e796")
-		(property "Reference" "#PWR011"
+		(property "Reference" "#PWR015"
 			(at 179.07 143.51 0)
 			(hide yes)
 			(show_name no)
@@ -7829,7 +7829,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR011")
+					(reference "#PWR015")
 					(unit 1)
 				)
 			)
@@ -7847,7 +7847,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "71ee3c27-fa4f-42aa-81f0-0a2a1bde0496")
-		(property "Reference" "#PWR08"
+		(property "Reference" "#PWR02"
 			(at 81.28 26.67 0)
 			(hide yes)
 			(show_name no)
@@ -7907,7 +7907,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR08")
+					(reference "#PWR02")
 					(unit 1)
 				)
 			)
@@ -7925,7 +7925,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "74d132ab-1669-4201-bd56-8fbf2efdf657")
-		(property "Reference" "R3"
+		(property "Reference" "R1"
 			(at 120.65 50.7999 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7989,7 +7989,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "R3")
+					(reference "R1")
 					(unit 1)
 				)
 			)
@@ -8281,7 +8281,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "7edb5bac-4816-4f62-a61e-ccb8121b91ae")
-		(property "Reference" "#PWR018"
+		(property "Reference" "#PWR012"
 			(at 213.36 116.84 0)
 			(hide yes)
 			(show_name no)
@@ -8341,7 +8341,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR018")
+					(reference "#PWR012")
 					(unit 1)
 				)
 			)
@@ -8358,7 +8358,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "9108be26-e344-4bfb-91dc-3b3b7cdc3973")
-		(property "Reference" "R6"
+		(property "Reference" "R7"
 			(at 167.64 123.19 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8419,7 +8419,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "R6")
+					(reference "R7")
 					(unit 1)
 				)
 			)
@@ -8437,7 +8437,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "92f65f2d-5113-4585-a511-b492788f52f6")
-		(property "Reference" "#PWR025"
+		(property "Reference" "#PWR018"
 			(at 205.74 147.32 0)
 			(hide yes)
 			(show_name no)
@@ -8497,7 +8497,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR025")
+					(reference "#PWR018")
 					(unit 1)
 				)
 			)
@@ -8593,7 +8593,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "9fbb6e43-e51a-46b8-946d-787db4b44136")
-		(property "Reference" "R7"
+		(property "Reference" "R8"
 			(at 173.736 127.762 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8657,7 +8657,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "R7")
+					(reference "R8")
 					(unit 1)
 				)
 			)
@@ -8675,7 +8675,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a5f9a166-b8e3-4bd8-b2b1-dc0e58dcbd8f")
-		(property "Reference" "#PWR013"
+		(property "Reference" "#PWR016"
 			(at 185.42 143.51 0)
 			(hide yes)
 			(show_name no)
@@ -8735,7 +8735,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR013")
+					(reference "#PWR016")
 					(unit 1)
 				)
 			)
@@ -8753,7 +8753,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "aef43fe4-4ad6-4c54-8beb-5ccc1291ae7c")
-		(property "Reference" "#PWR07"
+		(property "Reference" "#PWR014"
 			(at 76.2 120.65 0)
 			(hide yes)
 			(show_name no)
@@ -8813,7 +8813,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR07")
+					(reference "#PWR014")
 					(unit 1)
 				)
 			)
@@ -8831,7 +8831,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b35c2e7b-b833-4b72-888e-f28880f40516")
-		(property "Reference" "#PWR010"
+		(property "Reference" "#PWR023"
 			(at 143.51 171.45 0)
 			(hide yes)
 			(show_name no)
@@ -8891,7 +8891,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR010")
+					(reference "#PWR023")
 					(unit 1)
 				)
 			)
@@ -8988,7 +8988,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bad72ab0-2b0e-428f-8f31-3e2eb4a1fab8")
-		(property "Reference" "#PWR014"
+		(property "Reference" "#PWR08"
 			(at 196.85 58.42 0)
 			(hide yes)
 			(show_name no)
@@ -9048,7 +9048,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR014")
+					(reference "#PWR08")
 					(unit 1)
 				)
 			)
@@ -9066,7 +9066,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bc0ebcd5-a8a1-4345-973e-eca3ac51087c")
-		(property "Reference" "#PWR06"
+		(property "Reference" "#PWR01"
 			(at 71.12 26.67 0)
 			(hide yes)
 			(show_name no)
@@ -9126,7 +9126,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR06")
+					(reference "#PWR01")
 					(unit 1)
 				)
 			)
@@ -9143,7 +9143,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c35d7897-a491-4de3-9e25-58bb569d255f")
-		(property "Reference" "#PWR021"
+		(property "Reference" "#PWR013"
 			(at 227.33 116.84 0)
 			(hide yes)
 			(show_name no)
@@ -9203,7 +9203,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR021")
+					(reference "#PWR013")
 					(unit 1)
 				)
 			)
@@ -9221,7 +9221,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c3e04941-fc10-4c11-8ddf-c6897349ed68")
-		(property "Reference" "#PWR03"
+		(property "Reference" "#PWR011"
 			(at 22.86 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -9281,7 +9281,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR03")
+					(reference "#PWR011")
 					(unit 1)
 				)
 			)
@@ -9299,7 +9299,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c726b698-b9d7-46bb-9c4d-082b056f9a61")
-		(property "Reference" "C1"
+		(property "Reference" "C5"
 			(at 36.83 151.1299 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9363,7 +9363,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "C1")
+					(reference "C5")
 					(unit 1)
 				)
 			)
@@ -9380,7 +9380,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "ccd1d09d-beb7-4dec-8531-5741bb04bfcc")
-		(property "Reference" "R8"
+		(property "Reference" "R6"
 			(at 215.392 115.57 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9444,7 +9444,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "R8")
+					(reference "R6")
 					(unit 1)
 				)
 			)
@@ -9462,7 +9462,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d042d795-e86c-43d5-a411-2955d1377cfd")
-		(property "Reference" "#PWR012"
+		(property "Reference" "#PWR03"
 			(at 186.69 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -9522,7 +9522,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR012")
+					(reference "#PWR03")
 					(unit 1)
 				)
 			)
@@ -9539,7 +9539,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "d176a783-4650-4380-8121-2d550a9aa33d")
-		(property "Reference" "U3"
+		(property "Reference" "U2"
 			(at 263.398 48.26 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9609,7 +9609,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "U3")
+					(reference "U2")
 					(unit 1)
 				)
 			)
@@ -9822,7 +9822,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "eccb2105-2e27-4b09-b506-a7f6f46307a0")
-		(property "Reference" "R1"
+		(property "Reference" "R3"
 			(at 18.796 84.836 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9886,7 +9886,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "R1")
+					(reference "R3")
 					(unit 1)
 				)
 			)
@@ -9903,7 +9903,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "ed8b3599-55db-406b-ad0f-472d59a62fcb")
-		(property "Reference" "#PWR019"
+		(property "Reference" "#PWR04"
 			(at 217.17 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -9963,7 +9963,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR019")
+					(reference "#PWR04")
 					(unit 1)
 				)
 			)
@@ -10137,7 +10137,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f098ac0d-1edd-4f4a-bf2f-39639a37b4a3")
-		(property "Reference" "#PWR02"
+		(property "Reference" "#PWR022"
 			(at 33.02 163.83 0)
 			(hide yes)
 			(show_name no)
@@ -10197,7 +10197,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR02")
+					(reference "#PWR022")
 					(unit 1)
 				)
 			)
@@ -10215,7 +10215,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f1d56688-6fca-466f-a211-2b7e0e03298d")
-		(property "Reference" "U2"
+		(property "Reference" "U3"
 			(at 229.4733 116.84 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10297,7 +10297,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "U2")
+					(reference "U3")
 					(unit 1)
 				)
 			)
@@ -10314,7 +10314,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "f93d6cb9-b600-4b99-ac93-6a5eebea941e")
-		(property "Reference" "C2"
+		(property "Reference" "C4"
 			(at 183.642 127 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10375,7 +10375,7 @@
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "C2")
+					(reference "C4")
 					(unit 1)
 				)
 			)

@@ -13,6 +13,24 @@ _autosave-*
 *.log
 *.dxf
 
+# Production temporary raw gerbers (ZIP archive is tracked)
+production/*.gbr
+production/*.g1
+production/*.g2
+production/*.gtl
+production/*.gbl
+production/*.gts
+production/*.gbs
+production/*.gto
+production/*.gbo
+production/*.gtp
+production/*.gbp
+production/*.gta
+production/*.gba
+production/*.gm1
+production/*.drl
+production/*.gbrjob
+
 # Editor & Tool directories
 .claude/
 .history/

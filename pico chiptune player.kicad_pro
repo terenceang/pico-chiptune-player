@@ -90,10 +90,6 @@
           ""
         ],
         [
-          "courtyards_overlap|168165422|84087500|2f926d2e-30d5-4134-a6be-49d0ed003b5d|8d433597-3237-4798-9102-c7dc7bd96a26",
-          ""
-        ],
-        [
           "lib_footprint_issues|144610000|88242500|2e82caec-b336-4f8a-9138-02f7f40b9d2a|00000000-0000-0000-0000-000000000000",
           ""
         ],
@@ -115,14 +111,6 @@
         ],
         [
           "silk_edge_clearance|177186350|72500000|844d2510-ef90-4b44-8346-8735a69e92c2|dc04338f-74a2-4c53-96c3-362930e1c091",
-          ""
-        ],
-        [
-          "silk_over_copper|130613408|122622419|0fcfa995-28c9-4266-ad04-2aaa16949dd3|3e954f70-6a48-455d-ae1d-612fd1aa031a",
-          ""
-        ],
-        [
-          "silk_over_copper|130800000|120400000|e25a16f5-5fa4-4f84-9c42-874014509d35|956d8f33-3c5a-4c90-97df-f734ed7a4161",
           ""
         ],
         [
@@ -339,7 +327,7 @@
       "internal_id": "",
       "mfg": "",
       "mpn": "",
-      "sch_revision": "0.1"
+      "sch_revision": "0.2"
     },
     "layer_pairs": [],
     "layer_presets": [],
@@ -658,7 +646,7 @@
     "annotate_start_num": 0,
     "annotation": {
       "method": 0,
-      "sort_order": 0
+      "sort_order": 1
     },
     "bom_export_filename": "${PROJECTNAME}.csv",
     "bom_fmt_presets": [],
@@ -784,7 +772,7 @@
         "uuid": "7838ce79-4aa7-49e0-80b2-fad97ae8a425"
       }
     ],
-    "used_designators": "C3",
+    "used_designators": "C1-5,#PWR1-24,#PWR_JP1,A1,R1-8,J1-2,JP1,RV1,SW1-3,U1-3",
     "variants": []
   },
   "sheets": [
