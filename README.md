@@ -10,7 +10,7 @@ A standalone hardware chiptune music player powered by the **Raspberry Pi Pico (
 
 - **Microcontroller:** Raspberry Pi Pico (RP2040) controlling an 8-bit parallel bus.
 - **Sound Generator:** Compatible with AY-3-8910 or YM2149F retro 3-voice PSG.
-- **Storage:** SPI MicroSD Card interface with dedicated hardware Card Detect (`SD_CD`).
+- **Storage:** SPI MicroSD Card interface with dedicated hardware Card Detect (`SD_Card_Detect`).
 - **Display:** 4-pin I2C OLED header (0.96" SSD1306/SH1106).
 - **Controls:** 3 onboard pushbuttons (Play/Pause, Next Track, Previous Track).
 - **Clock Mode Selector:** Hardware jumper (`JP1`) for YM2149F clock division mode selection (1:1 or 1:2 clock divider).
@@ -38,11 +38,11 @@ For full pinout tables, block diagrams, and hardware specifications, refer to [*
 ### Quick Summary
 
 - **PSG Bus:** Data bits `DA0..DA7` mapped to Pico `GPIO0..GPIO7`.
-- **Bus Control:** `BDIR` on `GPIO8`, `BC1` on `GPIO9`, `~RESET` on `GPIO10`.
+- **Bus Control:** `BDIR` on `GPIO8` (reserved; U1 BDIR tied to +5V), `BC1` on `GPIO9`, `~RESET` on `GPIO10`.
 - **Clock Output:** Pico `GPIO11` providing master clock (1.789773 MHz / 2.0 MHz).
-- **Display:** I2C1 bus on `GPIO2` (SDA) and `GPIO3` (SCL).
-- **User Input:** Navigation buttons on `GPIO12` (Play), `GPIO13` (Next), and `GPIO14` (Prev).
-- **SD Interface:** SPI0 bus on `GPIO16..GPIO19` with Card Detect on `GPIO15`.
+- **Display:** I2C bus on `GPIO16` (SCL) and `GPIO17` (SDA).
+- **User Input:** Navigation buttons on `GPIO12` (Prev), `GPIO13` (Play), and `GPIO15` (Next).
+- **SD Interface:** SPI bus on `GPIO18` (CS), `GPIO19` (MOSI), `GPIO20` (SCK), `GPIO21` (MISO), Card Detect on `GPIO22`.
 
 ---
 
