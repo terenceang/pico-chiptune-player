@@ -11382,7 +11382,7 @@
 			)
 		)
 		(property "Value" "10uF"
-			(at -3.75 2 90)
+			(at -4.25 2.25 90)
 			(layer "B.SilkS")
 			(uuid "f95f4cf7-9412-4d3b-ba40-f52d4cd567ca")
 			(effects
@@ -11898,7 +11898,7 @@
 			)
 		)
 		(property "Value" "1k"
-			(at 2.804432 0.04876 0)
+			(at 0.075 -1.75 0)
 			(layer "B.SilkS")
 			(uuid "4837cb1f-0b14-4c08-b230-72550c39a552")
 			(effects
@@ -12749,18 +12749,6 @@
 			(justify left bottom)
 		)
 	)
-	(gr_text "+3.3V"
-		(at 157.0 85.25 0)
-		(layer "F.SilkS")
-		(uuid "1faac526-9641-472d-b51e-420e7f41fc0f")
-		(effects
-			(font
-				(size 0.8 0.8)
-				(thickness 0.15)
-			)
-			(justify left bottom)
-		)
-	)
 	(gr_text "GND"
 		(at 156.5 80.25 0)
 		(layer "F.SilkS")
@@ -12857,6 +12845,18 @@
 			(justify left bottom)
 		)
 	)
+	(gr_text "+3.3V"
+		(at 157.75 87 90)
+		(layer "F.SilkS")
+		(uuid "1faac526-9641-472d-b51e-420e7f41fc0f")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
 	(gr_text "RP2350 Pico 2 - AY-3-8910"
 		(at 161.330952 122.5 0)
 		(layer "F.SilkS")
@@ -12867,18 +12867,6 @@
 				(thickness 0.15)
 			)
 			(justify left bottom)
-		)
-	)
-	(gr_text "VOL"
-		(at 118 108.5 0)
-		(layer "B.SilkS")
-		(uuid "04dad0de-dbac-4e0c-ab63-7904615321cc")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-			(justify left bottom mirror)
 		)
 	)
 	(gr_text "SDA"
@@ -12915,6 +12903,18 @@
 				(thickness 0.15)
 			)
 			(justify mirror)
+		)
+	)
+	(gr_text "VOL"
+		(at 118 108.5 0)
+		(layer "B.SilkS")
+		(uuid "04dad0de-dbac-4e0c-ab63-7904615321cc")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom mirror)
 		)
 	)
 	(gr_text "terenceang.com"

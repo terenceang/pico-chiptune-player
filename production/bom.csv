@@ -1,20 +1,25 @@
-﻿Designator,Footprint,Quantity,Value,LCSC Part #
-A1,RaspberryPi_Pico_Common,1,RaspberryPi_Pico,
-"C1, C2",0805,2,10nF,
-C3_2,CP_Elec_3x5.4,1,1uF,
-C3,0805,1,1uF,
-C4,CP_Elec_3x5.3,1,10uF,
-C5,0805,1,100nF,
-J1,MicroSD,1,MicroSD,
-J2,PinSocket_2x01_P1.27mm_Vertical,1,Spk Out,
-JP1,SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm,1,CLLK DIV,
-"R1, R3, R8",0805,3,10K,
-R2,0805,1,33,
-"R4, R5, R6, R7",0805,4,1k,
-RV1,Potentiometer_Bourns_3224W_Vertical,1,3224W-1-103E,C81348
-SW1,SW_PUSH_6mm,1,Play / Pause,
-SW2,SW_PUSH_6mm,1,Next,
-SW3,SW_PUSH_6mm,1,Previous,
-U1,DIP-40_W15.24mm,1,AY-3-8910,
-U2,SOIC-8_3.9x4.9mm_P1.27mm,1,PAM8302AAS,
-U3,0.96OLED I2C,1,"0.96""OLED_I2C",
+"Refs","Value","Footprint","Qty","DNP"
+"A1","RaspberryPi_Pico 2","Module_RaspberryPi_Pico:RaspberryPi_Pico_Common","1",""
+"C1","10uF","Capacitor_SMD:CP_Elec_3x5.3","1",""
+"C2","100nF","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","1",""
+"C3","1uF","Capacitor_SMD:CP_Elec_3x5.4","1",""
+"C4","10nF","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","1",""
+"C5","10nF","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","1",""
+"J1","Speaker Out","Connector_PinSocket_1.27mm:PinSocket_2x01_P1.27mm_Vertical","1",""
+"J2","MicroSD","terence:MicroSD","1",""
+"JP1","Clk Div","Jumper:SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm","1",""
+"R1","10K","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","1",""
+"R2","33","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","1",""
+"R3","10K","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","1",""
+"R4","1k","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","1",""
+"R5","1k","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","1",""
+"R6","10K","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","1",""
+"R7","1k","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","1",""
+"R8","1K","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","1",""
+"RV1","3224W-1-103E","Potentiometer_SMD:Potentiometer_Bourns_3224W_Vertical","1",""
+"SW1","Play / Pause","Button_Switch_THT:SW_PUSH_6mm","1",""
+"SW2","Next","Button_Switch_THT:SW_PUSH_6mm","1",""
+"SW3","Previous","Button_Switch_THT:SW_PUSH_6mm","1",""
+"U1","AY-3-8910","Package_DIP:DIP-40_W15.24mm","1",""
+"U2","0.96""OLED_I2C","terence:0.96OLED I2C","1",""
+"U3","PAM8302AAS","Package_SO:SOIC-8_3.9x4.9mm_P1.27mm","1",""

@@ -13,7 +13,7 @@ Ref,Val,Package,PosX,PosY,Rot,Side
 "R8","1K","R_0805_2012Metric_Pad1.20x1.40mm_HandSolder",124.425000,-87.500000,-90.000000,bottom
 "RV1","3224W-1-103E","Potentiometer_Bourns_3224W_Vertical",115.950000,-104.500000,90.000000,bottom
 "U3","PAM8302AAS","SOIC-8_3.9x4.9mm_P1.27mm",119.500000,-95.000000,0.000000,bottom
-"A1","RaspberryPi_Pico","RaspberryPi_Pico_Common",144.610000,-98.780000,0.000000,top
+"A1","RaspberryPi_Pico 2","RaspberryPi_Pico_Common",144.610000,-98.780000,0.000000,top
 "C2","100nF","C_0805_2012Metric_Pad1.18x1.45mm_HandSolder",124.000000,-77.250000,180.000000,top
 "J1","Speaker Out","PinSocket_2x01_P1.27mm_Vertical",123.500000,-100.000000,0.000000,top
 "R2","33","R_0805_2012Metric_Pad1.20x1.40mm_HandSolder",131.250000,-117.000000,90.000000,top
