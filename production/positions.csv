@@ -1,25 +1,25 @@
-Ref,Val,Package,PosX,PosY,Rot,Side
-"C1","10uF","CP_Elec_3x5.3",130.000000,-76.500000,90.000000,bottom
-"C3","1uF","CP_Elec_3x5.4",120.425000,-80.375000,-90.000000,bottom
-"C4","10nF","C_0805_2012Metric_Pad1.18x1.45mm_HandSolder",116.250000,-88.500000,-90.000000,bottom
-"C5","10nF","C_0805_2012Metric_Pad1.18x1.45mm_HandSolder",178.000000,-91.000000,0.000000,bottom
-"J2","MicroSD","MicroSD",170.250000,-78.400000,0.000000,bottom
-"JP1","Clk Div","SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm",118.275000,-112.725000,180.000000,bottom
-"R1","10K","R_0805_2012Metric_Pad1.20x1.40mm_HandSolder",174.000000,-92.000000,-90.000000,bottom
-"R4","1k","R_0805_2012Metric_Pad1.20x1.40mm_HandSolder",115.425000,-85.000000,0.000000,bottom
-"R5","1k","R_0805_2012Metric_Pad1.20x1.40mm_HandSolder",115.425000,-82.500000,0.000000,bottom
-"R6","10K","R_0805_2012Metric_Pad1.20x1.40mm_HandSolder",118.500000,-88.500000,-90.000000,bottom
-"R7","1k","R_0805_2012Metric_Pad1.20x1.40mm_HandSolder",124.425000,-83.500000,-90.000000,bottom
-"R8","1K","R_0805_2012Metric_Pad1.20x1.40mm_HandSolder",124.425000,-87.500000,-90.000000,bottom
-"RV1","3224W-1-103E","Potentiometer_Bourns_3224W_Vertical",115.950000,-104.500000,90.000000,bottom
-"U3","PAM8302AAS","SOIC-8_3.9x4.9mm_P1.27mm",119.500000,-95.000000,0.000000,bottom
-"A1","RaspberryPi_Pico 2","RaspberryPi_Pico_Common",144.610000,-98.780000,0.000000,top
-"C2","100nF","C_0805_2012Metric_Pad1.18x1.45mm_HandSolder",124.000000,-77.250000,180.000000,top
-"J1","Speaker Out","PinSocket_2x01_P1.27mm_Vertical",123.500000,-100.000000,0.000000,top
-"R2","33","R_0805_2012Metric_Pad1.20x1.40mm_HandSolder",131.250000,-117.000000,90.000000,top
-"R3","10K","R_0805_2012Metric_Pad1.20x1.40mm_HandSolder",124.000000,-119.250000,90.000000,top
-"SW1","Play / Pause","SW_PUSH_6mm",145.625000,-135.000000,0.000000,top
-"SW2","Next","SW_PUSH_6mm",174.000000,-135.000000,0.000000,top
-"SW3","Previous","SW_PUSH_6mm",117.250000,-135.000000,0.000000,top
-"U1","AY-3-8910","DIP-40_W15.24mm",111.805000,-77.240000,0.000000,top
-"U2","0.96"OLED_I2C","0.96OLED I2C",186.655000,-101.655000,180.000000,top
+﻿Designator,Mid X,Mid Y,Rotation,Layer
+A1,144.61,-98.695,0.0,top
+C1,130.0,-76.5,270.0,bottom
+C2,124.0,-77.25,180.0,top
+C3,120.425,-80.375,90.0,bottom
+C4,116.25,-88.5,270.0,bottom
+C5,178.0,-91.0,180.0,bottom
+J1,122.865,-100.0,0.0,top
+J2,170.25,-78.4,180.0,bottom
+JP1,118.275,-112.725,0.0,bottom
+R1,174.0,-92.0,270.0,bottom
+R2,131.25,-117.0,90.0,top
+R3,124.0,-119.25,90.0,top
+R4,115.425,-85.0,180.0,bottom
+R5,115.425,-82.5,180.0,bottom
+R6,118.5,-88.5,270.0,bottom
+R7,124.425,-83.5,270.0,bottom
+R8,124.425,-87.5,270.0,bottom
+RV1,115.95,-104.5,90.0,bottom
+SW1,148.875,-137.25,0.0,top
+SW2,177.25,-137.25,0.0,top
+SW3,120.5,-137.25,0.0,top
+U1,119.425,-101.37,0.0,top
+U2,172.905,-99.401022,180.0,top
+U3,119.5,-95.0,90.0,bottom

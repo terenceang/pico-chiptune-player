@@ -1,25 +1,23 @@
-"Refs","Value","Footprint","Qty","DNP"
-"A1","RaspberryPi_Pico 2","Module_RaspberryPi_Pico:RaspberryPi_Pico_Common","1",""
-"C1","10uF","Capacitor_SMD:CP_Elec_3x5.3","1",""
-"C2","100nF","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","1",""
-"C3","1uF","Capacitor_SMD:CP_Elec_3x5.4","1",""
-"C4","10nF","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","1",""
-"C5","10nF","Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder","1",""
-"J1","Speaker Out","Connector_PinSocket_1.27mm:PinSocket_2x01_P1.27mm_Vertical","1",""
-"J2","MicroSD","terence:MicroSD","1",""
-"JP1","Clk Div","Jumper:SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm","1",""
-"R1","10K","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","1",""
-"R2","33","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","1",""
-"R3","10K","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","1",""
-"R4","1k","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","1",""
-"R5","1k","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","1",""
-"R6","10K","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","1",""
-"R7","1k","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","1",""
-"R8","1K","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","1",""
-"RV1","3224W-1-103E","Potentiometer_SMD:Potentiometer_Bourns_3224W_Vertical","1",""
-"SW1","Play / Pause","Button_Switch_THT:SW_PUSH_6mm","1",""
-"SW2","Next","Button_Switch_THT:SW_PUSH_6mm","1",""
-"SW3","Previous","Button_Switch_THT:SW_PUSH_6mm","1",""
-"U1","AY-3-8910","Package_DIP:DIP-40_W15.24mm","1",""
-"U2","0.96""OLED_I2C","terence:0.96OLED I2C","1",""
-"U3","PAM8302AAS","Package_SO:SOIC-8_3.9x4.9mm_P1.27mm","1",""
+Refs,Value,Footprint,Qty,DNP,LCSC Part #
+C1,10uF,Capacitor_SMD:CP_Elec_3x5.3,1,,C15850
+C2,100nF,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder,1,,C49678
+C3,1uF,Capacitor_SMD:CP_Elec_3x5.4,1,,C15848
+C4,10nF,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder,1,,C1710
+C5,10nF,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder,1,,C1710
+J1,Speaker Out,Connector_PinSocket_1.27mm:PinSocket_2x01_P1.27mm_Vertical,1,,C12437
+J2,MicroSD,terence:MicroSD,1,,C114217
+JP1,Clk Div,Jumper:SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm,1,,
+R1,10K,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,1,,C17414
+R2,33,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,1,,C17631
+R3,10K,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,1,,C17414
+R4,1k,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,1,,C17513
+R5,1k,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,1,,C17513
+R6,10K,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,1,,C17414
+R7,1k,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,1,,C17513
+R8,1K,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,1,,C17513
+RV1,3224W-1-103E,Potentiometer_SMD:Potentiometer_Bourns_3224W_Vertical,1,,C81348
+SW1,Play / Pause,Button_Switch_THT:SW_PUSH_6mm,1,,C12740
+SW2,Next,Button_Switch_THT:SW_PUSH_6mm,1,,C12740
+SW3,Previous,Button_Switch_THT:SW_PUSH_6mm,1,,C12740
+U2,"0.96""OLED_I2C",terence:0.96OLED I2C,1,,C22548
+U3,PAM8302AAS,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,1,,C8302

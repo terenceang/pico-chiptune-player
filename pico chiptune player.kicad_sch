@@ -6572,6 +6572,17 @@
 		(pin "2"
 			(uuid "0b49b18b-72ca-4fde-8213-85c573f95a70")
 		)
+		(property "LCSC Part #" "C17513"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
@@ -6649,6 +6660,17 @@
 		)
 		(pin "1"
 			(uuid "b90ac8b0-4dd2-4afb-b3e0-7b746d23ba5b")
+		)
+		(property "LCSC Part #" "C15848"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
 		(instances
 			(project "pico chiptune player"
@@ -6728,6 +6750,17 @@
 		(pin "1"
 			(uuid "705c22da-d60f-45b4-9d1f-7d4958ffcd59")
 		)
+		(property "LCSC Part #" "C17513"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
@@ -6805,6 +6838,17 @@
 		)
 		(pin "2"
 			(uuid "f05bae34-d014-4912-9899-bed0a1da0975")
+		)
+		(property "LCSC Part #" "C12437"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
 		(instances
 			(project "pico chiptune player"
@@ -7122,6 +7166,17 @@
 		(pin "1"
 			(uuid "9123ff8e-2354-4303-aee2-ff62cecddd8d")
 		)
+		(property "LCSC Part #" "C49678"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
@@ -7202,6 +7257,17 @@
 		)
 		(pin "2"
 			(uuid "ce798590-54e7-4bce-a413-29c8e21eb879")
+		)
+		(property "LCSC Part #" "C81348"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
 		(instances
 			(project "pico chiptune player"
@@ -7301,7 +7367,7 @@
 				)
 			)
 		)
-		(property "LCSC Part #" "C81348"
+		(property "LCSC Part #" "C12740"
 			(at 205.74 124.46 0)
 			(hide yes)
 			(show_name no)
@@ -7410,6 +7476,17 @@
 		)
 		(pin "2"
 			(uuid "08db7759-91e4-4d8c-a186-5e45b11384d0")
+		)
+		(property "LCSC Part #" "C114217"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
 		(instances
 			(project "pico chiptune player"
@@ -7670,6 +7747,17 @@
 		)
 		(pin "2"
 			(uuid "65a5bfae-0edc-4e15-9895-35d604c7eddc")
+		)
+		(property "LCSC Part #" "C15850"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
 		(instances
 			(project "pico chiptune player"
@@ -7986,6 +8074,28 @@
 		(pin "1"
 			(uuid "10f648bf-ce9f-45bd-8627-8b92cf36ab80")
 		)
+		(property "LCSC Part #" "C17414"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part #" "C17631"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
@@ -8082,8 +8192,8 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
+		(in_bom no)
+		(on_board no)
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -8338,6 +8448,17 @@
 		(pin "1"
 			(uuid "c425c5c8-4e04-4fec-9708-1858443c684c")
 		)
+		(property "LCSC Part #" "C17513"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
@@ -8494,6 +8615,17 @@
 		(pin "1"
 			(uuid "6decfb0e-d272-40ea-ba39-e4ad6bf1a979")
 		)
+		(property "LCSC Part #" "C12740"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
@@ -8572,6 +8704,17 @@
 		)
 		(pin "1"
 			(uuid "c7ef08a4-b1d3-4b68-9452-8c336671e6f4")
+		)
+		(property "LCSC Part #" "C17513"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
 		(instances
 			(project "pico chiptune player"
@@ -8888,6 +9031,17 @@
 		(pin "1"
 			(uuid "50b0feca-b5f7-4ed3-a002-489a01e61a79")
 		)
+		(property "LCSC Part #" "C12740"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
@@ -8966,6 +9120,17 @@
 		)
 		(pin "1"
 			(uuid "254f81bb-68b9-4b52-89c3-9d661b378bab")
+		)
+		(property "LCSC Part #" "C12740"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
 		(instances
 			(project "pico chiptune player"
@@ -9360,6 +9525,28 @@
 		(pin "1"
 			(uuid "eaaf7625-1ae7-49cc-b927-3dcbe6c059ff")
 		)
+		(property "LCSC Part #" "C1710"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part #" "C17414"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(instances
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
@@ -9621,8 +9808,8 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
+		(in_bom no)
+		(on_board no)
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -9801,6 +9988,17 @@
 		)
 		(pin "38"
 			(uuid "662aaca8-36be-4a42-827e-359490af4a16")
+		)
+		(property "LCSC Part #" "C17414"
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
 		(instances
 			(project "pico chiptune player"

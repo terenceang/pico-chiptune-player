@@ -3826,8 +3826,8 @@
 				)
 			)
 		)
-		(property "Value" "Speaker Out"
-			(at -0.5 1.5 0)
+		(property "Value" "Spk Out"
+			(at -0.5 1.75 0)
 			(layer "B.SilkS")
 			(uuid "ce131577-f0f9-400b-adbc-369caefa584c")
 			(effects
@@ -11382,7 +11382,7 @@
 			)
 		)
 		(property "Value" "10uF"
-			(at -4.25 2.25 90)
+			(at 0.25 3 90)
 			(layer "B.SilkS")
 			(uuid "f95f4cf7-9412-4d3b-ba40-f52d4cd567ca")
 			(effects
@@ -12729,6 +12729,18 @@
 		(at 128.5 123.5 0)
 		(layer "F.SilkS")
 		(uuid "0fcfa995-28c9-4266-ad04-2aaa16949dd3")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "+5V"
+		(at 128.525 77.855 0)
+		(layer "F.SilkS")
+		(uuid "ec245767-6518-44c8-9944-f9bcfdf15b8b")
 		(effects
 			(font
 				(size 0.8 0.8)
