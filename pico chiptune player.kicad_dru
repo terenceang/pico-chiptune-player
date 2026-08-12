@@ -28,8 +28,8 @@
 
 (rule "JLCPCB Silkscreen Text Height"
 	(constraint text_height (min 0.8mm))
-	(condition "A.type == 'text'"))
+	(condition "A.type == 'text' && (A.Layer == 'F.SilkS' || A.Layer == 'B.SilkS')"))
 
 (rule "JLCPCB Silkscreen Text Line Width"
 	(constraint text_thickness (min 0.15mm))
-	(condition "A.type == 'text'"))
+	(condition "A.type == 'text' && (A.Layer == 'F.SilkS' || A.Layer == 'B.SilkS')"))
