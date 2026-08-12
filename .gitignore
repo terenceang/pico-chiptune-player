@@ -21,6 +21,11 @@ _autosave-*
 .idea/
 .gemini/
 
+# Reports & local images
+erc_report.json
+drc_report.json
+image.png
+
 # OS generated files
 .DS_Store
 Thumbs.db
