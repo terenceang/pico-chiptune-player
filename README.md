@@ -23,8 +23,8 @@ A standalone hardware chiptune music player powered by the **Raspberry Pi Pico 2
 | File / Folder | Description |
 | :--- | :--- |
 | [`HARDWARE.md`](HARDWARE.md) | Complete hardware documentation, pin mapping table, block diagram, and signal specs |
-| [`pico chiptune player.kicad_sch`](pico%20chiptune%20player.kicad_sch) | KiCad 8 Schematic |
-| [`pico chiptune player.kicad_pcb`](pico%20chiptune%20player.kicad_pcb) | KiCad 8 PCB Layout |
+| [`pico chiptune player.kicad_sch`](pico%20chiptune%20player.kicad_sch) | KiCad 10 Schematic |
+| [`pico chiptune player.kicad_pcb`](pico%20chiptune%20player.kicad_pcb) | KiCad 10 PCB Layout |
 | [`bom/ibom.html`](bom/ibom.html) | Interactive HTML Bill of Materials |
 | [`production/`](production/) | Gerber ZIP archives, BOM CSV, and component position files for SMT assembly |
 | [`Greber/`](Greber/) | Gerber & Drill manufacturing files |
