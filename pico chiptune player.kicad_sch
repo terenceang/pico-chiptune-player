@@ -4275,12 +4275,6 @@
 		(uuid "6a6daace-2acf-4a6d-8bb4-8becf925c4eb")
 	)
 	(junction
-		(at 196.85 69.85)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "7d9fc90e-bbe2-4060-b545-93d26aea079b")
-	)
-	(junction
 		(at 217.17 45.72)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4750,7 +4744,7 @@
 	)
 	(wire
 		(pts
-			(xy 196.85 69.85) (xy 196.85 67.31)
+			(xy 196.85 67.31) (xy 196.85 74.93)
 		)
 		(stroke
 			(width 0)
@@ -4847,16 +4841,6 @@
 			(type default)
 		)
 		(uuid "56c05b66-ceca-4105-990d-074b44158325")
-	)
-	(wire
-		(pts
-			(xy 196.85 74.93) (xy 196.85 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "58a1230c-1f77-44df-bdeb-c4d81b878f29")
 	)
 	(wire
 		(pts
@@ -5020,6 +5004,16 @@
 	)
 	(wire
 		(pts
+			(xy 185.42 69.85) (xy 187.96 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "76af20ba-9239-4133-9fea-3b891f5dbbec")
+	)
+	(wire
+		(pts
 			(xy 59.69 157.48) (xy 62.23 157.48)
 		)
 		(stroke
@@ -5087,16 +5081,6 @@
 			(type default)
 		)
 		(uuid "818f5b97-e0bb-48f5-aa6a-d1bc38a0522f")
-	)
-	(wire
-		(pts
-			(xy 185.42 69.85) (xy 196.85 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "82026248-45f3-4dd1-88a8-feaee8cb87ca")
 	)
 	(wire
 		(pts
@@ -5877,6 +5861,16 @@
 			(justify right)
 		)
 		(uuid "3fb43931-a52f-4728-ac0b-ef78037b3afd")
+	)
+	(label "BDIR"
+		(at 187.96 69.85 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4316f48b-c499-4bce-88fc-768727a4ec8c")
 	)
 	(label "SD_MISO"
 		(at 59.69 157.48 180)
