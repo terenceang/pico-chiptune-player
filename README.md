@@ -1,6 +1,6 @@
 # Pico Chiptune Player (v0.01)
 
-A standalone hardware chiptune music player powered by the **Raspberry Pi Pico (RP2040)** microcontroller, driving a physical **General Instrument AY-3-8910** or **Yamaha YM2149F** 3-voice Programmable Sound Generator (PSG).
+A standalone hardware chiptune music player powered by the **Raspberry Pi Pico 2 (RP2350)** microcontroller, driving a physical **General Instrument AY-3-8910** or **Yamaha YM2149F** 3-voice Programmable Sound Generator (PSG).
 
 **Revision:** `0.01` | **Author:** Terence Ang / MotionFxDesign
 
@@ -8,7 +8,7 @@ A standalone hardware chiptune music player powered by the **Raspberry Pi Pico (
 
 ## Features
 
-- **Microcontroller:** Raspberry Pi Pico (RP2040) controlling an 8-bit parallel bus.
+- **Microcontroller:** Raspberry Pi Pico 2 (RP2350) controlling an 8-bit parallel bus.
 - **Sound Generator:** Compatible with AY-3-8910 or YM2149F retro 3-voice PSG.
 - **Storage:** SPI MicroSD Card interface with dedicated hardware Card Detect (`SD_Card_Detect`).
 - **Display:** 4-pin I2C OLED header (0.96" SSD1306/SH1106).
