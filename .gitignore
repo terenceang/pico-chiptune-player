@@ -1,19 +1,36 @@
-# KiCad Backup & Lock files
+# ==============================================================================
+# KiCad Backup, Autosave & Lock Files
+# ==============================================================================
 *.bak
+*.bck
 *.cd_bak
 *.final_bak
 *.fix_bak
 *.sd_bak
 *.kicad_pcb-bak
 *.kicad_sch-bak
-~*.lck
-*-backups/
+*-save.kicad_pcb
+*-save.kicad_sch
 _autosave-*
+*.lck
+~*.lck
+~*.kicad_pcb.lck
+~*.kicad_pro.lck
+~*.kicad_sch.lck
+*-backups/
+fp-info-cache
 *.tmp
 *.log
 *.dxf
 
-# Production temporary raw gerbers (ZIP archive is tracked)
+# ==============================================================================
+# KiCad Project Local Settings (Window state & user preferences)
+# ==============================================================================
+*.kicad_prl
+
+# ==============================================================================
+# Fabrication & Raw Gerber Outputs (ZIP packages & CSV BOMs tracked)
+# ==============================================================================
 production/*.gbr
 production/*.g1
 production/*.g2
@@ -28,23 +45,40 @@ production/*.gbp
 production/*.gta
 production/*.gba
 production/*.gm1
+production/*.gm2
 production/*.drl
+production/*.xln
 production/*.gbrjob
+*.zip.temp
 
-# Editor & Tool directories
-.claude/
-.history/
-**/.history/
-.vscode/
-.idea/
-.gemini/
-
-# Reports & local images
+# ==============================================================================
+# Reports & Analysis Output
+# ==============================================================================
 erc_report.json
 drc_report.json
-image.png
+*.erc
+*.drc
+*.rpt
 
-# OS generated files
+# ==============================================================================
+# Editor, IDE & AI Agent Directories
+# ==============================================================================
+.vscode/
+.idea/
+.history/
+**/.history/
+.gemini/
+.claude/
+.antigravity/
+
+# ==============================================================================
+# OS Generated Files
+# ==============================================================================
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 Desktop.ini
