@@ -3,9 +3,9 @@
 **Title:** Pico Chiptune Player  
 **Author:** Terence Ang <terenceang@mac.com> / MotionFxDesign  
 **Company:** MotionFxDesign  
-**Status:** Manufactured / Sent to Production (Schematic SSOT)  
-**Version / Rev:** 0.4  
-**Date:** 2026-08-15  
+**Status:** Schematic SSOT — Rev 0.5 (new board, schematic amended; supersedes manufactured Rev 0.4)  
+**Version / Rev:** 0.5  
+**Date:** 2026-10-11  
 **License:** Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) — NOT FOR COMMERCIAL USE  
 
 
@@ -105,13 +105,13 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 | **Pin 18** | **GND** | `GND` | Ground Plane | System Ground |
 | **Pin 19** | **GPIO14** | `SW_PLAY` | Tact Switch SW1 Pin 1 | Play / Pause Button (Active Low, Internal Pull-up) |
 | **Pin 20** | **GPIO15** | `SW_PREV` | Tact Switch SW3 Pin 1 | Previous Track Button (Active Low, Internal Pull-up) |
-| **Pin 21** | **GPIO16** | `OLED_SCL` | OLED Display (U2) Pin 3 | I2C Serial Clock (SCL, Internal / Display Pull-up) |
-| **Pin 22** | **GPIO17** | `OLED_SDA` | OLED Display (U2) Pin 4 | I2C Serial Data (SDA, Internal / Display Pull-up) |
+| **Pin 21** | **GPIO16** | `OLED_SDA` | OLED Display (U2) Pin 4 | I2C Serial Data (SDA, Internal / Display Pull-up) |
+| **Pin 22** | **GPIO17** | `OLED_SCL` | OLED Display (U2) Pin 3 | I2C Serial Clock (SCL, Internal / Display Pull-up) |
 | **Pin 23** | **GND** | `GND` | Ground Plane | System Ground |
-| **Pin 24** | **GPIO18** | `SD_CS` | MicroSD (J2) Pin 2, R1 | SPI Chip Select (CS, with 10kΩ pull-up R1 to +3.3V) |
+| **Pin 24** | **GPIO18** | `SD_SCK` | MicroSD (J2) Pin 5 | SPI0 Serial Clock (SCK) |
 | **Pin 25** | **GPIO19** | `SD_MOSI` | MicroSD (J2) Pin 3 | SPI Master Out Slave In (CMD / DI) |
-| **Pin 26** | **GPIO20** | `SD_SCK` | MicroSD (J2) Pin 5 | SPI Serial Clock (CLK) |
-| **Pin 27** | **GPIO21** | `SD_MISO` | MicroSD (J2) Pin 7 | SPI Master In Slave Out (DAT0 / DO) |
+| **Pin 26** | **GPIO20** | `SD_MISO` | MicroSD (J2) Pin 7 | SPI0 Master In Slave Out (DAT0 / DO) |
+| **Pin 27** | **GPIO21** | `SD_CS` | MicroSD (J2) Pin 2, R1 | SPI0 Chip Select (CS, with 10kΩ pull-up R1 to +3.3V) |
 | **Pin 28** | **GND** | `GND` | Ground Plane | System Ground |
 | **Pin 29** | **GPIO22** | `SD_Card_Detect` | MicroSD (J2) Pin 9 | MicroSD Card Detect (Active Low to GND when inserted) |
 | **Pin 30** | **RUN** | `N/C` | — | Reset input (Unconnected) |
@@ -175,12 +175,12 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 | Pin | Card Signal | Net Name | Connected To | Description |
 | :--- | :--- | :--- | :--- | :--- |
 | **1** | `DAT2` | `NC` | Unconnected | Unused in SPI Mode |
-| **2** | `DAT3 / CD` | `SD_CS` | Pico GPIO18 (Pin 24), R1 | SPI Chip Select (CS) with 10kΩ pull-up R1 to +3.3V |
+| **2** | `DAT3 / CD` | `SD_CS` | Pico GPIO21 (Pin 27), R1 | SPI Chip Select (CS) with 10kΩ pull-up R1 to +3.3V |
 | **3** | `CMD` | `SD_MOSI` | Pico GPIO19 (Pin 25) | SPI Data Input (DI / MOSI) |
 | **4** | `VDD` | `+3.3V` | +3.3V Rail | +3.3V Power Supply (Decoupled by C5 100nF MLCC) |
-| **5** | `CLK` | `SD_SCK` | Pico GPIO20 (Pin 26) | SPI Serial Clock (SCK) |
+| **5** | `CLK` | `SD_SCK` | Pico GPIO18 (Pin 24) | SPI Serial Clock (SCK) |
 | **6** | `VSS` | `GND` | Ground Plane | Power Ground |
-| **7** | `DAT0` | `SD_MISO` | Pico GPIO21 (Pin 27) | SPI Data Output (DO / MISO) |
+| **7** | `DAT0` | `SD_MISO` | Pico GPIO20 (Pin 26) | SPI Data Output (DO / MISO) |
 | **8** | `DAT1` | `NC` | Unconnected | Unused in SPI Mode |
 | **9** | `Card Detect`| `SD_Card_Detect`| Pico GPIO22 (Pin 29) | Card Detect Switch (Shorts to GND when card is inserted) |
 | **10** | `Casing` | `GND` | Ground Plane | Metal Shield / Housing Ground |
@@ -193,8 +193,8 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 | :--- | :--- | :--- | :--- | :--- |
 | **`U2` Pin 1** | `VCC` | `+3.3V` | +3.3V Rail | Display Power (Decoupled by C6 10µF + C7 100nF) |
 | **`U2` Pin 2** | `GND` | `GND` | Ground Plane | Display Power Ground |
-| **`U2` Pin 3** | `SCL` | `OLED_SCL` | Pico GPIO16 (Pin 21) | I2C Serial Clock Line |
-| **`U2` Pin 4** | `SDA` | `OLED_SDA` | Pico GPIO17 (Pin 22) | I2C Serial Data Line |
+| **`U2` Pin 3** | `SCL` | `OLED_SCL` | Pico GPIO17 (Pin 22) | I2C Serial Clock Line |
+| **`U2` Pin 4** | `SDA` | `OLED_SDA` | Pico GPIO16 (Pin 21) | I2C Serial Data Line |
 | **`U3` Pin 1** | `GND` | `GND` | Ground Plane | PAM8302 Power Ground |
 | **`U3` Pin 2** | `VIN` | `+5V` | +5V Rail | PAM8302 Power Input (Decoupled by C8 100nF) |
 | **`U3` Pin 3** | `SD` | `SD_Amp` | Pico GPIO9 (Pin 12) | Hardware Mute / Shutdown (HIGH = Enable, LOW = Mute) |
@@ -225,6 +225,60 @@ The analog audio outputs from the PSG are combined using a low-noise passive sum
    - **Mixer Load Resistor:** `R8` (1kΩ, 0805) to `GND`. Establishes the passive attenuator baseline impedance and DC ground reference.
    - **Low-Pass Filter Capacitor:** `C4` (100nF, 0805 MLCC) to `GND`. Forms a first-order low-pass filter with the equivalent summing impedance ($R_{eq} \approx 250\,\Omega$, cutoff frequency $f_c \approx 6.3\,\text{kHz}$) to eliminate high-frequency digital clock harmonics and PSG switching noise.
    - **AC Output Coupling Capacitor:** `C3` (1µF, 3x5.4mm Electrolytic). Blocks DC bias from the PSG output pins and passes the audio signal into the PAM8302 `A+` differential audio input (`U3` Pin 5).
+
+---
+
+### 3.6 Rev 0.4 Native-Function Errata & Rev 0.5 Correction (SSOT)
+
+The manufactured Rev 0.4 board used the pin assignment audited below, which predates the Rev 0.5 correction now shown in §3.1. A review against the **RP2350 Bank-0 GPIO functions** table shows that the pins chosen for the **OLED I²C** and the **microSD SPI** are not the RP2350's *native* peripheral (function-mux) pins. Because GPIO alternate functions are fixed per pin on RP2350, the on-chip **I2C0** and **SPI0** controllers cannot be routed to these signals as wired in Rev 0.4 — only **PIO** or software (bit-banged) I²C/SPI can drive them on an existing Rev 0.4 board.
+
+#### Rev 0.4 pin audit
+
+| Pico Pin | GPIO | Rev 0.4 Net | Native alt function of that GPIO | Compliant? |
+| :--- | :--- | :--- | :--- | :--- |
+| 21 | `GPIO16` | `OLED_SCL` | **I2C0 SDA** (SPI0 RX) | ❌ SDA/SCL swapped |
+| 22 | `GPIO17` | `OLED_SDA` | **I2C0 SCL** (SPI0 CSn) | ❌ SDA/SCL swapped |
+| 24 | `GPIO18` | `SD_CS` | **SPI0 SCK** | ❌ not a CS pin |
+| 25 | `GPIO19` | `SD_MOSI` | **SPI0 TX (MOSI)** | ✅ correct |
+| 26 | `GPIO20` | `SD_SCK` | **SPI0 RX (MISO)** | ❌ not SCK |
+| 27 | `GPIO21` | `SD_MISO` | **SPI0 CSn** | ❌ not MISO |
+| 29 | `GPIO22` | `SD_Card_Detect` | SPI0 SCK (used as GPIO) | ✅ (plain GPIO) |
+
+#### Rev 0.5 correction (native-compliant, now the current SSOT)
+
+The fix keeps every signal within the **same GPIO group (GP16–GP21)** and only re-assigns five Pico header connections — **no additional GPIOs are used**.
+
+| Function | Rev 0.4 GPIO | **Rev 0.5 GPIO** | Native peripheral (RP2350) |
+| :--- | :--- | :--- | :--- |
+| `OLED_SDA` | `GPIO17` | **`GPIO16`** | I2C0 SDA |
+| `OLED_SCL` | `GPIO16` | **`GPIO17`** | I2C0 SCL |
+| `SD_SCK` | `GPIO20` | **`GPIO18`** | SPI0 SCK |
+| `SD_MOSI` | `GPIO19` | `GPIO19` | SPI0 TX (MOSI) — unchanged |
+| `SD_MISO` | `GPIO21` | **`GPIO20`** | SPI0 RX (MISO) |
+| `SD_CS` | `GPIO18` | **`GPIO21`** | SPI0 CSn / GPIO |
+| `SD_Card_Detect` | `GPIO22` | `GPIO22` | GPIO — unchanged |
+
+#### Header-only change list (schematic nets, Rev 0.4 → Rev 0.5)
+
+| Pico Pin | GPIO | Rev 0.4 Net | Rev 0.5 Net |
+| :--- | :--- | :--- | :--- |
+| 21 | `GPIO16` | `OLED_SCL` | `OLED_SDA` |
+| 22 | `GPIO17` | `OLED_SDA` | `OLED_SCL` |
+| 24 | `GPIO18` | `SD_CS` | `SD_SCK` |
+| 25 | `GPIO19` | `SD_MOSI` | `SD_MOSI` (unchanged) |
+| 26 | `GPIO20` | `SD_SCK` | `SD_MISO` |
+| 27 | `GPIO21` | `SD_MISO` | `SD_CS` |
+
+All other assignments — AY-3-8910 data bus (`DA0..DA7` on `GPIO0..7`), `BC1` (`GPIO8`), `SD_Amp` (`GPIO9`), `BDIR` (`GPIO10`), `~RESET` (`GPIO11`), `CLOCK` (`GPIO12`, PWM/PIO), and the three buttons (`GPIO13..15`) — are plain GPIO/PWM and remain unchanged.
+
+#### Firmware note for existing Rev 0.4 boards
+
+Rev 0.4 hardware works only if firmware does **not** rely on the RP2350 hardware I2C0/SPI0 peripherals:
+- **microSD:** use PIO-based SPI (e.g., `pico-sdk` `hardware_pio` / `pio_spi`) or a bit-banged driver.
+- **OLED:** use PIO/software I²C or a bit-banged I²C driver.
+- The AY-3-8910 parallel bus is already GPIO bit-banged, so it is unaffected.
+
+This Rev 0.5 pinout (the current SSOT, now applied in §3.1) restores native hardware `I2C0` and `SPI0` support.
 
 ---
 
@@ -263,7 +317,8 @@ The analog audio outputs from the PSG are combined using a low-noise passive sum
 
 | Rev | Date | Notes |
 | :--- | :--- | :--- |
-| **0.4** | **2026-08-15** | **Manufactured Production Release (SSOT)**: Fully aligned documentation with production schematic and manufactured PCB (`Pico_Chiptune_Player_0.4.zip` / `netlist.ipc`). Updated complete Pico GPIO assignments: `CLOCK` on GPIO12 via 33Ω R2, `BDIR` on GPIO10, `~RESET` on GPIO11 with R3 10kΩ pull-down, `BC1` on GPIO8, `SD_Amp` on GPIO9, `SW_PLAY` on GPIO14, `SW_NEXT` on GPIO13, and `SW_PREV` on GPIO15. Documented PAM8302A breakout module header topology (`U3`), 8-capacitor decoupling arrangement (`C1..C8`), and verified all LCSC component part numbers. |
+| **0.5** | **2026-10-11** | **Native-function pin correction (new board; schematic amended, not yet manufactured)**: Re-mapped OLED I²C and microSD SPI to RP2350 native pins — `OLED_SDA`→`GPIO16`, `OLED_SCL`→`GPIO17` (SDA/SCL swap); `SD_SCK`→`GPIO18`, `SD_MISO`→`GPIO20`, `SD_CS`→`GPIO21`; `SD_MOSI` remains `GPIO19`. No additional GPIOs used. Supersedes Rev 0.4 (§3.6). |
+| **0.4** | **2026-08-15** | **Manufactured Production Release (superseded by Rev 0.5, see §3.6)**: Fully aligned documentation with production schematic and manufactured PCB (`Pico_Chiptune_Player_0.4.zip` / `netlist.ipc`). Updated complete Pico GPIO assignments: `CLOCK` on GPIO12 via 33Ω R2, `BDIR` on GPIO10, `~RESET` on GPIO11 with R3 10kΩ pull-down, `BC1` on GPIO8, `SD_Amp` on GPIO9, `SW_PLAY` on GPIO14, `SW_NEXT` on GPIO13, and `SW_PREV` on GPIO15. Documented PAM8302A breakout module header topology (`U3`), 8-capacitor decoupling arrangement (`C1..C8`), and verified all LCSC component part numbers. |
 | 0.2 | 2026-08-12 | Intermediate documentation revision. |
 | 0.1 | 2026-08-08 | Initial hardware documentation release. |
  

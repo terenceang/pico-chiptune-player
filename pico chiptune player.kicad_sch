@@ -6,8 +6,8 @@
 	(paper "A4")
 	(title_block
 		(title "Pico Chiptune Player")
-		(date "2026-08-12")
-		(rev "0.2")
+		(date "2026-10-11")
+		(rev "0.5")
 		(company "MotionFxDesign")
 		(comment 1 "Terence Ang / MotionFxDesign")
 		(comment 2 "Hardware AY-3-8910 / YM2149 Chiptune Player")
@@ -5398,15 +5398,15 @@
 		)
 		(uuid "ebb41c91-b00d-40f8-a3b6-361b4d493453")
 	)
-	(wire
-		(pts
-			(xy 118.11 55.88) (xy 118.11 62.23)
+	(label "SD_CS"
+		(at 118.11 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
 		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ef030023-132b-4cc2-b91d-16ecad085e26")
+		(uuid "c0ffee00-1234-4abc-9def-000000000001")
 	)
 	(wire
 		(pts
@@ -5498,7 +5498,7 @@
 		)
 		(uuid "020fd105-29f4-444d-8f81-7190abfe5f3f")
 	)
-	(label "SD_SCK"
+	(label "SD_MISO"
 		(at 101.6 67.31 0)
 		(effects
 			(font
@@ -5718,7 +5718,7 @@
 		)
 		(uuid "75473487-1ced-4057-be03-ce6199b31458")
 	)
-	(label "OLED_SCL"
+	(label "OLED_SDA"
 		(at 101.6 57.15 0)
 		(effects
 			(font
@@ -5798,7 +5798,7 @@
 		)
 		(uuid "a1022b41-2aad-49b2-b9c5-9debc46dca78")
 	)
-	(label "SD_MISO"
+	(label "SD_CS"
 		(at 101.6 69.85 0)
 		(effects
 			(font
@@ -5918,7 +5918,7 @@
 		)
 		(uuid "e9c7aa7d-4e40-48a4-9dea-95a8391b10fc")
 	)
-	(label "OLED_SDA"
+	(label "OLED_SCL"
 		(at 101.6 59.69 0)
 		(effects
 			(font
@@ -5978,7 +5978,7 @@
 		)
 		(uuid "f3e77c58-2da3-4f88-9389-58047d046e63")
 	)
-	(label "SD_CS"
+	(label "SD_SCK"
 		(at 120.65 62.23 0)
 		(effects
 			(font
