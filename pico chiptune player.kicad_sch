@@ -4059,10 +4059,6 @@
 		(uuid "f96b2a61-a061-4e0d-b7c4-ae5e0595f546")
 	)
 	(no_connect
-		(at 99.06 87.63)
-		(uuid "0ddc025f-0150-4010-be10-1527ff920feb")
-	)
-	(no_connect
 		(at 149.86 82.55)
 		(uuid "1cd01bcf-4721-4fa3-937a-5749c55f93fb")
 	)
@@ -4089,10 +4085,6 @@
 	(no_connect
 		(at 99.06 77.47)
 		(uuid "59410757-ea0a-45a5-a918-0b73b90a99fd")
-	)
-	(no_connect
-		(at 62.23 160.02)
-		(uuid "5d0a8eee-1cdd-4448-a090-e3257858cfba")
 	)
 	(no_connect
 		(at 149.86 52.07)
@@ -4153,10 +4145,6 @@
 	(no_connect
 		(at 149.86 39.37)
 		(uuid "cbdd290c-2d42-4897-bfce-35d64d6d738d")
-	)
-	(no_connect
-		(at 62.23 142.24)
-		(uuid "e23554b4-e975-4a4b-ad89-1b7b2affdd70")
 	)
 	(no_connect
 		(at 236.22 118.11)
@@ -4449,16 +4437,6 @@
 			(type default)
 		)
 		(uuid "3c2b6bbd-6b62-40db-a338-aa685461b935")
-	)
-	(wire
-		(pts
-			(xy 59.69 163.83) (xy 62.23 163.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3d50590c-1692-47b3-9e22-4077b85aa31d")
 	)
 	(wire
 		(pts
@@ -5390,7 +5368,7 @@
 		)
 		(uuid "ebb41c91-b00d-40f8-a3b6-361b4d493453")
 	)
-	(label "SD_CS"
+	(label "SD_DAT3"
 		(at 118.11 55.88 0)
 		(effects
 			(font
@@ -5490,7 +5468,7 @@
 		)
 		(uuid "020fd105-29f4-444d-8f81-7190abfe5f3f")
 	)
-	(label "SD_MISO"
+	(label "SD_DAT2"
 		(at 101.6 67.31 0)
 		(effects
 			(font
@@ -5540,7 +5518,7 @@
 		)
 		(uuid "1d2fbe50-3709-4ccd-8deb-062230c13beb")
 	)
-	(label "SD_CS"
+	(label "SD_DAT3"
 		(at 59.69 144.78 180)
 		(effects
 			(font
@@ -5610,7 +5588,7 @@
 		)
 		(uuid "4316f48b-c499-4bce-88fc-768727a4ec8c")
 	)
-	(label "SD_MISO"
+	(label "SD_DAT0"
 		(at 59.69 157.48 180)
 		(effects
 			(font
@@ -5640,7 +5618,7 @@
 		)
 		(uuid "5106f94f-5661-42b5-8d42-ef3aad0b9083")
 	)
-	(label "SD_MOSI"
+	(label "SD_DAT1"
 		(at 101.6 64.77 0)
 		(effects
 			(font
@@ -5750,7 +5728,7 @@
 		)
 		(uuid "90fac669-213d-4f75-8fb0-543279d67a19")
 	)
-	(label "SD_SCK"
+	(label "SD_CLK"
 		(at 59.69 152.4 180)
 		(effects
 			(font
@@ -5770,7 +5748,7 @@
 		)
 		(uuid "96840e61-7c2f-4ab4-9e0b-631a74cdac96")
 	)
-	(label "SD_MOSI"
+	(label "SD_CMD"
 		(at 59.69 147.32 180)
 		(effects
 			(font
@@ -5790,7 +5768,7 @@
 		)
 		(uuid "a1022b41-2aad-49b2-b9c5-9debc46dca78")
 	)
-	(label "SD_CS"
+	(label "SD_DAT3"
 		(at 101.6 69.85 0)
 		(effects
 			(font
@@ -5860,16 +5838,6 @@
 		)
 		(uuid "ca69048f-845c-49e6-be7c-b39353cdbf82")
 	)
-	(label "SD_Card_Detect"
-		(at 59.69 163.83 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "d81e25c9-9aa0-4c72-ba72-1a7eca941e36")
-	)
 	(label "SW_PREV"
 		(at 120.65 162.56 180)
 		(effects
@@ -5900,7 +5868,7 @@
 		)
 		(uuid "e8f45990-04c0-46bc-8aa0-d1367344d765")
 	)
-	(label "SD_Card_Detect"
+	(label "SD_CLK"
 		(at 101.6 72.39 0)
 		(effects
 			(font
@@ -5970,7 +5938,7 @@
 		)
 		(uuid "f3e77c58-2da3-4f88-9389-58047d046e63")
 	)
-	(label "SD_SCK"
+	(label "SD_DAT0"
 		(at 120.65 62.23 0)
 		(effects
 			(font
@@ -13361,6 +13329,70 @@
 			(justify left)
 		)
 		(uuid "947b049d-19d1-4772-956f-c2abee5287a3")
+	)
+	(wire
+		(pts
+			(xy 99.06 87.63) (xy 101.6 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1bc61470-ad68-4272-ac33-6554c77a8ac7")
+	)
+	(label "SD_CMD"
+		(at 101.6 87.63 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "da9542e6-728b-4a2b-a46e-8a914fd0018e")
+	)
+	(wire
+		(pts
+			(xy 59.69 160.02) (xy 62.23 160.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "38e841af-f60b-4ff4-b263-0b8151b01d22")
+	)
+	(label "SD_DAT1"
+		(at 59.69 160.02 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3a6f3e88-f1e4-4aff-853a-bc6f3f2376aa")
+	)
+	(wire
+		(pts
+			(xy 59.69 142.24) (xy 62.23 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ded49248-ed2e-483c-aaff-5b2a0eaf5734")
+	)
+	(label "SD_DAT2"
+		(at 59.69 142.24 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2196c194-7f7d-45a6-9c0e-10b22ab4688f")
+	)
+	(no_connect
+		(at 62.23 163.83)
+		(uuid "b3caff4e-ea21-464d-87f4-244aa0811a60")
 	)
 	(sheet_instances
 		(path "/"

@@ -22,7 +22,7 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 - **Audio Amplifiers (stereo):** Two onboard **Adafruit PAM8302A 2.5W Mono Class-D Audio Amplifier Modules** (`U3` left, `U5` right) with shared hardware GPIO shutdown/mute control (`SD_Amp`).
 - **Speaker Output:** Direct differential `OUT+` / `OUT-` speaker terminals on each PAM8302 module breakout.
 - **Display:** 0.96" 128x64 I2C OLED display module (`U2`) with bulk and high-frequency decoupling (`C6` = 10µF, `C7` = 100nF).
-- **Storage:** Full SPI microSD card socket (`J2`) with hardware card detect (`SD_Card_Detect`) and dedicated pull-up (`R1` = 10kΩ).
+- **Storage:** Full 4-bit SDIO microSD card socket (`J2`), driven by the RP2350 PIO-based `pico_sd_card` driver (Pico SDK / pico-extras). Card presence is detected **in software** (no card-detect switch). A single external pull-up `R1` = 10kΩ sits on `DAT3`; the firmware enables the RP2350 internal pull-ups on `CMD`/`DAT0`–`DAT3`.
 - **Navigation Controls:** 3 tactile pushbuttons (`SW1` Play/Pause, `SW2` Next Track, `SW3` Previous Track).
 - **Clock Divider Select:** Solder jumper `JP1` to select YM2149 internal ÷2 clock division (shared by both PSGs).
 
@@ -37,7 +37,7 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
                              +--+---+---+---+----+
                                 |   |   |   |
           +---------------------+   |   |   +-----------------------+
-          | (SPI: GPIO18..22)       |   | (I2C: GPIO16, 17)         | (GPIO13, 14, 15)
+          | (SDIO: GPIO18-22,28)    |   | (I2C: GPIO16, 17)         | (GPIO13, 14, 15)
           v                         v   v                           v
 +------------------+         +------------+                    +-----------+
 | microSD Card     |         | 0.96" OLED |                    | Buttons   |
@@ -108,17 +108,17 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 | **Pin 21** | **GPIO16** | `OLED_SDA` | OLED Display (U2) Pin 4 | I2C Serial Data (SDA, Internal / Display Pull-up) |
 | **Pin 22** | **GPIO17** | `OLED_SCL` | OLED Display (U2) Pin 3 | I2C Serial Clock (SCL, Internal / Display Pull-up) |
 | **Pin 23** | **GND** | `GND` | Ground Plane | System Ground |
-| **Pin 24** | **GPIO18** | `SD_SCK` | MicroSD (J2) Pin 5 | SPI0 Serial Clock (SCK) |
-| **Pin 25** | **GPIO19** | `SD_MOSI` | MicroSD (J2) Pin 3 | SPI Master Out Slave In (CMD / DI) |
-| **Pin 26** | **GPIO20** | `SD_MISO` | MicroSD (J2) Pin 7 | SPI0 Master In Slave Out (DAT0 / DO) |
-| **Pin 27** | **GPIO21** | `SD_CS` | MicroSD (J2) Pin 2, R1 | SPI0 Chip Select (CS, with 10kΩ pull-up R1 to +3.3V) |
+| **Pin 24** | **GPIO18** | `SD_DAT0` | MicroSD (J2) Pin 7 | SDIO Data 0 (DAT0) |
+| **Pin 25** | **GPIO19** | `SD_DAT1` | MicroSD (J2) Pin 8 | SDIO Data 1 (DAT1) |
+| **Pin 26** | **GPIO20** | `SD_DAT2` | MicroSD (J2) Pin 1 | SDIO Data 2 (DAT2) |
+| **Pin 27** | **GPIO21** | `SD_DAT3` | MicroSD (J2) Pin 2, R1 | SDIO Data 3 (DAT3), with 10kΩ pull-up R1 to +3.3V |
 | **Pin 28** | **GND** | `GND` | Ground Plane | System Ground |
-| **Pin 29** | **GPIO22** | `SD_Card_Detect` | MicroSD (J2) Pin 9 | MicroSD Card Detect (Active Low to GND when inserted) |
+| **Pin 29** | **GPIO22** | `SD_CLK` | MicroSD (J2) Pin 5 | SDIO Clock (CLK) |
 | **Pin 30** | **RUN** | `N/C` | — | Reset input (Unconnected) |
 | **Pin 31** | **GPIO26_ADC0** | `BDIR2` | AY-3-8910 (U4) Pin 27 | PSG2 Bus Direction Control |
 | **Pin 32** | **GPIO27_ADC1** | `BC1_2` | AY-3-8910 (U4) Pin 29 | PSG2 Bus Control 1 (Address Latch / Data Write) |
 | **Pin 33** | **AGND** | `N/C` | — | Analog ground (Unconnected) |
-| **Pin 34** | **GPIO28_ADC2** | `N/C` | — | Analog input 2 (Unconnected) |
+| **Pin 34** | **GPIO28_ADC2** | `SD_CMD` | MicroSD (J2) Pin 3 | SDIO Command (CMD) |
 | **Pin 35** | **ADC_VREF** | `N/C` | — | ADC reference (Unconnected) |
 | **Pin 36** | **3V3** | `+3.3V` | MicroSD J2, OLED U2, R1, C5..C7 | 3.3V System Power Rail (Sourced from Pico onboard regulator) |
 | **Pin 37** | **3V3_EN** | `N/C` | — | 3.3V regulator enable (Unconnected) |
@@ -191,15 +191,15 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 
 | Pin | Card Signal | Net Name | Connected To | Description |
 | :--- | :--- | :--- | :--- | :--- |
-| **1** | `DAT2` | `NC` | Unconnected | Unused in SPI Mode |
-| **2** | `DAT3 / CD` | `SD_CS` | Pico GPIO21 (Pin 27), R1 | SPI Chip Select (CS) with 10kΩ pull-up R1 to +3.3V |
-| **3** | `CMD` | `SD_MOSI` | Pico GPIO19 (Pin 25) | SPI Data Input (DI / MOSI) |
+| **1** | `DAT2` | `SD_DAT2` | Pico GPIO20 (Pin 26) | SDIO Data 2 (DAT2) |
+| **2** | `DAT3 / CD` | `SD_DAT3` | Pico GPIO21 (Pin 27), R1 | SDIO Data 3 (DAT3), with 10kΩ pull-up R1 to +3.3V |
+| **3** | `CMD` | `SD_CMD` | Pico GPIO28 (Pin 34) | SDIO Command (CMD) |
 | **4** | `VDD` | `+3.3V` | +3.3V Rail | +3.3V Power Supply (Decoupled by C5 100nF MLCC) |
-| **5** | `CLK` | `SD_SCK` | Pico GPIO18 (Pin 24) | SPI Serial Clock (SCK) |
+| **5** | `CLK` | `SD_CLK` | Pico GPIO22 (Pin 29) | SDIO Clock (CLK) |
 | **6** | `VSS` | `GND` | Ground Plane | Power Ground |
-| **7** | `DAT0` | `SD_MISO` | Pico GPIO20 (Pin 26) | SPI Data Output (DO / MISO) |
-| **8** | `DAT1` | `NC` | Unconnected | Unused in SPI Mode |
-| **9** | `Card Detect`| `SD_Card_Detect`| Pico GPIO22 (Pin 29) | Card Detect Switch (Shorts to GND when card is inserted) |
+| **7** | `DAT0` | `SD_DAT0` | Pico GPIO18 (Pin 24) | SDIO Data 0 (DAT0) |
+| **8** | `DAT1` | `SD_DAT1` | Pico GPIO19 (Pin 25) | SDIO Data 1 (DAT1) |
+| **9** | `Card Detect`| `NC` | Unconnected | Card Detect switch unused (card presence detected in software) |
 | **10** | `Casing` | `GND` | Ground Plane | Metal Shield / Housing Ground |
 
 ---
@@ -328,9 +328,9 @@ This Rev 0.5 pinout (the current SSOT, now applied in §3.1) restores native har
 | **`C11`** | `10uF` | `Capacitor_SMD:CP_Elec_4x5.4` | 1 | `C3343` | Aluminum Electrolytic Bulk Power Decoupling Cap (U4 +5V) |
 | **`C12`** | `100nF` | `Capacitor_SMD:C_0805` | 1 | `C1711` | MLCC 0805 High-Frequency Decoupling Cap (U4 +5V) |
 | **`C13`** | `100nF` | `Capacitor_SMD:C_0805` | 1 | `C1710` | MLCC 0805 PAM8302 (U5) +5V Power Decoupling Cap |
-| **`J2`** | `MicroSD` | `Terence:MicroSD` | 1 | `C479742` | TF-1115 MicroSD Card Socket (SPI Mode with Card Detect) |
+| **`J2`** | `MicroSD` | `Terence:MicroSD` | 1 | `C479742` | TF-1115 MicroSD Card Socket (4-bit SDIO) |
 | **`JP1`** | `Clk Div` | `Jumper:SolderJumper-2_P1.3mm_Open` | 1 | — | 2-Pole Solder Jumper (YM2149 /SEL Clock Divider Mode) |
-| **`R1`** | `10K` | `Resistor_SMD:R_0805` | 1 | `C17414` | MicroSD SPI `SD_CS` Pull-Up Resistor (+3.3V) |
+| **`R1`** | `10K` | `Resistor_SMD:R_0805` | 1 | `C17414` | MicroSD SDIO `DAT3` Pull-Up Resistor (+3.3V) |
 | **`R2`** | `33` | `Resistor_SMD:R_0805` | 1 | `C17634` | PSG Master Clock (GPIO12) Series Damping Resistor |
 | **`R3`** | `10K` | `Resistor_SMD:R_0805` | 1 | `C17414` | AY-3-8910 `~RESET` (GPIO11) Boot Pull-Down Resistor (GND) |
 | **`R4`** | `1k` | `Resistor_SMD:R_0805` | 1 | `C17513` | Channel A Audio Mixer Summer Resistor |
@@ -356,7 +356,7 @@ This Rev 0.5 pinout (the current SSOT, now applied in §3.1) restores native har
 
 | Rev | Date | Notes |
 | :--- | :--- | :--- |
-| **0.6** | **2026-10-11** | **Dual-PSG stereo variant**: Added a second AY-3-8910/YM2149F (`U4`) sharing the `DA0..DA7`/`CLOCK`/`~RESET`/`BC2` bus, driven by a dedicated `BDIR`/`BC1` pair on `GPIO26`/`GPIO27` (6 voices total). Added an independent right-channel passive mixer (`R9`-`R12`, `C9`, `C10`) and a second PAM8302A amplifier module (`U5`) for true stereo, plus decoupling (`C11`, `C12`, `C13`). Board widened to 139.4 × 62.6 mm. ERC clean; routed PCB with 0 unconnected items. |
+| **0.6** | **2026-10-11** | **Dual-PSG stereo variant**: Added a second AY-3-8910/YM2149F (`U4`) sharing the `DA0..DA7`/`CLOCK`/`~RESET`/`BC2` bus, driven by a dedicated `BDIR`/`BC1` pair on `GPIO26`/`GPIO27` (6 voices total). Added an independent right-channel passive mixer (`R9`-`R12`, `C9`, `C10`) and a second PAM8302A amplifier module (`U5`) for true stereo, plus decoupling (`C11`, `C12`, `C13`). Board widened to 139.4 × 62.6 mm. ERC clean; routed PCB with 0 unconnected items. **microSD changed from SPI to 4-bit SDIO** (PIO-based `pico_sd_card`): `SD_DAT0..DAT3` → `GPIO18`-`GPIO21`, `SD_CLK` → `GPIO22`, `SD_CMD` → `GPIO28`; dedicated card-detect switch dropped (presence detected in software); `R1` 10kΩ now pulls up `DAT3`. |
 | **0.5** | **2026-10-11** | **Native-function pin correction (new board; schematic amended, not yet manufactured)**: Re-mapped OLED I²C and microSD SPI to RP2350 native pins — `OLED_SDA`→`GPIO16`, `OLED_SCL`→`GPIO17` (SDA/SCL swap); `SD_SCK`→`GPIO18`, `SD_MISO`→`GPIO20`, `SD_CS`→`GPIO21`; `SD_MOSI` remains `GPIO19`. No additional GPIOs used. Supersedes Rev 0.4 (§3.6). |
 | **0.4** | **2026-08-15** | **Manufactured Production Release (superseded by Rev 0.5, see §3.6)**: Fully aligned documentation with production schematic and manufactured PCB (`Pico_Chiptune_Player_0.4.zip` / `netlist.ipc`). Updated complete Pico GPIO assignments: `CLOCK` on GPIO12 via 33Ω R2, `BDIR` on GPIO10, `~RESET` on GPIO11 with R3 10kΩ pull-down, `BC1` on GPIO8, `SD_Amp` on GPIO9, `SW_PLAY` on GPIO14, `SW_NEXT` on GPIO13, and `SW_PREV` on GPIO15. Documented PAM8302A breakout module header topology (`U3`), 8-capacitor decoupling arrangement (`C1..C8`), and verified all LCSC component part numbers. |
 | 0.2 | 2026-08-12 | Intermediate documentation revision. |
