@@ -349,6 +349,7 @@ This Rev 0.5 pinout (the current SSOT, now applied in §3.1) restores native har
 | **`U3`** | `PAM8302` | `TModules:PAM8302A_Module` | 1 | — | Adafruit PAM8302A 2.5W Mono Class-D Audio Amplifier Breakout (left) |
 | **`U4`** | `AY-3-8910` | `Package_DIP:DIP-40_W15.24mm` | 1 | — | Second 3-Voice Programmable Sound Generator IC (DIP-40 Socket, right) |
 | **`U5`** | `PAM8302` | `TModules:PAM8302A_Module` | 1 | — | Adafruit PAM8302A 2.5W Mono Class-D Audio Amplifier Breakout (right) |
+| **`H1`-`H4`** | `MountingHole_3mm` | `MountingHole:MountingHole_3mm` | 4 | — | 3mm NPTH Corner Mounting Holes (M3) |
 
 ---
 
@@ -356,7 +357,7 @@ This Rev 0.5 pinout (the current SSOT, now applied in §3.1) restores native har
 
 | Rev | Date | Notes |
 | :--- | :--- | :--- |
-| **0.6** | **2026-10-11** | **Dual-PSG stereo variant**: Added a second AY-3-8910/YM2149F (`U4`) sharing the `DA0..DA7`/`CLOCK`/`~RESET`/`BC2` bus, driven by a dedicated `BDIR`/`BC1` pair on `GPIO26`/`GPIO27` (6 voices total). Added an independent right-channel passive mixer (`R9`-`R12`, `C9`, `C10`) and a second PAM8302A amplifier module (`U5`) for true stereo, plus decoupling (`C11`, `C12`, `C13`). Board widened to 139.4 × 62.6 mm. ERC clean; routed PCB with 0 unconnected items. **microSD changed from SPI to 4-bit SDIO** (PIO-based `pico_sd_card`): `SD_DAT0..DAT3` → `GPIO18`-`GPIO21`, `SD_CLK` → `GPIO22`, `SD_CMD` → `GPIO28`; dedicated card-detect switch dropped (presence detected in software); `R1` 10kΩ now pulls up `DAT3`. |
+| **0.6** | **2026-10-11** | **Dual-PSG stereo variant**: Added a second AY-3-8910/YM2149F (`U4`) sharing the `DA0..DA7`/`CLOCK`/`~RESET`/`BC2` bus, driven by a dedicated `BDIR`/`BC1` pair on `GPIO26`/`GPIO27` (6 voices total). Added an independent right-channel passive mixer (`R9`-`R12`, `C9`, `C10`) and a second PAM8302A amplifier module (`U5`) for true stereo, plus decoupling (`C11`, `C12`, `C13`). Board resized to 118 × 92 mm with rounded corners, adding four 3 mm NPTH (`H1`-`H4`) corner mounting holes. ERC clean; routed PCB with 0 unconnected items. **microSD changed from SPI to 4-bit SDIO** (PIO-based `pico_sd_card`): `SD_DAT0..DAT3` → `GPIO18`-`GPIO21`, `SD_CLK` → `GPIO22`, `SD_CMD` → `GPIO28`; dedicated card-detect switch dropped (presence detected in software); `R1` 10kΩ now pulls up `DAT3`. |
 | **0.5** | **2026-10-11** | **Native-function pin correction (new board; schematic amended, not yet manufactured)**: Re-mapped OLED I²C and microSD SPI to RP2350 native pins — `OLED_SDA`→`GPIO16`, `OLED_SCL`→`GPIO17` (SDA/SCL swap); `SD_SCK`→`GPIO18`, `SD_MISO`→`GPIO20`, `SD_CS`→`GPIO21`; `SD_MOSI` remains `GPIO19`. No additional GPIOs used. Supersedes Rev 0.4 (§3.6). |
 | **0.4** | **2026-08-15** | **Manufactured Production Release (superseded by Rev 0.5, see §3.6)**: Fully aligned documentation with production schematic and manufactured PCB (`Pico_Chiptune_Player_0.4.zip` / `netlist.ipc`). Updated complete Pico GPIO assignments: `CLOCK` on GPIO12 via 33Ω R2, `BDIR` on GPIO10, `~RESET` on GPIO11 with R3 10kΩ pull-down, `BC1` on GPIO8, `SD_Amp` on GPIO9, `SW_PLAY` on GPIO14, `SW_NEXT` on GPIO13, and `SW_PREV` on GPIO15. Documented PAM8302A breakout module header topology (`U3`), 8-capacitor decoupling arrangement (`C1..C8`), and verified all LCSC component part numbers. |
 | 0.2 | 2026-08-12 | Intermediate documentation revision. |
