@@ -7,7 +7,7 @@
 	(title_block
 		(title "Pico Chiptune Player")
 		(date "2026-10-11")
-		(rev "0.5")
+		(rev "0.6")
 		(company "MotionFxDesign")
 		(comment 1 "Terence Ang / MotionFxDesign")
 		(comment 2 "Hardware AY-3-8910 / YM2149 Chiptune Player")
@@ -3766,14 +3766,14 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "terence:PAM8302"
+		(symbol "Amplifier_Audio:PAM8403D"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
 			(property "Reference" "U"
-				(at 0 11.43 0)
+				(at 1.27 16.51 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -3782,8 +3782,8 @@
 					)
 				)
 			)
-			(property "Value" "PAM8302"
-				(at 4.826 7.874 0)
+			(property "Value" "PAM8403D"
+				(at 6.096 14.224 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -3792,7 +3792,7 @@
 					)
 				)
 			)
-			(property "Footprint" "TModules:PAM8302A_Module"
+			(property "Footprint" "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -3803,7 +3803,18 @@
 					)
 				)
 			)
-			(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/PAM8302A.pdf"
+			(property "Datasheet" "https://www.diodes.com/assets/Datasheets/products_inactive_data/PAM8403.pdf"
+				(at -5.08 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "3W Filterless Class-D Stereo Audio Amplifier, SOIC-16"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -3814,7 +3825,7 @@
 					)
 				)
 			)
-			(property "Description" "Adafruit PAM8302 Mono 2.5W Class D Audio Amplifier breakout - VIN, GND, A+, A-, SD, OUT+, OUT-"
+			(property "ki_keywords" "class-D-amplifier switching-amplifier"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -3825,7 +3836,7 @@
 					)
 				)
 			)
-			(property "ki_keywords" "class D amplifier mono audio PAM8302 Adafruit 2.5W"
+			(property "ki_fp_filters" "*SO*3.9x9.9mm*P1.27mm*"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -3836,10 +3847,10 @@
 					)
 				)
 			)
-			(symbol "PAM8302_0_1"
+			(symbol "PAM8403D_0_1"
 				(rectangle
-					(start -8.89 6.35)
-					(end 8.89 -5.08)
+					(start -10.16 12.7)
+					(end 10.16 -12.7)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -3849,11 +3860,11 @@
 					)
 				)
 			)
-			(symbol "PAM8302_1_1"
-				(pin power_in line
-					(at 0 -10.16 90)
-					(length 5.08)
-					(name "GND"
+			(symbol "PAM8403D_1_1"
+				(pin output line
+					(at 12.7 7.62 180)
+					(length 2.54)
+					(name "LOUT+"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3869,9 +3880,9 @@
 					)
 				)
 				(pin power_in line
-					(at 0 11.43 270)
-					(length 5.08)
-					(name "VIN"
+					(at 0 -15.24 90)
+					(length 2.54)
+					(name "PGND"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3886,10 +3897,10 @@
 						)
 					)
 				)
-				(pin input line
-					(at -13.97 -2.54 0)
-					(length 5.08)
-					(name "SD"
+				(pin output line
+					(at 12.7 5.08 180)
+					(length 2.54)
+					(name "LOUT-"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3904,10 +3915,10 @@
 						)
 					)
 				)
-				(pin input line
-					(at -13.97 0 0)
-					(length 5.08)
-					(name "A-"
+				(pin power_in line
+					(at 0 15.24 270)
+					(length 2.54)
+					(name "PVDD"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3923,9 +3934,9 @@
 					)
 				)
 				(pin input line
-					(at -13.97 2.54 0)
-					(length 5.08)
-					(name "A+"
+					(at -12.7 -7.62 0)
+					(length 2.54)
+					(name "~{MUTE}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3940,10 +3951,10 @@
 						)
 					)
 				)
-				(pin output line
-					(at 13.97 1.27 180)
-					(length 5.08)
-					(name "OUT+"
+				(pin power_in line
+					(at -2.54 15.24 270)
+					(length 2.54)
+					(name "VDD"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3958,10 +3969,10 @@
 						)
 					)
 				)
-				(pin output line
-					(at 13.97 -1.27 180)
-					(length 5.08)
-					(name "OUT-"
+				(pin input line
+					(at -12.7 10.16 0)
+					(length 2.54)
+					(name "INL"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3969,6 +3980,329 @@
 						)
 					)
 					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -12.7 5.08 0)
+					(length 2.54)
+					(name "VREF"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 10.16 -10.16 180)
+					(length 2.54)
+					(hide yes)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -12.7 0 0)
+					(length 2.54)
+					(name "INR"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -2.54 -15.24 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -12.7 -5.08 0)
+					(length 2.54)
+					(name "~{SHDN}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 15.24 270)
+					(length 2.54)
+					(hide yes)
+					(name "PVDD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 12.7 -5.08 180)
+					(length 2.54)
+					(name "ROUT-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -15.24 90)
+					(length 2.54)
+					(hide yes)
+					(name "PGND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 12.7 -7.62 180)
+					(length 2.54)
+					(name "ROUT+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	(symbol "Connector_Generic:Conn_01x02"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x02"
+				(at 0 -5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Conn_01x02_1_1"
+				(rectangle
+					(start -1.27 1.27)
+					(end 1.27 -3.81)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start -1.27 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4147,16 +4481,8 @@
 		(uuid "cbdd290c-2d42-4897-bfce-35d64d6d738d")
 	)
 	(no_connect
-		(at 236.22 118.11)
-		(uuid "e4755a50-30df-46a2-a1a1-82eff66e0755")
-	)
-	(no_connect
 		(at 149.86 80.01)
 		(uuid "ea73a657-49ae-4955-a1c5-45b1a5ef540c")
-	)
-	(no_connect
-		(at 236.22 120.65)
-		(uuid "eddd58f3-13d6-4684-bdc0-33f9bed0be8a")
 	)
 	(wire
 		(pts
@@ -4280,16 +4606,6 @@
 	)
 	(wire
 		(pts
-			(xy 205.74 121.92) (xy 208.28 121.92)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1ae8303d-9e9b-4c92-b490-eccd348392db")
-	)
-	(wire
-		(pts
 			(xy 49.53 74.93) (xy 53.34 74.93)
 		)
 		(stroke
@@ -4357,16 +4673,6 @@
 			(type default)
 		)
 		(uuid "28057387-5208-437c-822a-785b6dfee1ba")
-	)
-	(wire
-		(pts
-			(xy 194.31 137.16) (xy 194.31 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2b8ec7e2-27b3-4a67-8498-d68577f3d45b")
 	)
 	(wire
 		(pts
@@ -4630,16 +4936,6 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 116.84) (xy 208.28 116.84)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "652c3356-9953-4a6e-8868-abf2612c71d6")
-	)
-	(wire
-		(pts
 			(xy 33.02 147.32) (xy 33.02 148.59)
 		)
 		(stroke
@@ -4647,16 +4943,6 @@
 			(type default)
 		)
 		(uuid "66cdd410-cd27-4ed0-ba7a-161aa393dd7b")
-	)
-	(wire
-		(pts
-			(xy 194.31 119.38) (xy 208.28 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "68642123-376d-4732-9766-fc65535a97fd")
 	)
 	(wire
 		(pts
@@ -5140,16 +5426,6 @@
 	)
 	(wire
 		(pts
-			(xy 222.25 104.14) (xy 222.25 107.95)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c031e140-5287-4aef-bf15-452a128bdfab")
-	)
-	(wire
-		(pts
 			(xy 212.09 45.72) (xy 217.17 45.72)
 		)
 		(stroke
@@ -5237,16 +5513,6 @@
 			(type default)
 		)
 		(uuid "ce9ff5ef-caa9-43c4-8a12-13ccc545d52c")
-	)
-	(wire
-		(pts
-			(xy 222.25 129.54) (xy 222.25 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d2275de9-9f67-4255-985c-6055d5b042e3")
 	)
 	(wire
 		(pts
@@ -5627,16 +5893,6 @@
 			(justify left bottom)
 		)
 		(uuid "52dfac65-8b8a-4ef2-88a6-9e909dce0696")
-	)
-	(label "SD_Amp"
-		(at 205.74 121.92 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "5601b5cf-07d3-436a-95fe-bdf51e479ad5")
 	)
 	(label "SD_Amp"
 		(at 49.53 72.39 180)
@@ -6467,7 +6723,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C_Polarized")
+		(lib_id "Device:C")
 		(at 191.77 116.84 90)
 		(unit 1)
 		(body_style 1)
@@ -6497,7 +6753,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_3x5.4"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
 			(at 192.786 105.156 90)
 			(hide yes)
 			(show_name no)
@@ -6519,7 +6775,7 @@
 				)
 			)
 		)
-		(property "Description" "Polarized capacitor"
+		(property "Description" "Unpolarized capacitor"
 			(at 191.77 116.84 0)
 			(hide yes)
 			(show_name no)
@@ -6530,7 +6786,7 @@
 				)
 			)
 		)
-		(property "LCSC Part #" "C3348"
+		(property "LCSC Part #" "C28323"
 			(at -2.54 0 0)
 			(hide yes)
 			(show_name no)
@@ -6732,180 +6988,6 @@
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
 					(reference "C1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 222.25 137.16 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "273af69a-3440-45be-a75c-3576a67b11be")
-		(property "Reference" "#PWR018"
-			(at 222.25 143.51 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 222.25 142.24 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 222.25 137.16 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 222.25 137.16 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 222.25 137.16 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "8b26fab1-991d-472e-8055-fc1bba7071a5")
-		)
-		(instances
-			(project "pico chiptune player"
-				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR018")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "terence:PAM8302")
-		(at 222.25 119.38 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "2ee15339-52de-459e-a401-5fb9d9f2982c")
-		(property "Reference" "U3"
-			(at 224.3933 110.49 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "PAM8302"
-			(at 224.282 126.492 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "TModules:PAM8302A_Module"
-			(at 222.25 119.38 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/PAM8302A.pdf"
-			(at 222.25 119.38 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Adafruit PAM8302 Mono 2.5W Class D Audio Amplifier breakout - VIN, GND, A+, A-, SD, OUT+, OUT-"
-			(at 222.25 119.38 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "3"
-			(uuid "e2cca60c-003c-4b0b-8edb-0688a0256674")
-		)
-		(pin "6"
-			(uuid "0d5bc6a3-eb8e-429d-b513-387900b431df")
-		)
-		(pin "2"
-			(uuid "c7300b2f-b061-42c5-93a9-8f449c489992")
-		)
-		(pin "7"
-			(uuid "8833cd89-4af0-43f4-8f7e-b1bea627ebd7")
-		)
-		(pin "4"
-			(uuid "d6b36c3d-0003-480f-9400-943db1c673a8")
-		)
-		(pin "5"
-			(uuid "62be9f41-e656-4201-a449-62dc94c007af")
-		)
-		(pin "1"
-			(uuid "a6855338-5749-4ae3-b18a-a5edf0d98b18")
-		)
-		(instances
-			(project "pico chiptune player"
-				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "U3")
 					(unit 1)
 				)
 			)
@@ -7404,7 +7486,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100nF"
+		(property "Value" "1uF"
 			(at 250.19 111.7599 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7448,7 +7530,7 @@
 				)
 			)
 		)
-		(property "LCSC Part #" "C1710"
+		(property "LCSC Part #" "C28323"
 			(at 213.36 -41.91 0)
 			(hide yes)
 			(show_name no)
@@ -8275,84 +8357,6 @@
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
 					(reference "U1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+5V")
-		(at 222.25 104.14 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "7ff67ec6-8f1b-4f86-9562-859e2f54d68a")
-		(property "Reference" "#PWR012"
-			(at 222.25 107.95 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "+5V"
-			(at 222.25 99.06 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 222.25 104.14 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 222.25 104.14 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 222.25 104.14 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "bdc5c129-c4a2-4b6c-a61f-6f5612ce93a4")
-		)
-		(instances
-			(project "pico chiptune player"
-				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR012")
 					(unit 1)
 				)
 			)
@@ -9474,84 +9478,6 @@
 			(project "pico chiptune player"
 				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
 					(reference "#PWR011")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 194.31 137.16 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c683c8fd-f17d-4a8d-89f1-5e3a533adf22")
-		(property "Reference" "#PWR020"
-			(at 194.31 143.51 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 194.31 142.24 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 194.31 137.16 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 194.31 137.16 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 194.31 137.16 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "5d3a8e1c-7293-4eff-80ca-aa0e048c0ac5")
-		)
-		(instances
-			(project "pico chiptune player"
-				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR020")
 					(unit 1)
 				)
 			)
@@ -11438,369 +11364,10 @@
 		(at 335.28 49.53)
 		(uuid "1a52fc71-0bed-41d9-9f74-efc450469fb3")
 	)
-	(symbol
-		(lib_id "terence:PAM8302")
-		(at 317.5 200.66 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "dcb9dd1b-0676-488c-b367-a4c3465e6fb3")
-		(property "Reference" "U5"
-			(at 317.5 189.23 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "PAM8302"
-			(at 317.5 192.786 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "TModules:PAM8302A_Module"
-			(at 317.5 200.66 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://cdn-shop.adafruit.com/datasheets/PAM8302A.pdf"
-			(at 317.5 200.66 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Adafruit PAM8302 Mono 2.5W Class D Audio Amplifier breakout - VIN, GND, A+, A-, SD, OUT+, OUT-"
-			(at 317.5 200.66 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "af75c40a-6e98-48e1-9fe5-81a6407a0bd7")
-		)
-		(pin "2"
-			(uuid "75135c9d-a542-49b0-9e7b-edf5ed76a165")
-		)
-		(pin "3"
-			(uuid "60441ab4-1beb-4660-b5e8-d2315cad4e1c")
-		)
-		(pin "4"
-			(uuid "00e52107-8305-4ab3-9fc1-ee7174b86501")
-		)
-		(pin "5"
-			(uuid "7320b938-7e59-41eb-86bb-b1adfc16bf7b")
-		)
-		(pin "6"
-			(uuid "277c3b99-029f-4634-8696-7c85d7fd3051")
-		)
-		(pin "7"
-			(uuid "d04e7f02-5128-4ea1-ad4b-ae0d183d0361")
-		)
-		(instances
-			(project "pico chiptune player"
-				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "U5")
-					(unit 1)
-				)
-			)
-		)
-	)
 
-	(symbol
-		(lib_id "power:GND")
-		(at 317.5 210.82 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "55308c45-2d74-4a08-8f69-04626e176674")
-		(property "Reference" "#PWR033"
-			(at 317.5 217.17 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 317.5 214.884 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 317.5 210.82 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 317.5 210.82 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\""
-			(at 317.5 210.82 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "6a807a66-3fd6-4fbe-b1bc-82146d2a2ef9")
-		)
-		(instances
-			(project "pico chiptune player"
-				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR033")
-					(unit 1)
-				)
-			)
-		)
-	)
 
-	(symbol
-		(lib_id "power:+5V")
-		(at 317.5 189.23 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "e230c082-9a96-4efb-b652-107fbf09797d")
-		(property "Reference" "#PWR034"
-			(at 317.5 193.04 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "+5V"
-			(at 317.5 184.15 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 317.5 189.23 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 317.5 189.23 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 317.5 189.23 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "3e021883-f96c-4641-8216-f70972e8b605")
-		)
-		(instances
-			(project "pico chiptune player"
-				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR034")
-					(unit 1)
-				)
-			)
-		)
-	)
 
-	(label "SD_Amp"
-		(at 303.53 203.2 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "09fd517e-ef83-4449-af20-d447c6c9ae28")
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 303.53 200.66 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "9c28bec9-ef5c-4d61-b792-df7b809dd2ee")
-		(property "Reference" "#PWR035"
-			(at 303.53 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 303.53 204.724 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 303.53 200.66 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 303.53 200.66 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\""
-			(at 303.53 200.66 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "238705d1-8add-4c01-93aa-3ae63ae575da")
-		)
-		(instances
-			(project "pico chiptune player"
-				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
-					(reference "#PWR035")
-					(unit 1)
-				)
-			)
-		)
-	)
 
-	(label "AMP2_IN"
-		(at 303.53 198.12 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "99cd2208-9a57-44d7-8e7e-a465f73a208e")
-	)
-	(no_connect
-		(at 331.47 199.39)
-		(uuid "5b053283-30f4-4267-bc5e-7b7464940e14")
-	)
-	(no_connect
-		(at 331.47 201.93)
-		(uuid "c92994f0-b8ba-498b-820d-9239128db02e")
-	)
 	(symbol
 		(lib_id "Device:R")
 		(at 285.75 182.88 0)
@@ -12455,7 +12022,7 @@
 	)
 
 	(symbol
-		(lib_id "Device:C_Polarized")
+		(lib_id "Device:C")
 		(at 323.85 182.88 0)
 		(unit 1)
 		(body_style 1)
@@ -12488,7 +12055,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_3x5.4"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
 			(at 323.85 182.88 0)
 			(hide yes)
 			(show_name no)
@@ -12510,7 +12077,18 @@
 				)
 			)
 		)
-		(property "Description" "Polarized capacitor"
+		(property "Description" "Unpolarized capacitor"
+			(at 323.85 182.88 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part #" "C28323"
 			(at 323.85 182.88 0)
 			(hide yes)
 			(show_name no)
@@ -12547,7 +12125,7 @@
 		)
 		(uuid "c6c8a885-5a84-47b1-b657-10005f660ce5")
 	)
-	(label "AMP2_IN"
+	(label "AMP_INR"
 		(at 323.85 186.69 0)
 		(effects
 			(font
@@ -13062,7 +12640,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100nF"
+		(property "Value" "1uF"
 			(at 361.95 203.2 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13096,6 +12674,17 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 361.95 200.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part #" "C28323"
 			(at 361.95 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -13393,6 +12982,1736 @@
 	(no_connect
 		(at 62.23 163.83)
 		(uuid "b3caff4e-ea21-464d-87f4-244aa0811a60")
+	)
+	(symbol
+		(lib_id "Amplifier_Audio:PAM8403D")
+		(at 219.71 120.65 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "afb854bf-cd7c-45d3-9b26-af3c4c84a006")
+		(property "Reference" "U3"
+			(at 220.98 104.14 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "PAM8403"
+			(at 220.98 137.16 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm"
+			(at 219.71 120.65 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/products_inactive_data/PAM8403.pdf"
+			(at 219.71 120.65 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "3W Filterless Class-D Stereo Audio Amplifier, SOIC-16"
+			(at 219.71 120.65 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part #" "C5122557"
+			(at 219.71 120.65 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "7595b9cd-e5cc-4f56-842a-20fc52675bb1")
+		)
+		(pin "2"
+			(uuid "1c90d772-9976-4917-b5d6-9a8a6cb49149")
+		)
+		(pin "3"
+			(uuid "7d68cf35-8b9a-416a-a069-fbb1a2ba3c3e")
+		)
+		(pin "4"
+			(uuid "2d86a650-9546-4082-bd7a-b76c9cf73bf8")
+		)
+		(pin "5"
+			(uuid "9de28ef4-4ddd-46d4-ad3f-bd218b08b669")
+		)
+		(pin "6"
+			(uuid "86dddb45-66d1-4615-a9bf-a37f18655e7c")
+		)
+		(pin "7"
+			(uuid "c331c607-b4a6-4af7-a0bb-c3676f862145")
+		)
+		(pin "8"
+			(uuid "b3ad8e7e-eda7-480c-8ea0-8912665447e5")
+		)
+		(pin "9"
+			(uuid "76b92ea0-e587-45ad-8317-f3f828a20de7")
+		)
+		(pin "10"
+			(uuid "ea732516-c65c-4a02-98c0-5b661e7dd837")
+		)
+		(pin "11"
+			(uuid "1d5458f6-79cb-419d-afd4-b8f8070d6b0c")
+		)
+		(pin "12"
+			(uuid "208fd7c3-54a1-4274-b405-eb7bd0c57ac4")
+		)
+		(pin "13"
+			(uuid "02ffd3f1-cb00-4535-bdd7-0300d6505ac6")
+		)
+		(pin "14"
+			(uuid "4c8e9435-93e5-41b0-8b87-07872d54aca6")
+		)
+		(pin "15"
+			(uuid "a9121bed-2ff3-4ec8-82cf-6810752e1aba")
+		)
+		(pin "16"
+			(uuid "ddb594e3-8f94-4227-b404-120e2c832ee9")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "U3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 207.01 110.49) (xy 204.47 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6c5025c0-3743-4eec-9964-7d355479d5bf")
+	)
+	(label "AMP_INL"
+		(at 204.47 110.49 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2e0f1dca-0437-4bbf-9ea7-3219643c0f61")
+	)
+	(wire
+		(pts
+			(xy 207.01 115.57) (xy 204.47 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "02e5fb59-62f4-4126-8070-e3bcf56a3dc4")
+	)
+	(label "AMP_VREF"
+		(at 204.47 115.57 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d4ab44d4-778c-435a-8994-480aba4e5319")
+	)
+	(wire
+		(pts
+			(xy 207.01 120.65) (xy 204.47 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4d81ea9a-44f0-499e-bf88-92d5a18a2ae3")
+	)
+	(label "AMP_INR"
+		(at 204.47 120.65 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e20b4237-f1a3-43d4-917f-b6639bcb23ff")
+	)
+	(wire
+		(pts
+			(xy 207.01 125.73) (xy 204.47 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "213bf750-b826-4cb8-a535-28bb4a856e87")
+	)
+	(label "SD_Amp"
+		(at 204.47 125.73 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bc28c47a-d2a1-4f4c-8cb4-64c90d761653")
+	)
+	(wire
+		(pts
+			(xy 207.01 128.27) (xy 204.47 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "de2e4ba2-8685-4db3-af2f-89802ac598a2")
+	)
+	(label "SD_Amp"
+		(at 204.47 128.27 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "607f0c06-16b4-4b94-8eb9-bf59a8aae6f4")
+	)
+	(wire
+		(pts
+			(xy 232.41 113.03) (xy 234.95 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "494c8392-c78f-456b-be48-62ef39d743ec")
+	)
+	(label "SPK_L+"
+		(at 234.95 113.03 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d8da80d2-829b-4037-8d78-01185368a085")
+	)
+	(wire
+		(pts
+			(xy 232.41 115.57) (xy 234.95 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d484ff43-51a0-4b9f-8e91-df1efe901c18")
+	)
+	(label "SPK_L-"
+		(at 234.95 115.57 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bd37845d-9495-48bc-8ed1-7928b0344197")
+	)
+	(wire
+		(pts
+			(xy 232.41 125.73) (xy 234.95 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ac7a3c41-dad1-4187-8fb2-593a8ab0cd12")
+	)
+	(label "SPK_R-"
+		(at 234.95 125.73 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a605e33d-395c-4d5e-85ad-1886e1201aa8")
+	)
+	(wire
+		(pts
+			(xy 232.41 128.27) (xy 234.95 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0abc13a7-4672-415f-8535-2ae1ae38762c")
+	)
+	(label "SPK_R+"
+		(at 234.95 128.27 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b7533cd2-c8a2-4534-a7d4-07264e0d5268")
+	)
+	(no_connect
+		(at 229.87 130.81)
+		(uuid "463a18ea-02ea-4520-957f-2fb84e674290")
+	)
+	(symbol
+		(lib_id "power:+5V")
+		(at 219.71 105.41 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "7520279c-13ed-455d-8d84-6e6f06a9acc1")
+		(property "Reference" "#PWR101"
+			(at 219.71 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+5V"
+			(at 219.71 101.854 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 219.71 105.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 219.71 105.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 219.71 105.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "776f7e29-a944-4cb3-9695-66475134691b")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "#PWR101")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 219.71 135.89 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "807b8151-4f97-444a-8873-d5e1d68fa925")
+		(property "Reference" "#PWR102"
+			(at 219.71 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 219.71 139.7 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 219.71 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 219.71 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 219.71 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "77bf1683-aabc-48e1-9d7f-5923038445c0")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "#PWR102")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+5V")
+		(at 217.17 105.41 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "0eba9c55-1a40-4e79-a071-5919df5baac7")
+		(property "Reference" "#PWR103"
+			(at 217.17 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+5V"
+			(at 217.17 101.854 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 217.17 105.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 217.17 105.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 217.17 105.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "643dafd7-114b-4852-a0d1-a900ed14b9ff")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "#PWR103")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 217.17 135.89 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "1a1a306f-8b88-47d4-85cb-93149837e5db")
+		(property "Reference" "#PWR104"
+			(at 217.17 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 217.17 139.7 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 217.17 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 217.17 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 217.17 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d374a155-080f-45ff-bcc4-b536ec09d0bc")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "#PWR104")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "AMP_INL"
+		(at 195.58 116.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b4f58aa6-6afc-489f-9858-aa100062707b")
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 259.08 125.73 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "01f04946-8d83-416a-96f7-c0853a7d7ae6")
+		(property "Reference" "J3"
+			(at 261.62 125.73 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Speaker_L"
+			(at 261.62 128.27 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 259.08 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.jst-mfg.com/product/pdf/eng/ePH.pdf"
+			(at 259.08 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "JST-PH 2-pin speaker connector"
+			(at 259.08 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part #" "C131337"
+			(at 259.08 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4253e9da-afa4-4eef-bfe8-c2ade5c4a54f")
+		)
+		(pin "2"
+			(uuid "8660d557-cf32-4953-8d67-d37228e3d2f4")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "J3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "SPK_L+"
+		(at 254 125.73 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5631da45-0e6f-4663-8b5a-74e5352f11d5")
+	)
+	(label "SPK_L-"
+		(at 254 128.27 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5c5161a0-5de1-432f-82d1-43bd1bb7a04e")
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 259.08 133.35 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "e31c6924-fefb-469b-94bb-e1a9c685c23e")
+		(property "Reference" "J4"
+			(at 261.62 133.35 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Speaker_R"
+			(at 261.62 135.89 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 259.08 133.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.jst-mfg.com/product/pdf/eng/ePH.pdf"
+			(at 259.08 133.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "JST-PH 2-pin speaker connector"
+			(at 259.08 133.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part #" "C131337"
+			(at 259.08 133.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a1ce507a-eeee-4b78-89f5-acab1ffe1f9b")
+		)
+		(pin "2"
+			(uuid "ec6040ac-bffe-4d4a-9a02-c69d0173a2b7")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "J4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "SPK_R+"
+		(at 254 133.35 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "59ce9e02-d2c1-4454-8796-7da87b11f6ad")
+	)
+	(label "SPK_R-"
+		(at 254 135.89 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e5571c0d-c065-4d77-999c-0b8ee49e2a7c")
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 269.24 110.49 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ff88a1c4-8602-473b-a81c-d60b132b971a")
+		(property "Reference" "C14"
+			(at 271.78 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1uF"
+			(at 271.78 111.76 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
+			(at 269.24 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 269.24 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "PAM8403 PVDD (pin 4) decoupling"
+			(at 269.24 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part #" "C28323"
+			(at 269.24 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "7ff51218-8a13-4939-9bf2-450376360cca")
+		)
+		(pin "2"
+			(uuid "8bf71534-9330-4db8-88b3-346144406aba")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "C14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+5V")
+		(at 269.24 106.68 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "e2b52ee6-10d4-46bd-b7a5-384c3a7b22a9")
+		(property "Reference" "#PWR105"
+			(at 269.24 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+5V"
+			(at 269.24 103.124 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 269.24 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 269.24 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 269.24 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "57e3722b-165a-4e19-87aa-ccd73b2cba5b")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "#PWR105")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 269.24 114.3 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "dd44a1a3-af91-423a-b666-a8bff7d9aaac")
+		(property "Reference" "#PWR106"
+			(at 269.24 120.65 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 269.24 118.11 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 269.24 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 269.24 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 269.24 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "859f46e4-f954-46a7-8adb-20d503f638ab")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "#PWR106")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Polarized")
+		(at 276.86 110.49 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b80327de-0846-4414-9672-9d015cd8ea6a")
+		(property "Reference" "C15"
+			(at 279.4 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10uF"
+			(at 279.4 111.76 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:CP_Elec_4x5.4"
+			(at 276.86 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 276.86 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "PAM8403 PVDD bulk decoupling"
+			(at 276.86 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part #" "C3343"
+			(at 276.86 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a57060c0-75c1-4b40-ae90-db06fd082eff")
+		)
+		(pin "2"
+			(uuid "d8ab7a0f-af81-45d7-b200-999cd2e8773e")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "C15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+5V")
+		(at 276.86 106.68 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "ee8597fe-239c-4504-81f3-1379c37f95bf")
+		(property "Reference" "#PWR107"
+			(at 276.86 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+5V"
+			(at 276.86 103.124 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 276.86 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 276.86 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 276.86 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "20b972a5-0d24-480f-9c6a-74dfd7898b64")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "#PWR107")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 276.86 114.3 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "b04e7f3a-607b-4e39-acf4-48fa46affe19")
+		(property "Reference" "#PWR108"
+			(at 276.86 120.65 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 276.86 118.11 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 276.86 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 276.86 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 276.86 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "531a0e57-cb87-4938-a132-1687e261c42a")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "#PWR108")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 284.48 110.49 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ba346ac6-4f6a-4dde-baa5-b629f72e9303")
+		(property "Reference" "C16"
+			(at 287.02 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1uF"
+			(at 287.02 111.76 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
+			(at 284.48 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 284.48 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "PAM8403 VREF bypass"
+			(at 284.48 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part #" "C28323"
+			(at 284.48 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "2df00167-8050-41d7-8e4f-526b0c8c954e")
+		)
+		(pin "2"
+			(uuid "ac8fdcb5-5919-4e9f-b3cf-d90be5ad7680")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "C16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 284.48 106.68) (xy 284.48 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cf9e0a9b-496f-4e42-9ea3-22afa590dd41")
+	)
+	(label "AMP_VREF"
+		(at 284.48 104.14 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "741e8785-de74-4c3e-9546-b74bb8630d30")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 284.48 114.3 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "4ca5744b-ca0d-48de-ba78-6cda8f446d16")
+		(property "Reference" "#PWR109"
+			(at 284.48 120.65 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 284.48 118.11 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 284.48 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 284.48 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 284.48 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f319fe5d-4e07-432c-8d24-6b573e99ac29")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "#PWR109")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 292.1 110.49 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "dde34626-4b23-4736-bd45-bb78f676d89f")
+		(property "Reference" "R13"
+			(at 294.64 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10K"
+			(at 294.64 111.76 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 292.1 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 292.1 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "SD_Amp pull-down (amp muted until firmware enables)"
+			(at 292.1 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC Part #" "C17414"
+			(at 292.1 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "2910d2c4-9f6d-4c37-8a20-5a694780fd74")
+		)
+		(pin "2"
+			(uuid "7dd080cc-f408-4ff4-a8cc-6118702aedce")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "R13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 292.1 106.68) (xy 292.1 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fdbe34ba-b658-4438-8d4b-b2f13a77eafc")
+	)
+	(label "SD_Amp"
+		(at 292.1 104.14 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3bbc6d35-9ced-4394-8f64-4bb3a7a9f917")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 292.1 114.3 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "b5526d7a-b3eb-4e1e-a4c3-861e2fc1f633")
+		(property "Reference" "#PWR110"
+			(at 292.1 120.65 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 292.1 118.11 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 292.1 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 292.1 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 292.1 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "fcf1e1a9-e7da-4cf3-86e2-c4ad58ae70b8")
+		)
+		(instances
+			(project "pico chiptune player"
+				(path "/7838ce79-4aa7-49e0-80b2-fad97ae8a425"
+					(reference "#PWR110")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(sheet_instances
 		(path "/"

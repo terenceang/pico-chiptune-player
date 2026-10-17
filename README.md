@@ -21,9 +21,9 @@ It enables standalone playback of classic AY-3-8910 / YM2149 chiptune music form
 - **Sound Generators:** 2× General Instrument AY-3-8910 / Yamaha YM2149F (40-pin DIP), 6 voices total
 - **Storage:** 4-bit SDIO microSD card socket (`J2`), driven by the Pico SDK / pico-extras PIO-based `pico_sd_card` driver; card presence detected in software (`R1` 10kΩ pull-up on `DAT3`)
 - **Audio Output (stereo):**
-  - Two independent 3-channel passive summing mixers (`R4`,`R5`,`R7`,`R8` for the left/U1 PSG; `R9`,`R10`,`R11`,`R12` for the right/U4 PSG), each with a low-pass filter cap (`C4`, `C9` = 100nF) and AC coupling cap (`C3`, `C10` = 1µF / 1µF)
-  - Two onboard Adafruit PAM8302A 2.5W Mono Class-D Audio Amplifier Modules (`U3` left, `U5` right) with hardware GPIO mute/shutdown control (`SD_Amp` on GPIO9)
-  - Direct differential speaker terminals (`OUT+`, `OUT-`) on each module
+  - Two independent 3-channel passive summing mixers (`R4`,`R5`,`R7`,`R8` for the left/U1 PSG; `R9`,`R10`,`R11`,`R12` for the right/U4 PSG), each with a low-pass filter cap (`C4`, `C9` = 100nF) and AC coupling cap (`C3`, `C10` = 1µF X7R MLCC)
+  - One on-board PAM8403 3W+3W filterless Class-D stereo amplifier (`U3`, SOIC-16) with hardware mute/shutdown on `SD_Amp` (GPIO9). A 10kΩ `R13` pull-down keeps it muted at boot; drive GPIO9 HIGH to play
+  - JST-PH 2-pin speaker connectors `J3` (left) / `J4` (right) with bridge-tied outputs for 4–8Ω speakers
 - **Display:** 0.96" SSD1306 128x64 I2C OLED Display (`U2`)
 - **Storage:** MicroSD Card Slot via SPI mode with Card Detect (`J2`)
 - **Controls:** 3 tactile pushbuttons (`SW1` Play/Pause, `SW2` Next Track, `SW3` Previous Track)
@@ -37,7 +37,7 @@ It enables standalone playback of classic AY-3-8910 / YM2149 chiptune music form
 | :--- | :--- | :--- | :--- |
 | **`GPIO0..GPIO7`** | Pins 1, 2, 4..7, 9, 10 | `DA0..DA7` | AY-3-8910 8-Bit Data Bus (Pins 37..30) |
 | **`GPIO8`** | Pin 11 | `BC1` | PSG1 (U1) Bus Control 1 (Pin 29) |
-| **`GPIO9`** | Pin 12 | `SD_Amp` | PAM8302 Audio Amp Shutdown / Mute Control (`U3`/`U5` Pin 3) |
+| **`GPIO9`** | Pin 12 | `SD_Amp` | PAM8403 Audio Amp Enable / Mute (`U3` Pins 5 `~MUTE` & 12 `~SHDN`, `R13` pull-down) |
 | **`GPIO10`** | Pin 14 | `BDIR` | PSG1 (U1) Bus Direction Control (Pin 27) |
 | **`GPIO11`** | Pin 15 | `~RESET` | AY-3-8910 Active-Low Reset (Pin 23) + 10kΩ R3 Pull-down |
 | **`GPIO12`** | Pin 16 | `CLOCK` | AY-3-8910 Master Clock Input (Pin 22 via 33Ω series R2) |

@@ -18,9 +18,9 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 ### Key Features & Subsystems
 - **Microcontroller:** Raspberry Pi Pico 2 (RP2350) microcontroller running the chiptune player firmware, file parser, and UI.
 - **Sound Generators:** 2× AY-3-8910 / YM2149F 40-pin DIP PSG (`U1`, `U4`). The 8-bit parallel bus (`DA0..DA7`), master clock (`CLOCK`), active-low reset (`~RESET`) and `BC2` are shared; `BDIR`/`BC1` are driven **separately per PSG** (`GPIO10`/`GPIO8` → U1, `GPIO26`/`GPIO27` → U4) so each PSG can be independently selected.
-- **Audio Summer & Filter (per channel):** 3-channel passive resistive summing networks (`R4`,`R5`,`R7` = 1kΩ + `R8` = 1kΩ load for U1; `R9`,`R10`,`R11` = 1kΩ + `R12` = 1kΩ load for U4) with high-cut low-pass filtering (`C4`, `C9` = 100nF) and AC output coupling (`C3`, `C10` = 1µF).
-- **Audio Amplifiers (stereo):** Two onboard **Adafruit PAM8302A 2.5W Mono Class-D Audio Amplifier Modules** (`U3` left, `U5` right) with shared hardware GPIO shutdown/mute control (`SD_Amp`).
-- **Speaker Output:** Direct differential `OUT+` / `OUT-` speaker terminals on each PAM8302 module breakout.
+- **Audio Summer & Filter (per channel):** 3-channel passive resistive summing networks (`R4`,`R5`,`R7` = 1kΩ + `R8` = 1kΩ load for U1; `R9`,`R10`,`R11` = 1kΩ + `R12` = 1kΩ load for U4) with high-cut low-pass filtering (`C4`, `C9` = 100nF) and AC output coupling (`C3`, `C10` = 1µF X7R MLCC).
+- **Audio Amplifier (stereo):** One on-board **PAM8403 3W+3W filterless Class-D stereo amplifier** (`U3`, SOIC-16) fed by the left (`AMP_INL`) and right (`AMP_INR`) mixers. Its `~MUTE` and `~SHDN` pins are both driven by `SD_Amp` (GPIO9), with a 10kΩ pull-down (`R13`) so the amp stays muted until firmware enables it.
+- **Speaker Output:** Two JST-PH 2-pin connectors (`J3` left, `J4` right) carrying the bridge-tied (BTL) `OUT+` / `OUT-` pair for each 4–8Ω speaker.
 - **Display:** 0.96" 128x64 I2C OLED display module (`U2`) with bulk and high-frequency decoupling (`C6` = 10µF, `C7` = 100nF).
 - **Storage:** Full 4-bit SDIO microSD card socket (`J2`), driven by the RP2350 PIO-based `pico_sd_card` driver (Pico SDK / pico-extras). Card presence is detected **in software** (no card-detect switch). A single external pull-up `R1` = 10kΩ sits on `DAT3`; the firmware enables the RP2350 internal pull-ups on `CMD`/`DAT0`–`DAT3`.
 - **Navigation Controls:** 3 tactile pushbuttons (`SW1` Play/Pause, `SW2` Next Track, `SW3` Previous Track).
@@ -55,26 +55,24 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
   | AY-3-8910 / YM2149 | <--- JP1 (YM2149 /SEL ÷2 Clock Mode Jumper)
   +---------+----------+
             |
-            | ANALOG_A, ANALOG_B, ANALOG_C
-            v
-  +--------------------+
-  | Passive Mono Mixer | (R4=1k, R5=1k, R7=1k Summing + R8=1k Load + C4=100nF LPF)
-  +---------+----------+
-            |
-            v
-  +--------------------+
-  | AC Output Coupling | (C3 = 1µF Polarized Electrolytic Cap)
-  +---------+----------+
-            |
-            | Net-(U3-A+)
-            v
-  +--------------------+
-  | Mono Audio Amp     | (U3: Adafruit PAM8302A 2.5W Class-D Module)
-  | Breakout Header    | (VIN=+5V with C8=100nF, A-=GND, SD=GPIO9 SD_Amp)
-  +---------+----------+
-            |
-            v
-     Differential Speaker Terminals (OUT+ / OUT- on U3)
+            | ANALOG_A/B/C (U1)          ANALOG_A2/B2/C2 (U4)
+            v                            v
+  +--------------------+       +--------------------+
+  | Left Mixer         |       | Right Mixer        |
+  | R4,R5,R7 + R8 load |       | R9,R10,R11 + R12   |
+  | C4 100nF LPF       |       | C9 100nF LPF       |
+  +---------+----------+       +---------+----------+
+            | C3 1µF                     | C10 1µF
+            | AMP_INL                    | AMP_INR
+            v                            v
+  +-------------------------------------------------+
+  | U3: PAM8403 Stereo Class-D Amp (SOIC-16)        |
+  | VDD/PVDD=+5V (C8, C13, C14 1µF + C15 10µF)      |
+  | VREF bypass C16 1µF, ~MUTE+~SHDN = SD_Amp (GPIO9) |
+  +-----------+-------------------------+-----------+
+              |                         |
+              v                         v
+     J3 Speaker L (JST-PH)     J4 Speaker R (JST-PH)
 ```
 
 ---
@@ -96,7 +94,7 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 | **Pin 9** | **GPIO6** | `DA6` | AY-3-8910 (U1) Pin 31 | PSG 8-Bit Data Bus Bit 6 |
 | **Pin 10** | **GPIO7** | `DA7` | AY-3-8910 (U1) Pin 30 | PSG 8-Bit Data Bus Bit 7 |
 | **Pin 11** | **GPIO8** | `BC1` | AY-3-8910 (U1) Pin 29 | Bus Control 1 (Address Latch / Data Write) |
-| **Pin 12** | **GPIO9** | `SD_Amp` | PAM8302 Module (U3) Pin 3 | Audio Amplifier Shutdown Control (Active High Enable / Low Mute) |
+| **Pin 12** | **GPIO9** | `SD_Amp` | PAM8403 (U3) Pins 5 `~MUTE` & 12 `~SHDN`, R13 | Audio Amplifier Enable (High = Play, Low = Mute/Shutdown; 10kΩ R13 pull-down holds it muted at boot) |
 | **Pin 13** | **GND** | `GND` | Ground Plane | System Ground |
 | **Pin 14** | **GPIO10** | `BDIR` | AY-3-8910 (U1) Pin 27 | Bus Direction Control |
 | **Pin 15** | **GPIO11** | `~RESET` | AY-3-8910 (U1) Pin 23, R3 | PSG Active-Low Reset (with 10kΩ pull-down R3 to GND) |
@@ -124,7 +122,7 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 | **Pin 37** | **3V3_EN** | `N/C` | — | 3.3V regulator enable (Unconnected) |
 | **Pin 38** | **GND** | `GND` | Ground Plane | System Ground |
 | **Pin 39** | **VSYS** | `N/C` | — | System supply input (Unconnected) |
-| **Pin 40** | **VBUS** | `+5V` | U1 Pin 40/25/28, U4 Pin 40/25/28, U3 Pin 2, U5 Pin 2, C1, C2, C8, C11 | 5V Main Power Rail (Sourced from Pico USB VBUS) |
+| **Pin 40** | **VBUS** | `+5V` | U1 Pin 40/25/28, U4 Pin 40/25/28, U3 (PAM8403) Pins 4/6/13, C1, C2, C8, C11..C15 | 5V Main Power Rail (Sourced from Pico USB VBUS) |
 
 ---
 
@@ -204,7 +202,7 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 
 ---
 
-### 3.4 Peripherals: OLED (U2), Audio Amp Module (U3), Buttons (SW1..SW3), Jumper (JP1)
+### 3.4 Peripherals: OLED (U2), Buttons (SW1..SW3), Jumper (JP1)
 
 | Designator | Pin / Signal | Net Name | Connected To | Description |
 | :--- | :--- | :--- | :--- | :--- |
@@ -212,20 +210,6 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 | **`U2` Pin 2** | `GND` | `GND` | Ground Plane | Display Power Ground |
 | **`U2` Pin 3** | `SCL` | `OLED_SCL` | Pico GPIO17 (Pin 22) | I2C Serial Clock Line |
 | **`U2` Pin 4** | `SDA` | `OLED_SDA` | Pico GPIO16 (Pin 21) | I2C Serial Data Line |
-| **`U3` Pin 1** | `GND` | `GND` | Ground Plane | PAM8302 Power Ground |
-| **`U3` Pin 2** | `VIN` | `+5V` | +5V Rail | PAM8302 Power Input (Decoupled by C8 100nF) |
-| **`U3` Pin 3** | `SD` | `SD_Amp` | Pico GPIO9 (Pin 12) | Hardware Mute / Shutdown (HIGH = Enable, LOW = Mute) |
-| **`U3` Pin 4** | `A-` | `GND` | Ground Plane | Differential Audio Negative Reference Input |
-| **`U3` Pin 5** | `A+` | `NET-(U3-A+)` | C3 Pin 2 (Negative lead) | AC-Coupled Audio Input from Mixer Summing Junction |
-| **`U3` Pin 6** | `OUT+` | `Net-(U3-OUT+-Pad6)` | Breakout Output Terminal | Positive Differential Class-D Speaker Output |
-| **`U3` Pin 7** | `OUT-` | `Net-(U3-OUT--Pad7)` | Breakout Output Terminal | Negative Differential Class-D Speaker Output |
-| **`U5` Pin 1** | `GND` | `GND` | Ground Plane | PAM8302 (right) Power Ground |
-| **`U5` Pin 2** | `VIN` | `+5V` | +5V Rail | PAM8302 (right) Power Input (Decoupled by C13 100nF) |
-| **`U5` Pin 3** | `SD` | `SD_Amp` | Pico GPIO9 (Pin 12) | Hardware Mute / Shutdown (shared with U3) |
-| **`U5` Pin 4** | `A-` | `GND` | Ground Plane | Differential Audio Negative Reference Input |
-| **`U5` Pin 5** | `A+` | `AMP2_IN` | C10 Pin 1 (Positive lead) | AC-Coupled Audio Input from right-channel Mixer |
-| **`U5` Pin 6** | `OUT+` | `Net-(U5-OUT+-Pad6)` | Breakout Output Terminal | Positive Differential Class-D Speaker Output (right) |
-| **`U5` Pin 7** | `OUT-` | `Net-(U5-OUT--Pad7)` | Breakout Output Terminal | Negative Differential Class-D Speaker Output (right) |
 | **`SW1` Pin 1** | `1` | `SW_PLAY` | Pico GPIO14 (Pin 19) | Play / Pause Navigation Button (Internal Pull-Up) |
 | **`SW1` Pin 2** | `2` | `GND` | Ground Plane | Ground Return |
 | **`SW2` Pin 1** | `1` | `SW_NEXT` | Pico GPIO13 (Pin 17) | Next Track Navigation Button (Internal Pull-Up) |
@@ -237,11 +221,38 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 
 ---
 
+### 3.4a PAM8403 Stereo Class-D Amplifier (U3) & Speaker Connectors (J3, J4)
+
+| Pin | Symbol | Net Name | Connected To | Notes / Function |
+| :--- | :--- | :--- | :--- | :--- |
+| **1** | `LOUT+` | `SPK_L+` | J3 Pin 1 | Left speaker output + (BTL) |
+| **2** | `PGND` | `GND` | Ground Plane | Power ground |
+| **3** | `LOUT-` | `SPK_L-` | J3 Pin 2 | Left speaker output − (BTL) |
+| **4** | `PVDD` | `+5V` | +5V Plane | Power-stage supply (C14 1µF under U3, C13 1µF + C15 10µF bulk) |
+| **5** | `~MUTE` | `SD_Amp` | Pico GPIO9 (Pin 12), R13 | Low = mute (tied to `~SHDN`) |
+| **6** | `VDD` | `+5V` | +5V Plane | Analog supply (C8 1µF under U3) |
+| **7** | `INL` | `AMP_INL` | C3 Pin 2 | Left input, AC-coupled from the U1 mixer |
+| **8** | `VREF` | `AMP_VREF` | C16 (1µF to GND) | Internal bias reference bypass |
+| **9** | `NC` | — | Unconnected | No connect |
+| **10** | `INR` | `AMP_INR` | C10 Pin 2 | Right input, AC-coupled from the U4 mixer |
+| **11** | `GND` | `GND` | Ground Plane | Analog ground |
+| **12** | `~SHDN` | `SD_Amp` | Pico GPIO9 (Pin 12), R13 | Low = shutdown (tied to `~MUTE`) |
+| **13** | `PVDD` | `+5V` | +5V Plane | Power-stage supply |
+| **14** | `ROUT-` | `SPK_R-` | J4 Pin 2 | Right speaker output − (BTL) |
+| **15** | `PGND` | `GND` | Ground Plane | Power ground |
+| **16** | `ROUT+` | `SPK_R+` | J4 Pin 1 | Right speaker output + (BTL) |
+
+- **`R13` (10kΩ)** pulls `SD_Amp` to GND, so the amplifier stays muted/shut down from power-on until firmware drives **GPIO9 HIGH**. The old Adafruit PAM8302 modules had an on-board pull-up and powered up enabled, so this is a change in behaviour.
+- **`J3` / `J4`:** JST-PH 2.0mm 2-pin vertical headers (Left / Right), one 4–8Ω speaker each. The outputs are bridge-tied: **never connect a speaker terminal to GND**, and do not share the `−` wires between channels.
+- The PAM8403 has a fixed internal gain of 24dB, the same as the PAM8302A it replaces, so the mixer levels stay as they are.
+
+---
+
 ### 3.5 Passive Audio Mixer & Filtering Topology
 
 Each PSG feeds its own identical passive summing stage, giving a fully independent **left** (U1) and **right** (U4) channel:
 
-**Left channel (U1 → U3):**
+**Left channel (U1 → U3 `INL`):**
 
 1. **Summing Resistors:**
    - Channel A (U1 Pin 4): `R4` (1kΩ, 0805)
@@ -250,9 +261,9 @@ Each PSG feeds its own identical passive summing stage, giving a fully independe
 2. **Summing Node (`Net-(C3-Pad1)`):**
    - **Mixer Load Resistor:** `R8` (1kΩ, 0805) to `GND`. Establishes the passive attenuator baseline impedance and DC ground reference.
    - **Low-Pass Filter Capacitor:** `C4` (100nF, 0805 MLCC) to `GND`. Forms a first-order low-pass filter with the equivalent summing impedance ($R_{eq} \approx 250\,\Omega$, cutoff frequency $f_c \approx 6.3\,\text{kHz}$) to eliminate high-frequency digital clock harmonics and PSG switching noise.
-   - **AC Output Coupling Capacitor:** `C3` (1µF, 3x5.4mm Electrolytic). Blocks DC bias from the PSG output pins and passes the audio signal into the PAM8302 `A+` differential audio input (`U3` Pin 5).
+   - **AC Output Coupling Capacitor:** `C3` (1µF X7R 0805 MLCC). Blocks the DC difference between the mixer node and the PAM8403 input bias (≈VDD/2) and passes the audio into `INL` (`U3` Pin 7). It is a non-polarized MLCC because the amplifier side now sits at the higher DC potential.
 
-**Right channel (U4 → U5):** identical topology using `R9`, `R10`, `R11` (1kΩ summing), `R12` (1kΩ load), `C9` (100nF LPF) and `C10` (1µF coupling) into the second PAM8302 `A+` input (`U5` Pin 5).
+**Right channel (U4 → U3 `INR`):** identical topology using `R9`, `R10`, `R11` (1kΩ summing), `R12` (1kΩ load), `C9` (100nF LPF) and `C10` (1µF X7R MLCC coupling) into `INR` (`U3` Pin 10).
 
 ---
 
@@ -317,18 +328,22 @@ This Rev 0.5 pinout (the current SSOT, now applied in §3.1) restores native har
 | **`A1`** | `RaspberryPi_Pico 2` | `TMCu Module:RPi_Pico_SMD_TH` | 1 | — | Raspberry Pi Pico 2 (RP2350) Microcontroller Module |
 | **`C1`** | `10uF` | `Capacitor_SMD:CP_Elec_4x5.4` | 1 | `C3343` | Aluminum Electrolytic Bulk Power Decoupling Cap (U1 +5V) |
 | **`C2`** | `100nF` | `Capacitor_SMD:C_0805` | 1 | `C1711` | MLCC 0805 High-Frequency Decoupling Cap (U1 +5V) |
-| **`C3`** | `1uF` | `Capacitor_SMD:CP_Elec_3x5.4` | 1 | `C3348` | Aluminum Electrolytic Audio Input AC Coupling Cap |
+| **`C3`** | `1uF` | `Capacitor_SMD:C_0805` | 1 | `C28323` | MLCC 0805 X7R Left Amp Input AC Coupling Cap |
 | **`C4`** | `100nF` | `Capacitor_SMD:C_0805` | 1 | `C1710` | MLCC 0805 Audio Mixer Low-Pass Filter Cap |
 | **`C5`** | `100nF` | `Capacitor_SMD:C_0805` | 1 | `C1710` | MLCC 0805 MicroSD +3.3V Decoupling Cap |
 | **`C6`** | `10uF` | `Capacitor_SMD:CP_Elec_4x5.4` | 1 | `C3343` | Aluminum Electrolytic Bulk Power Decoupling Cap (U2 +3.3V) |
 | **`C7`** | `100nF` | `Capacitor_SMD:C_0805` | 1 | `C1711` | MLCC 0805 High-Frequency Decoupling Cap (U2 +3.3V) |
-| **`C8`** | `100nF` | `Capacitor_SMD:C_0805` | 1 | `C1710` | MLCC 0805 PAM8302 +5V Power Decoupling Cap |
+| **`C8`** | `1uF` | `Capacitor_SMD:C_0805` | 1 | `C28323` | MLCC 0805 PAM8403 `VDD` Decoupling Cap (B.Cu, under U3) |
 | **`C9`** | `100nF` | `Capacitor_SMD:C_0805` | 1 | `C1710` | MLCC 0805 Right-Channel Audio Mixer Low-Pass Filter Cap |
-| **`C10`** | `1uF` | `Capacitor_SMD:CP_Elec_3x5.4` | 1 | `C3348` | Aluminum Electrolytic Right-Channel Audio AC Coupling Cap |
+| **`C10`** | `1uF` | `Capacitor_SMD:C_0805` | 1 | `C28323` | MLCC 0805 X7R Right Amp Input AC Coupling Cap |
 | **`C11`** | `10uF` | `Capacitor_SMD:CP_Elec_4x5.4` | 1 | `C3343` | Aluminum Electrolytic Bulk Power Decoupling Cap (U4 +5V) |
 | **`C12`** | `100nF` | `Capacitor_SMD:C_0805` | 1 | `C1711` | MLCC 0805 High-Frequency Decoupling Cap (U4 +5V) |
-| **`C13`** | `100nF` | `Capacitor_SMD:C_0805` | 1 | `C1710` | MLCC 0805 PAM8302 (U5) +5V Power Decoupling Cap |
+| **`C13`** | `1uF` | `Capacitor_SMD:C_0805` | 1 | `C28323` | MLCC 0805 PAM8403 `PVDD` Decoupling Cap |
+| **`C14`** | `1uF` | `Capacitor_SMD:C_0805` | 1 | `C28323` | MLCC 0805 PAM8403 `PVDD` Decoupling Cap (B.Cu, under U3) |
+| **`C15`** | `10uF` | `Capacitor_SMD:CP_Elec_4x5.4` | 1 | `C3343` | Aluminum Electrolytic PAM8403 `PVDD` Bulk Cap |
+| **`C16`** | `1uF` | `Capacitor_SMD:C_0805` | 1 | `C28323` | MLCC 0805 PAM8403 `VREF` Bypass Cap |
 | **`J2`** | `MicroSD` | `Terence:MicroSD` | 1 | `C479742` | TF-1115 MicroSD Card Socket (4-bit SDIO) |
+| **`J3`, `J4`** | `Speaker_L`, `Speaker_R` | `Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical` | 2 | `C131337` | JST-PH 2-pin Speaker Connectors (Left / Right) |
 | **`JP1`** | `Clk Div` | `Jumper:SolderJumper-2_P1.3mm_Open` | 1 | — | 2-Pole Solder Jumper (YM2149 /SEL Clock Divider Mode) |
 | **`R1`** | `10K` | `Resistor_SMD:R_0805` | 1 | `C17414` | MicroSD SDIO `DAT3` Pull-Up Resistor (+3.3V) |
 | **`R2`** | `33` | `Resistor_SMD:R_0805` | 1 | `C17634` | PSG Master Clock (GPIO12) Series Damping Resistor |
@@ -341,14 +356,14 @@ This Rev 0.5 pinout (the current SSOT, now applied in §3.1) restores native har
 | **`R10`** | `1k` | `Resistor_SMD:R_0805` | 1 | `C17513` | Right-Channel B Audio Mixer Summer Resistor |
 | **`R11`** | `1k` | `Resistor_SMD:R_0805` | 1 | `C17513` | Right-Channel C Audio Mixer Summer Resistor |
 | **`R12`** | `1K` | `Resistor_SMD:R_0805` | 1 | `C17513` | Right-Channel Mixer Summing Junction Load Resistor to GND |
+| **`R13`** | `10K` | `Resistor_SMD:R_0805` | 1 | `C17414` | `SD_Amp` Pull-Down (amp muted until GPIO9 driven HIGH) |
 | **`SW1`**| `SW_PUSH_6mm` | `Button_Switch_THT:SW_PUSH_6mm` | 1 | `C17513` | 6x6mm Pushbutton Tactile Switch (Play / Pause, GPIO14) |
 | **`SW2`**| `SW_PUSH_6mm` | `Button_Switch_THT:SW_PUSH_6mm` | 1 | `C114217` | 6x6mm Pushbutton Tactile Switch (Next Track, GPIO13) |
 | **`SW3`**| `SW_PUSH_6mm` | `Button_Switch_THT:SW_PUSH_6mm` | 1 | `C12740` | 6x6mm Pushbutton Tactile Switch (Previous Track, GPIO15) |
 | **`U1`** | `AY-3-8910` | `Package_DIP:DIP-40_W15.24mm` | 1 | — | 3-Voice Programmable Sound Generator IC (DIP-40 Socket) |
 | **`U2`** | `0.96"OLED_I2C` | `TModules:OLED 0.96 I2C` | 1 | — | 4-Pin 0.96" SSD1306 I2C OLED Display Module |
-| **`U3`** | `PAM8302` | `TModules:PAM8302A_Module` | 1 | — | Adafruit PAM8302A 2.5W Mono Class-D Audio Amplifier Breakout (left) |
+| **`U3`** | `PAM8403` | `Package_SO:SOIC-16_3.9x9.9mm_P1.27mm` | 1 | `C5122557` | PAM8403 3W+3W Filterless Class-D Stereo Audio Amplifier (Slkor) |
 | **`U4`** | `AY-3-8910` | `Package_DIP:DIP-40_W15.24mm` | 1 | — | Second 3-Voice Programmable Sound Generator IC (DIP-40 Socket, right) |
-| **`U5`** | `PAM8302` | `TModules:PAM8302A_Module` | 1 | — | Adafruit PAM8302A 2.5W Mono Class-D Audio Amplifier Breakout (right) |
 | **`H1`-`H4`** | `MountingHole_3mm` | `MountingHole:MountingHole_3mm` | 4 | — | 3mm NPTH Corner Mounting Holes (M3) |
 
 ---
@@ -357,7 +372,7 @@ This Rev 0.5 pinout (the current SSOT, now applied in §3.1) restores native har
 
 | Rev | Date | Notes |
 | :--- | :--- | :--- |
-| **0.6** | **2026-10-11** | **Dual-PSG stereo variant**: Added a second AY-3-8910/YM2149F (`U4`) sharing the `DA0..DA7`/`CLOCK`/`~RESET`/`BC2` bus, driven by a dedicated `BDIR`/`BC1` pair on `GPIO26`/`GPIO27` (6 voices total). Added an independent right-channel passive mixer (`R9`-`R12`, `C9`, `C10`) and a second PAM8302A amplifier module (`U5`) for true stereo, plus decoupling (`C11`, `C12`, `C13`). Board resized to 118 × 92 mm with rounded corners, adding four 3 mm NPTH (`H1`-`H4`) corner mounting holes. ERC clean; routed PCB with 0 unconnected items. **microSD changed from SPI to 4-bit SDIO** (PIO-based `pico_sd_card`): `SD_DAT0..DAT3` → `GPIO18`-`GPIO21`, `SD_CLK` → `GPIO22`, `SD_CMD` → `GPIO28`; dedicated card-detect switch dropped (presence detected in software); `R1` 10kΩ now pulls up `DAT3`. |
+| **0.6** | **2026-10-11** | **Dual-PSG stereo variant**: Added a second AY-3-8910/YM2149F (`U4`) sharing the `DA0..DA7`/`CLOCK`/`~RESET`/`BC2` bus, driven by a dedicated `BDIR`/`BC1` pair on `GPIO26`/`GPIO27` (6 voices total). Added an independent right-channel passive mixer (`R9`-`R12`, `C9`, `C10`) for true stereo, plus decoupling (`C11`, `C12`). Board resized to 118 × 92 mm with rounded corners, adding four 3 mm NPTH (`H1`-`H4`) corner mounting holes. ERC clean; routed PCB with 0 unconnected items. **microSD changed from SPI to 4-bit SDIO** (PIO-based `pico_sd_card`): `SD_DAT0..DAT3` → `GPIO18`-`GPIO21`, `SD_CLK` → `GPIO22`, `SD_CMD` → `GPIO28`; dedicated card-detect switch dropped (presence detected in software); `R1` 10kΩ now pulls up `DAT3`. **Audio amp changed to a single on-board PAM8403 stereo Class-D amplifier** (`U3`, SOIC-16, LCSC `C5122557`), replacing both Adafruit PAM8302A modules (old `U3`/`U5`). Added `C14`–`C16` and `R13`; `C8`/`C13` are now 1µF; `C3`/`C10` are now 1µF X7R 0805 MLCCs. Speakers connect through JST-PH `J3` (L) / `J4` (R). `~MUTE` and `~SHDN` are both on `SD_Amp` (GPIO9) with a 10kΩ pull-down (`R13`), so **the amp stays muted at boot until firmware drives GPIO9 HIGH**. |
 | **0.5** | **2026-10-11** | **Native-function pin correction (new board; schematic amended, not yet manufactured)**: Re-mapped OLED I²C and microSD SPI to RP2350 native pins — `OLED_SDA`→`GPIO16`, `OLED_SCL`→`GPIO17` (SDA/SCL swap); `SD_SCK`→`GPIO18`, `SD_MISO`→`GPIO20`, `SD_CS`→`GPIO21`; `SD_MOSI` remains `GPIO19`. No additional GPIOs used. Supersedes Rev 0.4 (§3.6). |
 | **0.4** | **2026-08-15** | **Manufactured Production Release (superseded by Rev 0.5, see §3.6)**: Fully aligned documentation with production schematic and manufactured PCB (`Pico_Chiptune_Player_0.4.zip` / `netlist.ipc`). Updated complete Pico GPIO assignments: `CLOCK` on GPIO12 via 33Ω R2, `BDIR` on GPIO10, `~RESET` on GPIO11 with R3 10kΩ pull-down, `BC1` on GPIO8, `SD_Amp` on GPIO9, `SW_PLAY` on GPIO14, `SW_NEXT` on GPIO13, and `SW_PREV` on GPIO15. Documented PAM8302A breakout module header topology (`U3`), 8-capacitor decoupling arrangement (`C1..C8`), and verified all LCSC component part numbers. |
 | 0.2 | 2026-08-12 | Intermediate documentation revision. |
