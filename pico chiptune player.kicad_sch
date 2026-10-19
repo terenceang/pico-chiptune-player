@@ -11292,7 +11292,7 @@
 				)
 			)
 		)
-		(property "LCSC Part #" "C15848"
+		(property "LCSC Part #" ""
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -11663,7 +11663,7 @@
 				)
 			)
 		)
-		(property "LCSC Part #" "C15848"
+		(property "LCSC Part #" ""
 			(at 6.35 0 0)
 			(hide yes)
 			(show_name no)
@@ -11763,7 +11763,7 @@
 				)
 			)
 		)
-		(property "LCSC Part #" "C49678"
+		(property "LCSC Part #" ""
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -13470,7 +13470,7 @@
 				)
 			)
 		)
-		(property "LCSC Part #" "C12740"
+		(property "LCSC Part #" ""
 			(at 0 0 0)
 			(hide yes)
 			(show_name no)
@@ -20016,7 +20016,7 @@
 		)
 		(uuid "9e0eeca6-ee53-43e5-a135-cd768b5ee1fa")
 	)
-	(label "MUX_PAN"
+	(label "BC1_2"
 		(at 104.14 66.04 0)
 		(effects
 			(font
@@ -20036,7 +20036,7 @@
 		)
 		(uuid "ddd369ed-3116-4f31-9ed9-d581139e4c81")
 	)
-	(label "MUX_B_CEN"
+	(label "BDIR2"
 		(at 104.14 68.58 0)
 		(effects
 			(font
@@ -20056,7 +20056,7 @@
 		)
 		(uuid "a60100bb-31d1-4d8c-a69a-1a2786cede9c")
 	)
-	(label "MUX_C_CEN"
+	(label "MUX_PAN"
 		(at 104.14 71.12 0)
 		(effects
 			(font
@@ -20076,7 +20076,7 @@
 		)
 		(uuid "eeb96ea3-1bdd-412d-aadc-7c2ffc88a4c7")
 	)
-	(label "MUX_MONO"
+	(label "MUX_B_CEN"
 		(at 104.14 73.66 0)
 		(effects
 			(font
@@ -20096,7 +20096,7 @@
 		)
 		(uuid "fa426cef-4731-449c-8615-42ce46672ffe")
 	)
-	(label "SW_NEXT"
+	(label "MUX_C_CEN"
 		(at 104.14 76.20 0)
 		(effects
 			(font
@@ -20116,7 +20116,7 @@
 		)
 		(uuid "3028dacb-6ac2-4398-9a3a-e25e0feb352b")
 	)
-	(label "SW_PLAY"
+	(label "MUX_MONO"
 		(at 104.14 78.74 0)
 		(effects
 			(font
@@ -20136,7 +20136,7 @@
 		)
 		(uuid "c8c9fbd9-ec0f-469a-ba4b-fb02e5846cb6")
 	)
-	(label "SW_PREV"
+	(label "SW_NEXT"
 		(at 104.14 81.28 0)
 		(effects
 			(font
@@ -20156,7 +20156,7 @@
 		)
 		(uuid "73bd4ec2-c94e-4d0c-871f-f3e3ca60863d")
 	)
-	(label "SD_Amp"
+	(label "SW_PLAY"
 		(at 104.14 83.82 0)
 		(effects
 			(font
@@ -20176,7 +20176,7 @@
 		)
 		(uuid "29eef39e-a39f-44b4-914f-cc87fcdabc4d")
 	)
-	(label "SD_DAT0"
+	(label "SW_PREV"
 		(at 104.14 86.36 0)
 		(effects
 			(font
@@ -20196,7 +20196,7 @@
 		)
 		(uuid "cd750871-18d0-4c55-90ba-fda1e8e12afc")
 	)
-	(label "SD_DAT1"
+	(label "SD_Amp"
 		(at 104.14 88.90 0)
 		(effects
 			(font
@@ -20216,7 +20216,7 @@
 		)
 		(uuid "e5fe6582-324e-43cd-87af-a2876907a617")
 	)
-	(label "SD_DAT2"
+	(label "SD_DAT0"
 		(at 104.14 91.44 0)
 		(effects
 			(font
@@ -20236,7 +20236,7 @@
 		)
 		(uuid "094b6d59-90d2-4632-8197-b24e1cbbff70")
 	)
-	(label "SD_DAT3"
+	(label "SD_DAT1"
 		(at 104.14 93.98 0)
 		(effects
 			(font
@@ -20256,7 +20256,7 @@
 		)
 		(uuid "83c89cc5-e9b4-4569-b972-4e1ff3f1ae63")
 	)
-	(label "SD_CLK"
+	(label "SD_DAT2"
 		(at 104.14 96.52 0)
 		(effects
 			(font
@@ -20276,7 +20276,7 @@
 		)
 		(uuid "b6482ea5-3ac4-4a06-8fb6-566e214879d9")
 	)
-	(label "SD_CMD"
+	(label "SD_DAT3"
 		(at 104.14 99.06 0)
 		(effects
 			(font
@@ -20296,7 +20296,7 @@
 		)
 		(uuid "1cd66bcf-a1b0-445a-90ee-9cd57e744ad7")
 	)
-	(label "BC1_2"
+	(label "SD_CLK"
 		(at 104.14 104.14 0)
 		(effects
 			(font
@@ -20316,7 +20316,7 @@
 		)
 		(uuid "765813a6-dfa9-46f1-aff9-53c561ef09aa")
 	)
-	(label "BDIR2"
+	(label "SD_CMD"
 		(at 104.14 106.68 0)
 		(effects
 			(font
