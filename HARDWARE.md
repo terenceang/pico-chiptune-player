@@ -3,370 +3,345 @@
 **Title:** Pico Chiptune Player  
 **Author:** Terence Ang <terenceang@mac.com> / MotionFxDesign  
 **Company:** MotionFxDesign  
-**Status:** Schematic SSOT — Rev 0.6 (dual-YM2149F stereo variant; supersedes Rev 0.5)  
-**Version / Rev:** 0.6  
-**Date:** 2026-10-11  
+**Status:** Schematic & PCB SSOT — Rev 0.7 (Bare RP2354A + USB-C 5V/3A 3-Stage Power Sequencer + 4-Mode 74HCT4053D Stereo/Mono Matrix; supersedes Rev 0.6)  
+**Version / Rev:** 0.7  
+**Date:** 2026-10-19  
 **License:** Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) — NOT FOR COMMERCIAL USE  
-
 
 ---
 
 ## 1. Overview
 
-The **Pico Chiptune Player** is a dedicated hardware chiptune music player powered by a **Raspberry Pi Pico 2 (RP2350)** microcontroller driving **two** real **Yamaha YM2149F** 3-voice Programmable Sound Generators (PSGs), register-compatible with the General Instrument AY-3-8910 — **6 voices total**, mixed as **stereo** (one PSG per channel).
+The **Pico Chiptune Player** is a dedicated hardware chiptune music player powered by an on-board **Raspberry Pi RP2354A** microcontroller (`U5`, QFN-60 with 2 MB internal stacked QSPI NOR flash) driving **two** real **Yamaha YM2149F** 3-voice Programmable Sound Generators (PSGs), register-compatible with the General Instrument AY-3-8910 — **6 voices total**, routed through a **software-controlled 4-mode analog stereo/mono mixing matrix** (`2× 74HCT4053D`, `U8` & `U9`).
 
 ### Key Features & Subsystems
-- **Microcontroller:** Raspberry Pi Pico 2 (RP2350) microcontroller running the chiptune player firmware, file parser, and UI.
-- **Sound Generators:** 2× YM2149F 40-pin DIP PSG (`U1`, `U4`, socketed; a matched pair of AY-3-8910s is an alternative with `JP1` open, see §3.2). The 8-bit parallel bus (`DA0..DA7`), master clock (`CLOCK`), active-low reset (`~RESET`) and `BC2` are shared; `BDIR`/`BC1` are driven **separately per PSG** (`GPIO10`/`GPIO8` → U1, `GPIO26`/`GPIO27` → U4) so each PSG can be independently selected.
-- **Audio Summer & Filter (per channel):** 3-channel passive resistive summing networks (`R4`,`R5`,`R7` = 1kΩ + `R8` = 1kΩ load for U1; `R9`,`R10`,`R11` = 1kΩ + `R12` = 1kΩ load for U4) with high-cut low-pass filtering (`C4`, `C9` = 100nF) and AC output coupling (`C3`, `C10` = 1µF X7R MLCC).
-- **Audio Amplifier (stereo):** One on-board **PAM8403 3W+3W filterless Class-D stereo amplifier** (`U3`, SOIC-16) fed by the left (`AMP_INL`) and right (`AMP_INR`) mixers. Its `~MUTE` and `~SHDN` pins are both driven by `SD_Amp` (GPIO9), with a 10kΩ pull-down (`R13`) so the amp stays muted until firmware enables it.
-- **Speaker Output:** Two JST-PH 2-pin connectors (`J3` left, `J4` right) carrying the bridge-tied (BTL) `OUT+` / `OUT-` pair for each 4–8Ω speaker.
-- **Display:** 0.96" 128x64 I2C OLED display module (`U2`) with bulk and high-frequency decoupling (`C6` = 10µF, `C7` = 100nF).
-- **Storage:** Full 4-bit SDIO microSD card socket (`J2`), driven by the RP2350 PIO-based `pico_sd_card` driver (Pico SDK / pico-extras). Card presence is detected **in software** (no card-detect switch). A single external pull-up `R1` = 10kΩ sits on `DAT3`; the firmware enables the RP2350 internal pull-ups on `CMD`/`DAT0`–`DAT3`.
-- **Navigation Controls:** 3 tactile pushbuttons (`SW1` Play/Pause, `SW2` Next Track, `SW3` Previous Track).
-- **Clock Divider Select:** Solder jumper `JP1` to select the YM2149F internal ÷2 clock division (`/SEL`, pin 26), shared by both PSGs.
+- **Microcontroller (`U5`):** Bare **Raspberry Pi RP2354A** (QFN-60, 7×7 mm, 0.4 mm pitch, 2 MB internal stacked QSPI NOR flash) exposing all **30 Bank-0 GPIOs (`GPIO0..GPIO29`)**, clocked by a 12 MHz SMD-3225 crystal (`Y1` + `C20`/`C21` = 15 pF + `R16` = 1 kΩ), with internal 1.1 V core buck regulator (`L1` = 3.3 µH + `C23` = 4.7 µF + `C24`/`C25` = 100 nF) and onboard `BOOTSEL` (`SW4` + `R20` = 1 kΩ) and `RESET` (`SW5` + `R19` = 10 kΩ) tactile switches.
+- **USB-C 5V/3A Power & 3-Stage Hardware Power Sequencing (`J1`, `D1`, `U6`, `Q1`, `Q2`):**
+  - 16-pin USB 2.0 Type-C receptacle (`J1`) with two independent 5.1 kΩ 1% pull-downs (`R21`, `R22`) on `CC1`/`CC2` advertising a fixed 5V/3A sink, `USBLC6-2SC6` (`D1`) ESD protection, and 27 Ω (`R17`, `R18`) USB D+/D− series termination.
+  - **Stage 1 (`VBUS` → `+3.3V` & `+1V1`):** `AMS1117-3.3` LDO (`U6`, SOT-223) immediately powers `+3.3V` (`RP2354A` `IOVDD`, microSD `J2`, OLED `U2`) and `RP2354A`'s internal `+1V1` (`DVDD`) buck regulator (`L1`) on USB plug-in.
+  - **Stage 2 (`+3.3V` RC-delayed → `+5V`):** RC delay network (`R23` = 47 kΩ, `C31` = 100 nF, $\tau \approx 4.7\,\text{ms}$) delays turn-on of N-MOSFET `Q2` (`2N7002`), which pulls down `PFET_GATE` (`R28` = 100 kΩ pull-up to `VBUS`, `C32` = 10 nF soft-start cap) to turn on high-side P-MOSFET `Q1` (`AO3401A`) **only after `+3.3V` (`IOVDD`) is stable**, preventing unpowered latch-up or back-bias on the 5 V `YM2149F` PSGs (`U1`, `U4`), `74HCT4053D` analog switches (`U8`, `U9`), and `PAM8403` amplifier (`U3`).
+  - **Stage 3 (`SD_Amp` on `GPIO9` → `U3` `PAM8403`):** `R13` (10 kΩ pull-down) keeps `PAM8403` `~MUTE` and `~SHDN` LOW during Stage 1 & Stage 2 power-up until firmware drives `GPIO9` HIGH after AC coupling capacitors `C3`/`C10` settle.
+- **Sound Generators (`U1`, `U4`):** 2× YM2149F 40-pin DIP PSG (socketed; a matched pair of AY-3-8910s is an alternative with `JP1` open, see §3.2). The 8-bit parallel bus (`DA0..DA7`), master clock (`CLOCK`), active-low reset (`~RESET`) and `BC2` are shared; `BDIR`/`BC1` are driven **separately per PSG** (`GPIO10`/`GPIO8` → `U1`, `GPIO26`/`GPIO27` → `U4`).
+- **4-Mode Hardware Stereo/Mono Analog Mixing Matrix (`U8`, `U9`):**
+  - Dual **74HCT4053D** triple 2:1 analog multiplexers (SOIC-16, powered from `+5V` with 3.3 V TTL-compatible inputs `V_IH = 2.0V`) controlled by `GPIO23` (`MUX_PAN`), `GPIO24` (`MUX_B_CEN`), `GPIO25` (`MUX_C_CEN`), and `GPIO29` (`MUX_MONO`) with 10 kΩ boot pull-downs (`R24..R27`) and 470 Ω (`R14`, `R15`) `-3 dB` center-channel compensation resistors.
+  - Supports **Mode 0: Dual-PSG Split Stereo** (`U1`=Left, `U4`=Right), **Mode 1: ABC Stereo** (`A`=Left, `B`=Center, `C`=Right), **Mode 2: ACB Stereo** (`A`=Left, `C`=Center, `B`=Right), and **Mode 3: True Mono** (`U1+U4` summed equally to Left & Right).
+- **Audio Summer, Filter & Amplifier (`U3`, `J3`, `J4`):**
+  - Left (`MIX1`: `R8` = 1 kΩ load, `C4` = 100 nF LPF, `C3` = 1 µF AC coupling) and Right (`MIX2`: `R12` = 1 kΩ load, `C9` = 100 nF LPF, `C10` = 1 µF AC coupling) summing junctions feeding an on-board **PAM8403 3W+3W filterless Class-D stereo amplifier** (`U3`, SOIC-16) and JST-PH 2-pin speaker connectors (`J3` Left, `J4` Right).
+- **Display (`U2`) & Storage (`J2`):** 0.96" 128×64 I2C OLED display (`U2`) and 4-bit SDIO microSD card socket (`J2`).
+- **Controls (`SW1..SW5`, `JP1`):** 3 track navigation buttons (`SW1` Play/Pause, `SW2` Next, `SW3` Prev), 2 MCU system buttons (`SW4` `BOOTSEL`, `SW5` `RESET`), and solder jumper `JP1` (`/SEL` ÷2 clock divider).
 
 ---
 
 ## 2. Block Diagram
 
 ```
-                             +-------------------+
-                             |  Raspberry Pi     |
-                             | Pico 2 (RP2350)   |
-                             +--+---+---+---+----+
-                                |   |   |   |
-          +---------------------+   |   |   +-----------------------+
-          | (SDIO: GPIO18-22,28)    |   | (I2C: GPIO16, 17)         | (GPIO13, 14, 15)
-          v                         v   v                           v
-+------------------+         +------------+                    +-----------+
-| microSD Card     |         | 0.96" OLED |                    | Buttons   |
-| Slot (J2)        |         | Display(U2)|                    | (SW1..3)  |
-+------------------+         +------------+                    +-----------+
-                                    |
-            +-----------------------+
-            | 8-Bit Parallel Data Bus: DA0..DA7 (GPIO0..7)
-            | Bus Control: BC1 (GPIO8), BDIR (GPIO10)
-            | Active-Low Reset: ~RESET (GPIO11) + 10kΩ R3 Pull-down
-            | Master Clock: CLOCK (GPIO12) + 33Ω R2 Series Damping
-            | Amp Shutdown Control: SD_Amp (GPIO9)
-            v
-  +--------------------+
-  | 2× YM2149F (U1,U4) | <--- JP1 (/SEL ÷2 Clock Mode Jumper, both PSGs)
-  +---------+----------+
-            |
-            | ANALOG_A/B/C (U1)          ANALOG_A2/B2/C2 (U4)
-            v                            v
-  +--------------------+       +--------------------+
-  | Left Mixer         |       | Right Mixer        |
-  | R4,R5,R7 + R8 load |       | R9,R10,R11 + R12   |
-  | C4 100nF LPF       |       | C9 100nF LPF       |
-  +---------+----------+       +---------+----------+
-            | C3 1µF                     | C10 1µF
-            | AMP_INL                    | AMP_INR
-            v                            v
-  +-------------------------------------------------+
-  | U3: PAM8403 Stereo Class-D Amp (SOIC-16)        |
-  | VDD/PVDD=+5V (C8, C13, C14 1µF + C15 10µF)      |
-  | VREF bypass C16 1µF, ~MUTE+~SHDN = SD_Amp (GPIO9) |
-  +-----------+-------------------------+-----------+
-              |                         |
-              v                         v
-     J3 Speaker L (JST-PH)     J4 Speaker R (JST-PH)
+  +---------------------+     Stage 1 (Immediate)     +--------------------------+
+  | USB-C 5V/3A Sink    | --------------------------> | U6: AMS1117-3.3 LDO      | ---> +3.3V Rail (IOVDD, J2, U2)
+  | J1 + R21/R22 (5.1k) |                             +------------+-------------+
+  | D1: USBLC6-2SC6 ESD |                                          | RC Delay (R23 47k + C31 100nF)
+  +----------+----------+     Stage 2 (Delayed +5V)                v
+             | VBUS           +------------------------------------+--------------------+
+             +--------------> | Q2 (2N7002) + Q1 (AO3401A P-MOSFET) + C32 Soft-Start    | ---> +5V Rail (U1, U4, U8, U9, U3)
+                              +---------------------------------------------------------+
+
+                                        +-----------------------------------+
+                                        | U5: Raspberry Pi RP2354A (QFN-60) |
+                                        | 2MB Internal Flash | Y1 12MHz XTAL|
+                                        | L1 3.3uH (+1V1)    | SW4/SW5 Btns |
+                                        +----+--------+--------+--------+---+
+                                             |        |        |        |
+             +-------------------------------+        |        |        +----------------------------+
+             | (SDIO: GPIO18-22,28)                   |        | (I2C0: GPIO16,17; Btns: GPIO13-15)  | (MUX: GPIO23-25,29)
+             v                                        |        v                                     |
+  +--------------------+                              |  +------------+   +--------------+           |
+  | microSD Slot (J2)  |                              |  | OLED (U2)  |   | SW1..SW3 Nav |           |
+  +--------------------+                              |  +------------+   +--------------+           |
+                                                      |                                              |
+             +----------------------------------------+                                              |
+             | DA0..DA7 (GPIO0..7), BC1/BDIR (GPIO8/10), BC1_2/BDIR2 (GPIO27/26)                     |
+             | ~RESET (GPIO11 + R3 10k), CLOCK (GPIO12 + R2 33R), SD_Amp (GPIO9 + R13 10k)           |
+             v                                                                                       v
+  +------------------------+     R4,R5,R7 (U1) / R9,R10,R11 (U4)     +---------------------------------------+
+  | 2x YM2149F (U1, U4)    | --------------------------------------> | U8, U9: 2x 74HCT4053D Stereo Matrix   |
+  | + JP1 (/SEL Divider)   |     6 Voices: A1,B1,C1 & A2,B2,C2       | Modes: Dual-PSG | ABC | ACB | Mono    |
+  +------------------------+                                         | + R14, R15 (470R -3dB Center Atten.)  |
+                                                                     +--------+---------------------+--------+
+                                                                              | MIX1                | MIX2
+                                                                              | (R8 1k, C4 100nF)   | (R12 1k, C9 100nF)
+                                                                              | C3 1uF -> AMP_INL   | C10 1uF -> AMP_INR
+                                                                              v                     v
+                                                                     +---------------------------------------+
+                                                                     | U3: PAM8403 Stereo Class-D Amp        |
+                                                                     | Stage 3 Enable: SD_Amp (GPIO9)        |
+                                                                     +--------+---------------------+--------+
+                                                                              |                     |
+                                                                              v                     v
+                                                                       J3 Speaker L          J4 Speaker R
 ```
 
 ---
 
 ## 3. Complete Pinout & Wiring Tables (SSOT)
 
-### 3.1 Raspberry Pi Pico 2 (A1) Pin Connections
+### 3.1 Raspberry Pi RP2354A Microcontroller (`U5`, QFN-60) Pin Connections
 
-| Pico Pin | Pin Name / GPIO | Net Name | Connected To | Signal Description |
+`U5` is the `RP2354A` (`QFN-60-1EP_7x7mm_P0.4mm_EP3.4x3.4mm`) with 2 MB internal stacked QSPI NOR flash. All 30 Bank-0 GPIOs (`GPIO0..GPIO29`) are used.
+
+| QFN Pin | Symbol | Net Name | Connected To | Signal Description |
 | :--- | :--- | :--- | :--- | :--- |
-| **Pin 1** | **GPIO0** | `DA0` | YM2149F (U1) Pin 37 | PSG 8-Bit Data Bus Bit 0 |
-| **Pin 2** | **GPIO1** | `DA1` | YM2149F (U1) Pin 36 | PSG 8-Bit Data Bus Bit 1 |
-| **Pin 3** | **GND** | `GND` | Ground Plane | System Ground |
-| **Pin 4** | **GPIO2** | `DA2` | YM2149F (U1) Pin 35 | PSG 8-Bit Data Bus Bit 2 |
-| **Pin 5** | **GPIO3** | `DA3` | YM2149F (U1) Pin 34 | PSG 8-Bit Data Bus Bit 3 |
-| **Pin 6** | **GPIO4** | `DA4` | YM2149F (U1) Pin 33 | PSG 8-Bit Data Bus Bit 4 |
-| **Pin 7** | **GPIO5** | `DA5` | YM2149F (U1) Pin 32 | PSG 8-Bit Data Bus Bit 5 |
-| **Pin 8** | **GND** | `GND` | Ground Plane | System Ground |
-| **Pin 9** | **GPIO6** | `DA6` | YM2149F (U1) Pin 31 | PSG 8-Bit Data Bus Bit 6 |
-| **Pin 10** | **GPIO7** | `DA7` | YM2149F (U1) Pin 30 | PSG 8-Bit Data Bus Bit 7 |
-| **Pin 11** | **GPIO8** | `BC1` | YM2149F (U1) Pin 29 | Bus Control 1 (Address Latch / Data Write) |
-| **Pin 12** | **GPIO9** | `SD_Amp` | PAM8403 (U3) Pins 5 `~MUTE` & 12 `~SHDN`, R13 | Audio Amplifier Enable (High = Play, Low = Mute/Shutdown; 10kΩ R13 pull-down holds it muted at boot) |
-| **Pin 13** | **GND** | `GND` | Ground Plane | System Ground |
-| **Pin 14** | **GPIO10** | `BDIR` | YM2149F (U1) Pin 27 | Bus Direction Control |
-| **Pin 15** | **GPIO11** | `~RESET` | YM2149F (U1 + U4) Pin 23, R3 | PSG Active-Low Reset (with 10kΩ pull-down R3 to GND) |
-| **Pin 16** | **GPIO12** | `Net-(A1-GPIO12)` | Resistor R2 Pin 2 (33Ω) | PSG Master Clock Output (series damped to U1 Pin 22 `CLOCK`) |
-| **Pin 17** | **GPIO13** | `SW_NEXT` | Tact Switch SW2 Pin 1 | Next Track Button (Active Low, Internal Pull-up) |
-| **Pin 18** | **GND** | `GND` | Ground Plane | System Ground |
-| **Pin 19** | **GPIO14** | `SW_PLAY` | Tact Switch SW1 Pin 1 | Play / Pause Button (Active Low, Internal Pull-up) |
-| **Pin 20** | **GPIO15** | `SW_PREV` | Tact Switch SW3 Pin 1 | Previous Track Button (Active Low, Internal Pull-up) |
-| **Pin 21** | **GPIO16** | `OLED_SDA` | OLED Display (U2) Pin 4 | I2C Serial Data (SDA, Internal / Display Pull-up) |
-| **Pin 22** | **GPIO17** | `OLED_SCL` | OLED Display (U2) Pin 3 | I2C Serial Clock (SCL, Internal / Display Pull-up) |
-| **Pin 23** | **GND** | `GND` | Ground Plane | System Ground |
-| **Pin 24** | **GPIO18** | `SD_DAT0` | MicroSD (J2) Pin 7 | SDIO Data 0 (DAT0) |
-| **Pin 25** | **GPIO19** | `SD_DAT1` | MicroSD (J2) Pin 8 | SDIO Data 1 (DAT1) |
-| **Pin 26** | **GPIO20** | `SD_DAT2` | MicroSD (J2) Pin 1 | SDIO Data 2 (DAT2) |
-| **Pin 27** | **GPIO21** | `SD_DAT3` | MicroSD (J2) Pin 2, R1 | SDIO Data 3 (DAT3), with 10kΩ pull-up R1 to +3.3V |
-| **Pin 28** | **GND** | `GND` | Ground Plane | System Ground |
-| **Pin 29** | **GPIO22** | `SD_CLK` | MicroSD (J2) Pin 5 | SDIO Clock (CLK) |
-| **Pin 30** | **RUN** | `N/C` | — | Reset input (Unconnected) |
-| **Pin 31** | **GPIO26_ADC0** | `BDIR2` | YM2149F (U4) Pin 27 | PSG2 Bus Direction Control |
-| **Pin 32** | **GPIO27_ADC1** | `BC1_2` | YM2149F (U4) Pin 29 | PSG2 Bus Control 1 (Address Latch / Data Write) |
-| **Pin 33** | **AGND** | `N/C` | — | Analog ground (Unconnected) |
-| **Pin 34** | **GPIO28_ADC2** | `SD_CMD` | MicroSD (J2) Pin 3 | SDIO Command (CMD) |
-| **Pin 35** | **ADC_VREF** | `N/C` | — | ADC reference (Unconnected) |
-| **Pin 36** | **3V3** | `+3.3V` | MicroSD J2, OLED U2, R1, C5..C7 | 3.3V System Power Rail (Sourced from Pico onboard regulator) |
-| **Pin 37** | **3V3_EN** | `N/C` | — | 3.3V regulator enable (Unconnected) |
-| **Pin 38** | **GND** | `GND` | Ground Plane | System Ground |
-| **Pin 39** | **VSYS** | `N/C` | — | System supply input (Unconnected) |
-| **Pin 40** | **VBUS** | `+5V` | U1 Pin 40/25/28, U4 Pin 40/25/28, U3 (PAM8403) Pins 4/6/13, C1, C2, C8, C11..C15 | 5V Main Power Rail (Sourced from Pico USB VBUS) |
+| **1** | `IOVDD` | `+3.3V` | +3.3V Plane, `C26` (100nF) | Digital I/O Power Supply (+3.3V) |
+| **2** | `GPIO0` | `/DA0` | `U1` Pin 37, `U4` Pin 37 | Shared PSG 8-Bit Data Bus Bit 0 |
+| **3** | `GPIO1` | `/DA1` | `U1` Pin 36, `U4` Pin 36 | Shared PSG 8-Bit Data Bus Bit 1 |
+| **4** | `GPIO2` | `/DA2` | `U1` Pin 35, `U4` Pin 35 | Shared PSG 8-Bit Data Bus Bit 2 |
+| **5** | `GPIO3` | `/DA3` | `U1` Pin 34, `U4` Pin 34 | Shared PSG 8-Bit Data Bus Bit 3 |
+| **6** | `DVDD` | `+1V1` | Internal +1.1V Core Rail, `C25` (100nF) | Digital Core Power Supply (+1.1V) |
+| **7** | `GPIO4` | `/DA4` | `U1` Pin 33, `U4` Pin 33 | Shared PSG 8-Bit Data Bus Bit 4 |
+| **8** | `GPIO5` | `/DA5` | `U1` Pin 32, `U4` Pin 32 | Shared PSG 8-Bit Data Bus Bit 5 |
+| **9** | `GPIO6` | `/DA6` | `U1` Pin 31, `U4` Pin 31 | Shared PSG 8-Bit Data Bus Bit 6 |
+| **10** | `GPIO7` | `/DA7` | `U1` Pin 30, `U4` Pin 30 | Shared PSG 8-Bit Data Bus Bit 7 |
+| **11** | `IOVDD` | `+3.3V` | +3.3V Plane, `C27` (100nF) | Digital I/O Power Supply (+3.3V) |
+| **12** | `GPIO8` | `/BC1` | `U1` Pin 29 | PSG1 (`U1`) Bus Control 1 (Address Latch / Data Write) |
+| **13** | `GPIO9` | `/SD_Amp` | `U3` Pins 5 (`~MUTE`) & 12 (`~SHDN`), `R13` (10kΩ) | Stage 3 Audio Amplifier Enable (High = Play, Low = Mute/Shutdown) |
+| **14** | `GPIO10` | `/BDIR` | `U1` Pin 27 | PSG1 (`U1`) Bus Direction Control |
+| **15** | `GPIO11` | `/~{RESET}` | `U1` Pin 23, `U4` Pin 23, `R3` (10kΩ) | Shared PSG Active-Low Reset (10kΩ `R3` pull-down holds PSGs in reset at boot) |
+| **16** | `GPIO12` | `/MCU_CLK` | `R2` Pin 2 (33Ω → `/CLOCK`) | Shared PSG Master Clock Output (series damped via 33Ω `R2` to `U1`/`U4` Pin 22) |
+| **17** | `GPIO13` | `/SW_NEXT` | `SW2` Pin 1 | Next Track Button (Active Low, Internal Pull-up) |
+| **18** | `GPIO14` | `/SW_PLAY` | `SW1` Pin 1 | Play / Pause Button (Active Low, Internal Pull-up) |
+| **19** | `GPIO15` | `/SW_PREV` | `SW3` Pin 1 | Previous Track Button (Active Low, Internal Pull-up) |
+| **20** | `IOVDD` | `+3.3V` | +3.3V Plane, `C28` (100nF) | Digital I/O Power Supply (+3.3V) |
+| **21** | `XIN` | `/XIN` | `Y1` Pin 1 (12MHz), `C20` (15pF) | 12 MHz Crystal Oscillator Input |
+| **22** | `XOUT` | `/XOUT_MCU` | `R16` Pin 1 (1kΩ → `/XOUT`, `Y1` Pin 3, `C21` 15pF) | 12 MHz Crystal Oscillator Output (1kΩ series damping `R16`) |
+| **23** | `DVDD` | `+1V1` | Internal +1.1V Core Rail | Digital Core Power Supply (+1.1V) |
+| **24** | `SWCLK` | `NC` | Unconnected | Serial Wire Debug Clock (Unused) |
+| **25** | `SWDIO` | `NC` | Unconnected | Serial Wire Debug Data (Unused) |
+| **26** | `RUN` | `/MCU_RUN` | `SW5` Pin 1 (`RESET`), `R19` (10kΩ to `+3.3V`) | Active-Low MCU Hardware Reset |
+| **27** | `GPIO16` | `/OLED_SDA` | `U2` Pin 4 | Native `I2C0 SDA` — OLED Serial Data |
+| **28** | `GPIO17` | `/OLED_SCL` | `U2` Pin 3 | Native `I2C0 SCL` — OLED Serial Clock |
+| **29** | `GPIO18` | `/SD_DAT0` | `J2` Pin 7 | MicroSD SDIO Data 0 (`DAT0`) |
+| **30** | `IOVDD` | `+3.3V` | +3.3V Plane, `C29` (100nF) | Digital I/O Power Supply (+3.3V) |
+| **31** | `GPIO19` | `/SD_DAT1` | `J2` Pin 8 | MicroSD SDIO Data 1 (`DAT1`) |
+| **32** | `GPIO20` | `/SD_DAT2` | `J2` Pin 1 | MicroSD SDIO Data 2 (`DAT2`) |
+| **33** | `GPIO21` | `/SD_DAT3` | `J2` Pin 2, `R1` (10kΩ to `+3.3V`) | MicroSD SDIO Data 3 (`DAT3`) with 10kΩ pull-up `R1` |
+| **34** | `GPIO22` | `/SD_CLK` | `J2` Pin 5 | MicroSD SDIO Clock (`CLK`) |
+| **35** | `GPIO23` | `/MUX_PAN` | `U9` Pins 9, 10, 11, `R24` (10kΩ to `GND`) | Stereo Matrix Right/Left Pan Control (`0` = Dual-PSG/ACB, `1` = ABC) |
+| **36** | `GPIO24` | `/MUX_B_CEN` | `U8` Pins 10, 11, `R25` (10kΩ to `GND`) | Stereo Matrix Voice B Center Enable (`1` = Route `B1+B2` to Center `-3 dB`) |
+| **37** | `GPIO25` | `/MUX_C_CEN` | `U8` Pin 9, `R26` (10kΩ to `GND`) | Stereo Matrix Voice C Center Enable (`1` = Route `C1+C2` to Center `-3 dB`) |
+| **38** | `IOVDD` | `+3.3V` | +3.3V Plane, `C30` (100nF) | Digital I/O Power Supply (+3.3V) |
+| **39** | `DVDD` | `+1V1` | Internal +1.1V Core Rail | Digital Core Power Supply (+1.1V) |
+| **40** | `GPIO26_ADC0` | `/BDIR2` | `U4` Pin 27 | PSG2 (`U4`) Bus Direction Control |
+| **41** | `GPIO27_ADC1` | `/BC1_2` | `U4` Pin 29 | PSG2 (`U4`) Bus Control 1 (Address Latch / Data Write) |
+| **42** | `GPIO28_ADC2` | `/SD_CMD` | `J2` Pin 3 | MicroSD SDIO Command (`CMD`) |
+| **43** | `GPIO29_ADC3` | `/MUX_MONO` | `U8` Pin 9 (via `MUX_C_CEN`) / `U9`, `R27` (10kΩ) | Stereo Matrix True Mono Bridge Enable (`1` = Tie `MIX1` & `MIX2` together) |
+| **44** | `ADC_AVDD` | `+3.3V` | +3.3V Plane | ADC Analog Supply (+3.3V) |
+| **45** | `IOVDD` | `+3.3V` | +3.3V Plane | Digital I/O Power Supply (+3.3V) |
+| **46** | `VREG_VIN` | `+3.3V` | +3.3V Plane, `C22` (4.7µF) | Internal 1.1V Buck Regulator Input (+3.3V) |
+| **47** | `VREG_PGND` | `GND` | Ground Plane | Internal 1.1V Buck Regulator Power Ground |
+| **48** | `VREG_LX` | `/VREG_LX` | `L1` Pin 1 (3.3µH → `+1V1`) | Internal 1.1V Buck Regulator Switching Node |
+| **49** | `USB_OTP_VDD` | `+3.3V` | +3.3V Plane | USB PHY & OTP Power Supply (+3.3V) |
+| **50** | `DVDD` | `+1V1` | `L1` Pin 2, `C23` (4.7µF), `C24` (100nF) | Digital Core Power Supply (+1.1V) |
+| **51** | `USB_DM` | `/MCU_USB_DM` | `R17` Pin 2 (27Ω → `/USB_D-`) | USB 2.0 Differential Data Minus (via 27Ω series `R17` & `D1` ESD) |
+| **52** | `USB_DP` | `/MCU_USB_DP` | `R18` Pin 2 (27Ω → `/USB_D+`) | USB 2.0 Differential Data Plus (via 27Ω series `R18` & `D1` ESD) |
+| **53** | `IOVDD` | `+3.3V` | +3.3V Plane | Digital I/O Power Supply (+3.3V) |
+| **54** | `QSPI_IOVDD` | `+3.3V` | +3.3V Plane | Internal Stacked QSPI Flash Power Supply (+3.3V) |
+| **55..59**| `QSPI_SD3..1, SCLK` | `NC` | Unconnected | Internal Stacked 2MB Flash Bus (Unconnected externally) |
+| **60** | `~{QSPI_SS}` | `/QSPI_SS` | `R20` Pin 1 (1kΩ → `/BOOT_BTN`, `SW4` Pin 1) | USB UF2 Bootloader Select (`BOOTSEL` button `SW4` via 1kΩ `R20` to `GND`) |
+| **61** | `GND` (EP) | `GND` | Ground Plane (Thermal Via) | Exposed Center Thermal / Ground Pad |
 
 ---
 
-### 3.2 YM2149F Sound Generator (U1) Pinout
+### 3.1a USB-C 5V/3A Receptacle (`J1`), ESD (`D1`), & 3-Stage Power Sequencer (`U6`, `Q1`, `Q2`)
 
-| Pin | Symbol | Net Name | Connected To | Notes / Function |
+| Designator | Pin / Part | Net Name | Connected To | Function |
 | :--- | :--- | :--- | :--- | :--- |
-| **1** | `VSS` | `GND` | Ground Plane | Power Ground |
-| **2** | `NC` | `NC` | Unconnected | No Connect |
-| **3** | `ANALOG_B` | `ANALOG_B` | Resistor R5 (1kΩ) | Channel B Analog Audio Output |
-| **4** | `ANALOG_A` | `ANALOG_A` | Resistor R4 (1kΩ) | Channel A Analog Audio Output |
-| **5** | `NC` | `NC` | Unconnected | No Connect |
-| **6..13** | `IOB7..IOB0` | `NC` | Unconnected | General Purpose I/O Port B (Unused) |
-| **14..21**| `IOA7..IOA0` | `NC` | Unconnected | General Purpose I/O Port A (Unused) |
-| **22** | `CLOCK` | `CLOCK` | Resistor R2 Pin 1 (33Ω) | Master Clock Input (Driven from Pico GPIO12 via 33Ω series R2) |
-| **23** | `~RESET` | `~RESET` | Pico GPIO11, R3 (10kΩ to GND) | Active-Low Hardware Reset (Boot pull-down holds PSG in reset) |
-| **24** | `A9` | `GND` | Ground Plane | Fixed Address Decoding Bit 9 (Tied to GND = 0) |
-| **25** | `A8` | `+5V` | +5V Rail | Fixed Address Decoding Bit 8 (Tied to +5V = 1) |
-| **26** | `/SEL` (`~{CS/Test_2}` in symbol) | `/JP1_SEL` | Solder Jumper JP1 Pin 1, U4 Pin 26 | YM2149F Clock Select (/SEL): Open = 1x Clock; Bridged to GND = ÷2 Clock |
-| **27** | `BDIR` | `BDIR` | Pico GPIO10 | Bus Direction Control Line |
-| **28** | `BC2` | `+5V` | +5V Rail | Bus Control 2 (Tied permanently HIGH to +5V) |
-| **29** | `BC1` | `BC1` | Pico GPIO8 | Bus Control 1 Line |
-| **30** | `DA7` | `DA7` | Pico GPIO7 | 8-Bit Bidirectional Data Bus Bit 7 |
-| **31** | `DA6` | `DA6` | Pico GPIO6 | 8-Bit Bidirectional Data Bus Bit 6 |
-| **32** | `DA5` | `DA5` | Pico GPIO5 | 8-Bit Bidirectional Data Bus Bit 5 |
-| **33** | `DA4` | `DA4` | Pico GPIO4 | 8-Bit Bidirectional Data Bus Bit 4 |
-| **34** | `DA3` | `DA3` | Pico GPIO3 | 8-Bit Bidirectional Data Bus Bit 3 |
-| **35** | `DA2` | `DA2` | Pico GPIO2 | 8-Bit Bidirectional Data Bus Bit 2 |
-| **36** | `DA1` | `DA1` | Pico GPIO1 | 8-Bit Bidirectional Data Bus Bit 1 |
-| **37** | `DA0` | `DA0` | Pico GPIO0 | 8-Bit Bidirectional Data Bus Bit 0 |
-| **38** | `ANALOG_C` | `ANALOG_C` | Resistor R7 (1kΩ) | Channel C Analog Audio Output |
-| **39** | `TEST1` | `NC` | Unconnected | Test pin (Unconnected) |
-| **40** | `VCC` | `+5V` | +5V Rail | Main +5V Power Supply (Decoupled by C1 10µF bulk + C2 100nF MLCC) |
+| **`J1` Pins A4, A9, B4, B9** | `VBUS` | `VBUS` | `D1` Pin 5, `C17` (10µF), `C18` (100nF), `U6` Pin 3, `Q1` Pin 2, `R28` | Raw 5V USB Type-C Supply Input |
+| **`J1` Pin A5** | `CC1` | `/USB_CC1` | `R21` Pin 1 (5.1kΩ 1% to `GND`) | USB-C Configuration Channel 1 (5.1kΩ Rd advertises 5V/3A sink) |
+| **`J1` Pin B5** | `CC2` | `/USB_CC2` | `R22` Pin 1 (5.1kΩ 1% to `GND`) | USB-C Configuration Channel 2 (5.1kΩ Rd advertises 5V/3A sink) |
+| **`J1` Pins A6, B6** | `D+` | `/USB_D+` | `D1` Pins 3 & 4, `R18` Pin 1 (27Ω) | USB 2.0 Data+ |
+| **`J1` Pins A7, B7** | `D-` | `/USB_D-` | `D1` Pins 1 & 6, `R17` Pin 1 (27Ω) | USB 2.0 Data− |
+| **`J1` Pins A1, A12, B1, B12, S1** | `GND` / `SHIELD` | `GND` | Ground Plane | Ground & Connector Shield |
+| **`D1`** (`USBLC6-2SC6`) | Pins 1..6 | `/USB_D-`, `GND`, `/USB_D+`, `VBUS` | `J1`, `R17`, `R18` | Low-Capacitance Rail-to-Rail USB ESD Protection |
+| **`U6`** (`AMS1117-3.3`) | Pin 1 (`GND`), Pin 2 (`VOUT`), Pin 3 (`VIN`) | `GND`, `+3.3V`, `VBUS` | `C17`/`C18` (`VBUS`), `C19` (10µF `+3.3V`), `R23` | **Stage 1:** Immediate `+3.3V` LDO Regulator (1A max) |
+| **`R23` (47kΩ) + `C31` (100nF)** | RC Network | `/PG_DELAY` | `U6` `+3.3V` → `Q2` Pin 1 (`G`) | **Stage 2 Delay:** $\tau = 4.7\,\text{ms}$ delay after `+3.3V` rises |
+| **`Q2`** (`2N7002`, SOT-23) | Pin 1 (`G`), Pin 2 (`S`), Pin 3 (`D`) | `/PG_DELAY`, `GND`, `/PFET_GATE` | `R23`/`C31`, `GND`, `R28`/`C32`/`Q1` Pin 1 | **Stage 2 Driver:** Pulls `PFET_GATE` low once `+3.3V` is stable |
+| **`Q1`** (`AO3401A`, SOT-23) | Pin 1 (`G`), Pin 2 (`S`), Pin 3 (`D`) | `/PFET_GATE`, `VBUS`, `+5V` | `R28` (100kΩ to `VBUS`), `C32` (10nF to `+5V`) | **Stage 2 High-Side Switch:** 4A P-MOSFET with Miller soft-start (`C32`) supplying `+5V` |
 
-#### YM2149F / AY-3-8910 Bus State Decoding Table (`BC2` Tied HIGH to +5V)
+---
 
-| `BDIR` (GPIO10) | `BC1` (GPIO8) | Bus State | Operation Description |
+### 3.2 YM2149F Sound Generators (`U1` & `U4`) Pinout
+
+| Pin | Symbol | `U1` Net Name | `U4` Net Name | Connected To | Notes / Function |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **1** | `VSS` | `GND` | `GND` | Ground Plane | Power Ground |
+| **2, 5, 39** | `NC` / `TEST1` | `NC` | `NC` | Unconnected | No Connect |
+| **3** | `ANALOG_B` | `/ANALOG_B` | `/ANALOG_B2` | `R5` (1kΩ, `U1`) / `R10` (1kΩ, `U4`) | Channel B Analog Audio Output |
+| **4** | `ANALOG_A` | `/ANALOG_A` | `/ANALOG_A2` | `R4` (1kΩ, `U1`) / `R9` (1kΩ, `U4`) | Channel A Analog Audio Output |
+| **6..21** | `IOB7..IOA0` | `NC` | `NC` | Unconnected | Unused Parallel I/O Ports A & B |
+| **22** | `CLOCK` | `/CLOCK` | `/CLOCK` | `R2` Pin 1 (33Ω from `U5` `GPIO12`) | Shared Master Clock Input |
+| **23** | `~RESET` | `/~{RESET}` | `/~{RESET}` | `U5` `GPIO11`, `R3` (10kΩ to `GND`) | Shared Active-Low Hardware Reset |
+| **24** | `A9` | `GND` | `GND` | Ground Plane | Fixed Address Decoding Bit 9 (`0`) |
+| **25** | `A8` | `+5V` | `+5V` | Switched `+5V` Rail | Fixed Address Decoding Bit 8 (`1`) |
+| **26** | `/SEL` | `/JP1_SEL` | `/JP1_SEL` | Solder Jumper `JP1` Pin 1 | YM2149F Clock Divider Select (`Open` = 1×, `Bridged` = ÷2) |
+| **27** | `BDIR` | `/BDIR` | `/BDIR2` | `U5` `GPIO10` (`U1`) / `GPIO26` (`U4`) | Independent Bus Direction Control per PSG |
+| **28** | `BC2` | `+5V` | `+5V` | Switched `+5V` Rail | Bus Control 2 (Tied HIGH to `+5V`) |
+| **29** | `BC1` | `/BC1` | `/BC1_2` | `U5` `GPIO8` (`U1`) / `GPIO27` (`U4`) | Independent Bus Control 1 per PSG |
+| **30..37**| `DA7..DA0` | `/DA7../DA0` | `/DA7../DA0` | `U5` `GPIO7..GPIO0` | Shared 8-Bit Bidirectional Data Bus |
+| **38** | `ANALOG_C` | `/ANALOG_C` | `/ANALOG_C2` | `R7` (1kΩ, `U1`) / `R11` (1kΩ, `U4`) | Channel C Analog Audio Output |
+| **40** | `VCC` | `+5V` | `+5V` | Switched `+5V` Rail | Main +5V Supply (`C1`+`C2` on `U1`, `C11`+`C12` on `U4`) |
+
+#### YM2149F / AY-3-8910 Bus State Decoding Table (`BC2` Tied HIGH to `+5V`)
+
+| `BDIR` (`GPIO10` / `GPIO26`) | `BC1` (`GPIO8` / `GPIO27`) | Bus State | Operation Description |
 | :---: | :---: | :--- | :--- |
 | **0** | **0** | **INACTIVE** | PSG data bus is High-Z / Inactive. |
-| **0** | **1** | **READ** | Pico reads register contents from PSG data bus `DA[7:0]`. |
-| **1** | **0** | **WRITE** | Pico writes data on `DA[7:0]` into currently addressed register. |
-| **1** | **1** | **LATCH ADDRESS** | Pico selects target PSG register address (0x00..0x0F) on `DA[7:0]`. |
-
-#### Second PSG — Yamaha YM2149F (U4)
-
-`U4` is the second PSG and is electrically identical to `U1` **except** that its `BDIR` and `BC1` are driven from a second GPIO pair. All other connections (`DA0..DA7`, `CLOCK`, `~RESET`, `A8`→+5V, `A9`→GND, `BC2`→+5V, `/SEL`→`JP1`, power/decoupling) are shared with `U1`.
-
-| Pin | Symbol | Net Name | Connected To | Notes / Function |
-| :--- | :--- | :--- | :--- | :--- |
-| **3** | `ANALOG_B` | `ANALOG_B2` | Resistor R10 (1kΩ) | Channel B Analog Audio Output (right) |
-| **4** | `ANALOG_A` | `ANALOG_A2` | Resistor R9 (1kΩ) | Channel A Analog Audio Output (right) |
-| **26** | `/SEL` | `/JP1_SEL` | Solder Jumper JP1 Pin 1 | YM2149F Clock Select (/SEL), shared with U1 |
-| **27** | `BDIR` | `/BDIR2` | Pico GPIO26 (Pin 31) | Bus Direction Control Line (PSG2) |
-| **29** | `BC1` | `/BC1_2` | Pico GPIO27 (Pin 32) | Bus Control 1 Line (PSG2) |
-| **30..37**| `DA7..DA0` | `DA7..DA0` | Pico GPIO7..GPIO0 | Shared 8-Bit Data Bus (with U1) |
-| **38** | `ANALOG_C` | `ANALOG_C2` | Resistor R11 (1kΩ) | Channel C Analog Audio Output (right) |
-| **40** | `VCC` | `+5V` | +5V Rail | Main +5V Supply (Decoupled by C11 10µF bulk + C12 100nF MLCC) |
-
-> **Shared-bus note:** Only the currently selected PSG (the one whose `BDIR`/`BC1` pair is driven out of the inactive state) responds; the other PSG's bus stays High-Z. `U1` uses `GPIO10`/`GPIO8`; `U4` uses `GPIO26`/`GPIO27`.
-
-> **PSG fit / `JP1`:** `CLOCK` and `/SEL` (`JP1`) are common to both sockets, so both PSGs must divide the clock the same way. Fit **two YM2149F** (`JP1` open = full clock, bridged = ÷2 on both), or a matched pair of AY-3-8910s with `JP1` **open** (on the AY-3-8910, pin 26 is a test pin and there is no divider). Never fit one of each with `JP1` bridged: the YM2149F would run at half clock and the left and right channels would play an octave apart.
+| **0** | **1** | **READ** | MCU reads register contents from PSG data bus `DA[7:0]`. |
+| **1** | **0** | **WRITE** | MCU writes data on `DA[7:0]` into currently addressed register. |
+| **1** | **1** | **LATCH ADDRESS** | MCU selects target PSG register address (`0x00..0x0F`) on `DA[7:0]`. |
 
 ---
 
-### 3.3 MicroSD Card Socket (J2) Pinout
+### 3.3 MicroSD Card Socket (`J2`) Pinout
 
 | Pin | Card Signal | Net Name | Connected To | Description |
 | :--- | :--- | :--- | :--- | :--- |
-| **1** | `DAT2` | `SD_DAT2` | Pico GPIO20 (Pin 26) | SDIO Data 2 (DAT2) |
-| **2** | `DAT3 / CD` | `SD_DAT3` | Pico GPIO21 (Pin 27), R1 | SDIO Data 3 (DAT3), with 10kΩ pull-up R1 to +3.3V |
-| **3** | `CMD` | `SD_CMD` | Pico GPIO28 (Pin 34) | SDIO Command (CMD) |
-| **4** | `VDD` | `+3.3V` | +3.3V Rail | +3.3V Power Supply (Decoupled by C5 100nF MLCC) |
-| **5** | `CLK` | `SD_CLK` | Pico GPIO22 (Pin 29) | SDIO Clock (CLK) |
+| **1** | `DAT2` | `/SD_DAT2` | `U5` `GPIO20` (Pin 32) | SDIO Data 2 (`DAT2`) |
+| **2** | `DAT3 / CD` | `/SD_DAT3` | `U5` `GPIO21` (Pin 33), `R1` | SDIO Data 3 (`DAT3`), with 10kΩ pull-up `R1` to `+3.3V` |
+| **3** | `CMD` | `/SD_CMD` | `U5` `GPIO28` (Pin 42) | SDIO Command (`CMD`) |
+| **4** | `VDD` | `+3.3V` | `+3.3V` Rail | +3.3V Power Supply (Decoupled by `C5` 100nF MLCC) |
+| **5** | `CLK` | `/SD_CLK` | `U5` `GPIO22` (Pin 34) | SDIO Clock (`CLK`) |
 | **6** | `VSS` | `GND` | Ground Plane | Power Ground |
-| **7** | `DAT0` | `SD_DAT0` | Pico GPIO18 (Pin 24) | SDIO Data 0 (DAT0) |
-| **8** | `DAT1` | `SD_DAT1` | Pico GPIO19 (Pin 25) | SDIO Data 1 (DAT1) |
+| **7** | `DAT0` | `/SD_DAT0` | `U5` `GPIO18` (Pin 29) | SDIO Data 0 (`DAT0`) |
+| **8** | `DAT1` | `/SD_DAT1` | `U5` `GPIO19` (Pin 31) | SDIO Data 1 (`DAT1`) |
 | **9** | `Card Detect`| `NC` | Unconnected | Card Detect switch unused (card presence detected in software) |
 | **10** | `Casing` | `GND` | Ground Plane | Metal Shield / Housing Ground |
 
 ---
 
-### 3.4 Peripherals: OLED (U2), Buttons (SW1..SW3), Jumper (JP1)
+### 3.4 Peripherals: OLED (`U2`), Buttons (`SW1..SW5`), Jumper (`JP1`)
 
 | Designator | Pin / Signal | Net Name | Connected To | Description |
 | :--- | :--- | :--- | :--- | :--- |
-| **`U2` Pin 1** | `VCC` | `+3.3V` | +3.3V Rail | Display Power (Decoupled by C6 10µF + C7 100nF) |
+| **`U2` Pin 1** | `VCC` | `+3.3V` | `+3.3V` Rail | Display Power (Decoupled by `C6` 10µF + `C7` 100nF) |
 | **`U2` Pin 2** | `GND` | `GND` | Ground Plane | Display Power Ground |
-| **`U2` Pin 3** | `SCL` | `OLED_SCL` | Pico GPIO17 (Pin 22) | I2C Serial Clock Line |
-| **`U2` Pin 4** | `SDA` | `OLED_SDA` | Pico GPIO16 (Pin 21) | I2C Serial Data Line |
-| **`SW1` Pin 1** | `1` | `SW_PLAY` | Pico GPIO14 (Pin 19) | Play / Pause Navigation Button (Internal Pull-Up) |
-| **`SW1` Pin 2** | `2` | `GND` | Ground Plane | Ground Return |
-| **`SW2` Pin 1** | `1` | `SW_NEXT` | Pico GPIO13 (Pin 17) | Next Track Navigation Button (Internal Pull-Up) |
-| **`SW2` Pin 2** | `2` | `GND` | Ground Plane | Ground Return |
-| **`SW3` Pin 1** | `1` | `SW_PREV` | Pico GPIO15 (Pin 20) | Previous Track Navigation Button (Internal Pull-Up) |
-| **`SW3` Pin 2** | `2` | `GND` | Ground Plane | Ground Return |
-| **`JP1` Pin 1** | `A` | `/JP1_SEL` | YM2149F U1 Pin 26 + U4 Pin 26 | YM2149F /SEL Clock Divider Select (both PSGs) |
-| **`JP1` Pin 2** | `B` | `GND` | Ground Plane | Ground Return (Bridge pads to enable ÷2 divider) |
+| **`U2` Pin 3** | `SCL` | `/OLED_SCL` | `U5` `GPIO17` (Pin 28) | Native `I2C0 SCL` Serial Clock Line |
+| **`U2` Pin 4** | `SDA` | `/OLED_SDA` | `U5` `GPIO16` (Pin 27) | Native `I2C0 SDA` Serial Data Line |
+| **`SW1` Pin 1 / 2** | `1` / `2` | `/SW_PLAY` / `GND` | `U5` `GPIO14` (Pin 18) / `GND` | Play / Pause Navigation Button (Internal Pull-Up) |
+| **`SW2` Pin 1 / 2** | `1` / `2` | `/SW_NEXT` / `GND` | `U5` `GPIO13` (Pin 17) / `GND` | Next Track Navigation Button (Internal Pull-Up) |
+| **`SW3` Pin 1 / 2** | `1` / `2` | `/SW_PREV` / `GND` | `U5` `GPIO15` (Pin 19) / `GND` | Previous Track Navigation Button (Internal Pull-Up) |
+| **`SW4` Pin 1 / 2** | `1` / `2` | `/BOOT_BTN` / `GND` | `R20` (1kΩ to `U5` Pin 60 `~QSPI_SS`) / `GND` | USB UF2 `BOOTSEL` Button |
+| **`SW5` Pin 1 / 2** | `1` / `2` | `/MCU_RUN` / `GND` | `U5` Pin 26 (`RUN`), `R19` (10kΩ to `+3.3V`) / `GND` | MCU Hardware `RESET` Button |
+| **`JP1` Pin 1 / 2** | `A` / `B` | `/JP1_SEL` / `GND` | `U1` Pin 26 + `U4` Pin 26 / `GND` | YM2149F `/SEL` Clock Divider Select (both PSGs) |
 
 ---
 
-### 3.4a PAM8403 Stereo Class-D Amplifier (U3) & Speaker Connectors (J3, J4)
+### 3.4a PAM8403 Stereo Class-D Amplifier (`U3`) & Speaker Connectors (`J3`, `J4`)
 
 | Pin | Symbol | Net Name | Connected To | Notes / Function |
 | :--- | :--- | :--- | :--- | :--- |
-| **1** | `LOUT+` | `SPK_L+` | J3 Pin 1 | Left speaker output + (BTL) |
+| **1** | `LOUT+` | `/SPK_L+` | `J3` Pin 1 | Left speaker output + (BTL) |
 | **2** | `PGND` | `GND` | Ground Plane | Power ground |
-| **3** | `LOUT-` | `SPK_L-` | J3 Pin 2 | Left speaker output − (BTL) |
-| **4** | `PVDD` | `+5V` | +5V Plane | Power-stage supply (C14 1µF under U3, C13 1µF + C15 10µF bulk) |
-| **5** | `~MUTE` | `SD_Amp` | Pico GPIO9 (Pin 12), R13 | Low = mute (tied to `~SHDN`) |
-| **6** | `VDD` | `+5V` | +5V Plane | Analog supply (C8 1µF under U3) |
-| **7** | `INL` | `AMP_INL` | C3 Pin 2 | Left input, AC-coupled from the U1 mixer |
-| **8** | `VREF` | `AMP_VREF` | C16 (1µF to GND) | Internal bias reference bypass |
-| **9** | `NC` | — | Unconnected | No connect |
-| **10** | `INR` | `AMP_INR` | C10 Pin 2 | Right input, AC-coupled from the U4 mixer |
+| **3** | `LOUT-` | `/SPK_L-` | `J3` Pin 2 | Left speaker output − (BTL) |
+| **4** | `PVDD` | `+5V` | `+5V` Plane | Power-stage supply (`C14` 1µF under `U3`, `C13` 1µF + `C15` 10µF bulk) |
+| **5** | `~MUTE` | `/SD_Amp` | `U5` `GPIO9` (Pin 13), `R13` (10kΩ) | Low = mute (tied to `~SHDN`) |
+| **6** | `VDD` | `+5V` | `+5V` Plane | Analog supply (`C8` 1µF under `U3`) |
+| **7** | `INL` | `/AMP_INL` | `C3` Pin 2 | Left input, AC-coupled from `MIX1` |
+| **8** | `VREF` | `/AMP_VREF` | `C16` (1µF to `GND`) | Internal bias reference bypass |
+| **9** | `NC` | `NC` | Unconnected | No connect |
+| **10** | `INR` | `/AMP_INR` | `C10` Pin 2 | Right input, AC-coupled from `MIX2` |
 | **11** | `GND` | `GND` | Ground Plane | Analog ground |
-| **12** | `~SHDN` | `SD_Amp` | Pico GPIO9 (Pin 12), R13 | Low = shutdown (tied to `~MUTE`) |
-| **13** | `PVDD` | `+5V` | +5V Plane | Power-stage supply |
-| **14** | `ROUT-` | `SPK_R-` | J4 Pin 2 | Right speaker output − (BTL) |
+| **12** | `~SHDN` | `/SD_Amp` | `U5` `GPIO9` (Pin 13), `R13` (10kΩ) | Low = shutdown (tied to `~MUTE`) |
+| **13** | `PVDD` | `+5V` | `+5V` Plane | Power-stage supply |
+| **14** | `ROUT-` | `/SPK_R-` | `J4` Pin 2 | Right speaker output − (BTL) |
 | **15** | `PGND` | `GND` | Ground Plane | Power ground |
-| **16** | `ROUT+` | `SPK_R+` | J4 Pin 1 | Right speaker output + (BTL) |
-
-- **`R13` (10kΩ)** pulls `SD_Amp` to GND, so the amplifier stays muted/shut down from power-on until firmware drives **GPIO9 HIGH**. The old Adafruit PAM8302 modules had an on-board pull-up and powered up enabled, so this is a change in behaviour.
-- **`J3` / `J4`:** JST-PH 2.0mm 2-pin vertical headers (Left / Right), one 4–8Ω speaker each. The outputs are bridge-tied: **never connect a speaker terminal to GND**, and do not share the `−` wires between channels.
-- The PAM8403 has a fixed internal gain of 24dB, the same as the PAM8302A it replaces, so the mixer levels stay as they are.
+| **16** | `ROUT+` | `/SPK_R+` | `J4` Pin 1 | Right speaker output + (BTL) |
 
 ---
 
-### 3.5 Passive Audio Mixer & Filtering Topology
+### 3.5 4-Mode Hardware Stereo/Mono Analog Mixing Matrix (`U8`, `U9` — 2× `74HCT4053D`)
 
-Each PSG feeds its own identical passive summing stage, giving a fully independent **left** (U1) and **right** (U4) channel:
+To support all classic chiptune stereo/mono topologies in hardware without distortion or level mismatch, the 6 individual 1 kΩ voice resistors (`R4`, `R5`, `R7` from `U1`; `R9`, `R10`, `R11` from `U4`) feed a dual **74HCT4053D** (`U8`, `U9`, SOIC-16 on `B.Cu`) current-steering analog switch matrix operating into the low-impedance summing nodes `MIX1` (Left) and `MIX2` (Right):
 
-**Left channel (U1 → U3 `INL`):**
+- **Fixed Voices:**
+  - `U1` Voice A (`R4` = 1 kΩ) connects directly to `MIX1` (Left summing junction).
+  - `U4` Voice C (`R11` = 1 kΩ) connects directly to `C1_SUM` (`U9` switch `C`), which routes to `MIX2` (Right) in Modes 0/1/3 and to `MIX_C` in Mode 2 (`ACB`).
+- **Steered Voices & Center `-3 dB` Compensation (`R14`, `R15` = 470 Ω):**
+  - When a voice pair (`B1+B2` in `ABC` mode, or `C1+C2` in `ACB` mode) is steered to **Center**, both `U8` switches connect its intermediate node (`MIX_B` or `MIX_C`) simultaneously to `MIX1` via `R14` (470 Ω) and to `MIX2` via `R15` (470 Ω).
+  - Combined with the 1 kΩ series voice resistors and the switch $R_{\text{ON}} \approx 50\,\Omega$, the parallel 470 Ω split yields an effective per-side impedance of $\approx 1.41\,\text{k}\Omega$ ($-3.0\,\text{dB}$), preserving constant acoustic power across the stereo field.
 
-1. **Summing Resistors:**
-   - Channel A (U1 Pin 4): `R4` (1kΩ, 0805)
-   - Channel B (U1 Pin 3): `R5` (1kΩ, 0805)
-   - Channel C (U1 Pin 38): `R7` (1kΩ, 0805)
-2. **Summing Node (`Net-(C3-Pad1)`):**
-   - **Mixer Load Resistor:** `R8` (1kΩ, 0805) to `GND`. Establishes the passive attenuator baseline impedance and DC ground reference.
-   - **Low-Pass Filter Capacitor:** `C4` (100nF, 0805 MLCC) to `GND`. Forms a first-order low-pass filter with the equivalent summing impedance ($R_{eq} \approx 250\,\Omega$, cutoff frequency $f_c \approx 6.3\,\text{kHz}$) to eliminate high-frequency digital clock harmonics and PSG switching noise.
-   - **AC Output Coupling Capacitor:** `C3` (1µF X7R 0805 MLCC). Blocks the DC difference between the mixer node and the PAM8403 input bias (≈VDD/2) and passes the audio into `INL` (`U3` Pin 7). It is a non-polarized MLCC because the amplifier side now sits at the higher DC potential.
+#### `U8` & `U9` (`74HCT4053D`) Pinout Table
 
-**Right channel (U4 → U3 `INR`):** identical topology using `R9`, `R10`, `R11` (1kΩ summing), `R12` (1kΩ load), `C9` (100nF LPF) and `C10` (1µF X7R MLCC coupling) into `INR` (`U3` Pin 10).
-
----
-
-### 3.6 Rev 0.4 Native-Function Errata & Rev 0.5 Correction (SSOT)
-
-The manufactured Rev 0.4 board used the pin assignment audited below, which predates the Rev 0.5 correction now shown in §3.1. A review against the **RP2350 Bank-0 GPIO functions** table shows that the pins chosen for the **OLED I²C** and the **microSD SPI** are not the RP2350's *native* peripheral (function-mux) pins. Because GPIO alternate functions are fixed per pin on RP2350, the on-chip **I2C0** and **SPI0** controllers cannot be routed to these signals as wired in Rev 0.4 — only **PIO** or software (bit-banged) I²C/SPI can drive them on an existing Rev 0.4 board.
-
-#### Rev 0.4 pin audit
-
-| Pico Pin | GPIO | Rev 0.4 Net | Native alt function of that GPIO | Compliant? |
+| Pin | Symbol | `U8` Net Name | `U9` Net Name | Function |
 | :--- | :--- | :--- | :--- | :--- |
-| 21 | `GPIO16` | `OLED_SCL` | **I2C0 SDA** (SPI0 RX) | ❌ SDA/SCL swapped |
-| 22 | `GPIO17` | `OLED_SDA` | **I2C0 SCL** (SPI0 CSn) | ❌ SDA/SCL swapped |
-| 24 | `GPIO18` | `SD_CS` | **SPI0 SCK** | ❌ not a CS pin |
-| 25 | `GPIO19` | `SD_MOSI` | **SPI0 TX (MOSI)** | ✅ correct |
-| 26 | `GPIO20` | `SD_SCK` | **SPI0 RX (MISO)** | ❌ not SCK |
-| 27 | `GPIO21` | `SD_MISO` | **SPI0 CSn** | ❌ not MISO |
-| 29 | `GPIO22` | `SD_Card_Detect` | SPI0 SCK (used as GPIO) | ✅ (plain GPIO) |
+| **1** | `B1` | `/MIX_C` | `/NODE_B_PAN` | Switch B Throw 1 |
+| **2** | `B0` | `/MIX2` | `/MIX1` | Switch B Throw 0 |
+| **3** | `C1` | `/MIX2` | `/NODE_C_PAN` | Switch C Throw 1 |
+| **4** | `C` (COM) | `/MIX1` | `/C1_SUM` | Switch C Common (`R7` + `R11` on `U9`; `MIX1` mono bridge on `U8`) |
+| **5** | `C0` | `NC` | `/MIX1` | Switch C Throw 0 |
+| **6, 7, 8**| `~E`, `VEE`, `GND` | `GND` | `GND` | Enable (Active Low) & Negative/Ground Supply |
+| **9** | `S3` (`C` sel) | `/MUX_MONO` | `/MUX_PAN` | Switch C Control Input (`GPIO29` on `U8`, `GPIO23` on `U9`) |
+| **10** | `S2` (`B` sel) | `/MUX_C_CEN` | `/MUX_PAN` | Switch B Control Input (`GPIO25` on `U8`, `GPIO23` on `U9`) |
+| **11** | `S1` (`A` sel) | `/MUX_B_CEN` | `/MUX_PAN` | Switch A Control Input (`GPIO24` on `U8`, `GPIO23` on `U9`) |
+| **12** | `A0` | `/MIX2` | `/MIX2` | Switch A Throw 0 |
+| **13** | `A1` | `/MIX_B` | `/MIX1` | Switch A Throw 1 |
+| **14** | `A` (COM) | `/NODE_B_PAN` | `/ANALOG_A2_R9` | Switch A Common (`R9` from `U4` Voice A2 on `U9`) |
+| **15** | `B` (COM) | `/NODE_C_PAN` | `/B1_SUM` | Switch B Common (`R5` from `U1` Voice B1 on `U9`) |
+| **16** | `VCC` | `+5V` (`C33` 100nF) | `+5V` (`C34` 100nF) | +5V Supply (enables 3.3V TTL logic compatibility on `S1..S3`) |
 
-#### Rev 0.5 correction (native-compliant, now the current SSOT)
+#### 4-Mode Stereo / Mono Mixing Matrix Truth Table
 
-The fix keeps every signal within the **same GPIO group (GP16–GP21)** and only re-assigns five Pico header connections — **no additional GPIOs are used**.
-
-| Function | Rev 0.4 GPIO | **Rev 0.5 GPIO** | Native peripheral (RP2350) |
-| :--- | :--- | :--- | :--- |
-| `OLED_SDA` | `GPIO17` | **`GPIO16`** | I2C0 SDA |
-| `OLED_SCL` | `GPIO16` | **`GPIO17`** | I2C0 SCL |
-| `SD_SCK` | `GPIO20` | **`GPIO18`** | SPI0 SCK |
-| `SD_MOSI` | `GPIO19` | `GPIO19` | SPI0 TX (MOSI) — unchanged |
-| `SD_MISO` | `GPIO21` | **`GPIO20`** | SPI0 RX (MISO) |
-| `SD_CS` | `GPIO18` | **`GPIO21`** | SPI0 CSn / GPIO |
-| `SD_Card_Detect` | `GPIO22` | `GPIO22` | GPIO — unchanged |
-
-#### Header-only change list (schematic nets, Rev 0.4 → Rev 0.5)
-
-| Pico Pin | GPIO | Rev 0.4 Net | Rev 0.5 Net |
-| :--- | :--- | :--- | :--- |
-| 21 | `GPIO16` | `OLED_SCL` | `OLED_SDA` |
-| 22 | `GPIO17` | `OLED_SDA` | `OLED_SCL` |
-| 24 | `GPIO18` | `SD_CS` | `SD_SCK` |
-| 25 | `GPIO19` | `SD_MOSI` | `SD_MOSI` (unchanged) |
-| 26 | `GPIO20` | `SD_SCK` | `SD_MISO` |
-| 27 | `GPIO21` | `SD_MISO` | `SD_CS` |
-
-All other assignments — AY-3-8910 data bus (`DA0..DA7` on `GPIO0..7`), `BC1` (`GPIO8`), `SD_Amp` (`GPIO9`), `BDIR` (`GPIO10`), `~RESET` (`GPIO11`), `CLOCK` (`GPIO12`, PWM/PIO), and the three buttons (`GPIO13..15`) — are plain GPIO/PWM and remain unchanged.
-
-#### Firmware note for existing Rev 0.4 boards
-
-Rev 0.4 hardware works only if firmware does **not** rely on the RP2350 hardware I2C0/SPI0 peripherals:
-- **microSD:** use PIO-based SPI (e.g., `pico-sdk` `hardware_pio` / `pio_spi`) or a bit-banged driver.
-- **OLED:** use PIO/software I²C or a bit-banged I²C driver.
-- The AY-3-8910 parallel bus is already GPIO bit-banged, so it is unaffected.
-
-This Rev 0.5 pinout (the current SSOT, now applied in §3.1) restores native hardware `I2C0` and `SPI0` support.
+| Mode | `MUX_MONO` (`GPIO29`) | `MUX_B_CEN` (`GPIO24`) | `MUX_C_CEN` (`GPIO25`) | `MUX_PAN` (`GPIO23`) | Left Channel (`AMP_INL`) | Right Channel (`AMP_INR`) | Use Case |
+| :--- | :---: | :---: | :---: | :---: | :--- | :--- | :--- |
+| **0: Dual-PSG Split (Boot Default)** | `0` | `0` | `0` | `0` | `U1` (`A1 + B1 + C1`) | `U4` (`A2 + B2 + C2`) | 6-voice TurboSound / Dual-PSG tracks (`U1` Left, `U4` Right) |
+| **1: ABC Stereo** | `0` | `1` | `0` | `1` | `A1 + A2` + `0.71×(B1 + B2)` | `C1 + C2` + `0.71×(B1 + B2)` | Western / Atari ST / ZX Spectrum ABC stereo (`A`=L, `B`=C, `C`=R) |
+| **2: ACB Stereo** | `0` | `0` | `1` | `0` | `A1 + A2` + `0.71×(C1 + C2)` | `B1 + B2` + `0.71×(C1 + C2)` | Eastern European / Pentagon / PT3 ACB stereo (`A`=L, `C`=C, `B`=R) |
+| **3: True Mono** | `1` | `0` | `0` | `0` | `0.5×(U1 + U4)` (`A+B+C`) | `0.5×(U1 + U4)` (`A+B+C`) | Single-PSG or dual-PSG mono tracks played equally on both speakers |
 
 ---
 
-## 4. Bill of Materials & LCSC Part Mapping (SSOT)
+### 3.6 Historical Rev 0.4 Native-Function Errata & Rev 0.5 Correction
 
-| Designator | Value / Part | Package / Footprint | Quantity | LCSC Part # | Description |
+The manufactured Rev 0.4 board predated the Rev 0.5–0.7 native pin assignment:
+- `OLED_SDA` = `GPIO16` (`I2C0 SDA`), `OLED_SCL` = `GPIO17` (`I2C0 SCL`).
+- `SD_DAT0..DAT3` = `GPIO18..GPIO21`, `SD_CLK` = `GPIO22`, `SD_CMD` = `GPIO28` (4-bit SDIO via RP2350 PIO `pico_sd_card`).
+
+---
+
+## 4. Bill of Materials & LCSC Part Mapping (SSOT — Rev 0.7)
+
+| Designator | Value / Part | Package / Footprint | Qty | LCSC Part # | Description |
 | :--- | :--- | :--- | :---: | :--- | :--- |
-| **`A1`** | `RaspberryPi_Pico 2` | `TMCu Module:RPi_Pico_SMD_TH` | 1 | — | Raspberry Pi Pico 2 (RP2350) Microcontroller Module |
-| **`C1`** | `10uF` | `Capacitor_SMD:CP_Elec_4x5.4` | 1 | `C3343` | Aluminum Electrolytic Bulk Power Decoupling Cap (U1 +5V) |
-| **`C2`** | `100nF` | `Capacitor_SMD:C_0805` | 1 | `C1711` | MLCC 0805 High-Frequency Decoupling Cap (U1 +5V) |
-| **`C3`** | `1uF` | `Capacitor_SMD:C_0805` | 1 | `C28323` | MLCC 0805 X7R Left Amp Input AC Coupling Cap |
-| **`C4`** | `100nF` | `Capacitor_SMD:C_0805` | 1 | `C1710` | MLCC 0805 Audio Mixer Low-Pass Filter Cap |
-| **`C5`** | `100nF` | `Capacitor_SMD:C_0805` | 1 | `C1710` | MLCC 0805 MicroSD +3.3V Decoupling Cap |
-| **`C6`** | `10uF` | `Capacitor_SMD:CP_Elec_4x5.4` | 1 | `C3343` | Aluminum Electrolytic Bulk Power Decoupling Cap (U2 +3.3V) |
-| **`C7`** | `100nF` | `Capacitor_SMD:C_0805` | 1 | `C1711` | MLCC 0805 High-Frequency Decoupling Cap (U2 +3.3V) |
-| **`C8`** | `1uF` | `Capacitor_SMD:C_0805` | 1 | `C28323` | MLCC 0805 PAM8403 `VDD` Decoupling Cap (B.Cu, under U3) |
-| **`C9`** | `100nF` | `Capacitor_SMD:C_0805` | 1 | `C1710` | MLCC 0805 Right-Channel Audio Mixer Low-Pass Filter Cap |
-| **`C10`** | `1uF` | `Capacitor_SMD:C_0805` | 1 | `C28323` | MLCC 0805 X7R Right Amp Input AC Coupling Cap |
-| **`C11`** | `10uF` | `Capacitor_SMD:CP_Elec_4x5.4` | 1 | `C3343` | Aluminum Electrolytic Bulk Power Decoupling Cap (U4 +5V) |
-| **`C12`** | `100nF` | `Capacitor_SMD:C_0805` | 1 | `C1711` | MLCC 0805 High-Frequency Decoupling Cap (U4 +5V) |
-| **`C13`** | `1uF` | `Capacitor_SMD:C_0805` | 1 | `C28323` | MLCC 0805 PAM8403 `PVDD` Decoupling Cap |
-| **`C14`** | `1uF` | `Capacitor_SMD:C_0805` | 1 | `C28323` | MLCC 0805 PAM8403 `PVDD` Decoupling Cap (B.Cu, under U3) |
-| **`C15`** | `10uF` | `Capacitor_SMD:CP_Elec_4x5.4` | 1 | `C3343` | Aluminum Electrolytic PAM8403 `PVDD` Bulk Cap |
-| **`C16`** | `1uF` | `Capacitor_SMD:C_0805` | 1 | `C28323` | MLCC 0805 PAM8403 `VREF` Bypass Cap |
+| **`C1`, `C11`, `C15`, `C17`, `C19`** | `10uF` | `Capacitor_SMD:CP_Elec_4x5.4` | 5 | `C3343` | Aluminum Electrolytic Bulk Decoupling Capacitors (`+5V`, `VBUS`, `+3.3V`) |
+| **`C6`** | `10uF` | `Capacitor_SMD:CP_Elec_4x5.4` | 1 | `C3343` | Aluminum Electrolytic Bulk Decoupling Capacitor (`U2` `+3.3V`) |
+| **`C2`, `C7`, `C12`, `C18`, `C24`..`C31`, `C33`, `C34`** | `100nF` | `Capacitor_SMD:C_0805` | 14 | `C1711` | MLCC 0805 High-Frequency Decoupling & RC Delay (`C31`) Capacitors |
+| **`C4`, `C5`, `C9`** | `100nF` | `Capacitor_SMD:C_0805` | 3 | `C1710` | MLCC 0805 Audio Mixer LPF (`C4`, `C9`) & MicroSD Decoupling (`C5`) |
+| **`C3`, `C8`, `C10`, `C13`, `C14`, `C16`** | `1uF` | `Capacitor_SMD:C_0805` | 6 | `C28323` | MLCC 0805 X7R AC Coupling (`C3`, `C10`) & PAM8403 Bypass (`C8`, `C13`, `C14`, `C16`) |
+| **`C20`, `C21`** | `15pF` | `Capacitor_SMD:C_0805` | 2 | `C1794` | MLCC 0805 C0G/NP0 12 MHz Crystal Load Capacitors |
+| **`C22`, `C23`** | `4.7uF` | `Capacitor_SMD:C_0805` | 2 | `C1779` | MLCC 0805 X5R/X7R RP2354A 1.1V Buck Regulator Input/Output Caps |
+| **`C32`** | `10nF` | `Capacitor_SMD:C_0805` | 1 | `C1710` | MLCC 0805 High-Side P-MOSFET (`Q1`) Miller Soft-Start Capacitor |
+| **`D1`** | `USBLC6-2SC6` | `Package_TO_SOT_SMD:SOT-23-6` | 1 | `C7519` | USB 2.0 Low-Capacitance ESD Protection Array |
+| **`J1`** | `USB_C_Receptacle_USB2.0_16P` | `Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12` | 1 | `C165948` | 16-Pin USB 2.0 Type-C Receptacle (5V/3A Sink) |
 | **`J2`** | `MicroSD` | `Terence:MicroSD` | 1 | `C479742` | TF-1115 MicroSD Card Socket (4-bit SDIO) |
-| **`J3`, `J4`** | `Speaker_L`, `Speaker_R` | `Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical` | 2 | `C131337` | JST-PH 2-pin Speaker Connectors (Left / Right) |
-| **`JP1`** | `Clk Div` | `Jumper:SolderJumper-2_P1.3mm_Open` | 1 | — | 2-Pole Solder Jumper (YM2149F /SEL Clock Divider Mode, both PSGs) |
-| **`R1`** | `10K` | `Resistor_SMD:R_0805` | 1 | `C17414` | MicroSD SDIO `DAT3` Pull-Up Resistor (+3.3V) |
-| **`R2`** | `33` | `Resistor_SMD:R_0805` | 1 | `C17634` | PSG Master Clock (GPIO12) Series Damping Resistor |
-| **`R3`** | `10K` | `Resistor_SMD:R_0805` | 1 | `C17414` | YM2149F `~RESET` (GPIO11, both PSGs) Boot Pull-Down Resistor (GND) |
-| **`R4`** | `1k` | `Resistor_SMD:R_0805` | 1 | `C17513` | Channel A Audio Mixer Summer Resistor |
-| **`R5`** | `1k` | `Resistor_SMD:R_0805` | 1 | `C17513` | Channel B Audio Mixer Summer Resistor |
-| **`R7`** | `1k` | `Resistor_SMD:R_0805` | 1 | `C17513` | Channel C Audio Mixer Summer Resistor |
-| **`R8`** | `1K` | `Resistor_SMD:R_0805` | 1 | `C17513` | Left-Channel Mixer Summing Junction Load Resistor to GND |
-| **`R9`** | `1k` | `Resistor_SMD:R_0805` | 1 | `C17513` | Right-Channel A Audio Mixer Summer Resistor |
-| **`R10`** | `1k` | `Resistor_SMD:R_0805` | 1 | `C17513` | Right-Channel B Audio Mixer Summer Resistor |
-| **`R11`** | `1k` | `Resistor_SMD:R_0805` | 1 | `C17513` | Right-Channel C Audio Mixer Summer Resistor |
-| **`R12`** | `1K` | `Resistor_SMD:R_0805` | 1 | `C17513` | Right-Channel Mixer Summing Junction Load Resistor to GND |
-| **`R13`** | `10K` | `Resistor_SMD:R_0805` | 1 | `C17414` | `SD_Amp` Pull-Down (amp muted until GPIO9 driven HIGH) |
-| **`SW1`**| `SW_PUSH_6mm` | `Button_Switch_THT:SW_PUSH_6mm` | 1 | `C17513` | 6x6mm Pushbutton Tactile Switch (Play / Pause, GPIO14) |
-| **`SW2`**| `SW_PUSH_6mm` | `Button_Switch_THT:SW_PUSH_6mm` | 1 | `C114217` | 6x6mm Pushbutton Tactile Switch (Next Track, GPIO13) |
-| **`SW3`**| `SW_PUSH_6mm` | `Button_Switch_THT:SW_PUSH_6mm` | 1 | `C12740` | 6x6mm Pushbutton Tactile Switch (Previous Track, GPIO15) |
-| **`U1`** | `YM2149F` | `Package_DIP:DIP-40_W15.24mm` | 1 | — | Yamaha 3-Voice Programmable Sound Generator IC (DIP-40 Socket, left) |
+| **`J3`, `J4`** | `Speaker_L`, `Speaker_R` | `Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical` | 2 | `C131337` | JST-PH 2-Pin Speaker Connectors (Left / Right) |
+| **`JP1`** | `Clk Div` | `Jumper:SolderJumper-2_P1.3mm_Open` | 1 | — | 2-Pole Solder Jumper (YM2149F `/SEL` Clock Divider Mode) |
+| **`L1`** | `3.3uH` | `Inductor_SMD:L_1210_3225Metric` | 1 | `C408412` | 3.3 µH Shielded Power Inductor for RP2354A 1.1V Core Buck Regulator |
+| **`Q1`** | `AO3401A` | `Package_TO_SOT_SMD:SOT-23` | 1 | `C15127` | 30V 4A P-Channel MOSFET (Stage 2 High-Side `+5V` Load Switch) |
+| **`Q2`** | `2N7002` | `Package_TO_SOT_SMD:SOT-23` | 1 | `C8545` | 60V 300mA N-Channel MOSFET (Stage 2 Power Sequencer Gate Driver) |
+| **`R1`, `R3`, `R13`, `R19`, `R24`..`R27`** | `10K` | `Resistor_SMD:R_0805` | 8 | `C17414` | 10 kΩ Pull-Up (`R1`, `R19`) and Pull-Down (`R3`, `R13`, `R24..R27`) Resistors |
+| **`R2`** | `33` | `Resistor_SMD:R_0805` | 1 | `C17634` | 33 Ω PSG Master Clock (`GPIO12`) Series Damping Resistor |
+| **`R4`, `R5`, `R7`..`R12`, `R16`, `R20`** | `1k` | `Resistor_SMD:R_0805` | 10 | `C17513` | 1 kΩ Audio Summing/Load Resistors, Crystal Damping (`R16`), `BOOTSEL` (`R20`) |
+| **`R14`, `R15`** | `470` | `Resistor_SMD:R_0805` | 2 | `C17710` | 470 Ω Center-Channel `-3 dB` Attenuation Resistors |
+| **`R17`, `R18`** | `27` | `Resistor_SMD:R_0805` | 2 | `C17596` | 27 Ω 1% USB 2.0 D−/D+ Series Termination Resistors |
+| **`R21`, `R22`** | `5.1k` | `Resistor_SMD:R_0805` | 2 | `C17733` | 5.1 kΩ 1% USB-C `CC1`/`CC2` Rd Pull-Down Resistors (5V/3A Sink) |
+| **`R23`** | `47k` | `Resistor_SMD:R_0805` | 1 | `C17713` | 47 kΩ Stage 2 Power Sequencer RC Delay Resistor |
+| **`R28`** | `100k` | `Resistor_SMD:R_0805` | 1 | `C17407` | 100 kΩ High-Side P-MOSFET (`Q1`) Gate Pull-Up Resistor |
+| **`SW1`..`SW5`** | `SW_PUSH_6mm` | `Button_Switch_THT:SW_PUSH_6mm` | 5 | `C114217` | 6×6 mm Tactile Pushbuttons (`PLAY`, `NEXT`, `PREV`, `BOOTSEL`, `RESET`) |
+| **`U1`, `U4`** | `YM2149F` | `Package_DIP:DIP-40_W15.24mm` | 2 | — | Yamaha 3-Voice Programmable Sound Generator ICs (DIP-40 Socketed) |
 | **`U2`** | `0.96"OLED_I2C` | `TModules:OLED 0.96 I2C` | 1 | — | 4-Pin 0.96" SSD1306 I2C OLED Display Module |
-| **`U3`** | `PAM8403` | `Package_SO:SOIC-16_3.9x9.9mm_P1.27mm` | 1 | `C5122557` | PAM8403 3W+3W Filterless Class-D Stereo Audio Amplifier (Slkor) |
-| **`U4`** | `YM2149F` | `Package_DIP:DIP-40_W15.24mm` | 1 | — | Second Yamaha 3-Voice Programmable Sound Generator IC (DIP-40 Socket, right) |
-| **`H1`-`H4`** | `MountingHole_3mm` | `MountingHole:MountingHole_3mm` | 4 | — | 3mm NPTH Corner Mounting Holes (M3) |
+| **`U3`** | `PAM8403` | `Package_SO:SOIC-16_3.9x9.9mm_P1.27mm` | 1 | `C5122557` | PAM8403 3W+3W Filterless Class-D Stereo Audio Amplifier |
+| **`U5`** | `RP2354A` | `Package_DFN_QFN:QFN-60-1EP_7x7mm_P0.4mm_EP3.4x3.4mm` | 1 | `C42419115` | Raspberry Pi RP2354A Dual Cortex-M33 / Hazard3 MCU with 2 MB Internal Flash |
+| **`U6`** | `AMS1117-3.3` | `Package_TO_SOT_SMD:SOT-223-3_TabPin2` | 1 | `C6186` | 3.3V 1A Low-Dropout Linear Voltage Regulator (Stage 1 Supply) |
+| **`U8`, `U9`** | `74HCT4053D` | `Package_SO:SOIC-16_3.9x9.9mm_P1.27mm` | 2 | `C5582` | Triple 2-Channel Analog Multiplexer/Demultiplexer (3.3V TTL Input Compatible) |
+| **`Y1`** | `12MHz` | `Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm` | 1 | `C9002` | 12.000 MHz SMD-3225 4-Pin Quartz Crystal |
+| **`H1`-`H4`** | `MountingHole_3mm` | `MountingHole:MountingHole_3mm` | 4 | — | 3 mm NPTH Corner Mounting Holes (M3) |
 
 ---
 
@@ -374,20 +349,20 @@ This Rev 0.5 pinout (the current SSOT, now applied in §3.1) restores native har
 
 | Rev | Date | Notes |
 | :--- | :--- | :--- |
-| **0.6** | **2026-10-11** | **Dual-PSG stereo variant**: Both PSGs (`U1`, `U4`) specified as **YM2149F** so `JP1` (`/SEL`) divides the clock on both channels consistently; a matched AY-3-8910 pair remains an alternative with `JP1` open. Added a second PSG (`U4`) sharing the `DA0..DA7`/`CLOCK`/`~RESET`/`BC2` bus, driven by a dedicated `BDIR`/`BC1` pair on `GPIO26`/`GPIO27` (6 voices total). Added an independent right-channel passive mixer (`R9`-`R12`, `C9`, `C10`) for true stereo, plus decoupling (`C11`, `C12`). Board resized to 118 × 92 mm with rounded corners, adding four 3 mm NPTH (`H1`-`H4`) corner mounting holes. ERC clean; routed PCB with 0 unconnected items. **microSD changed from SPI to 4-bit SDIO** (PIO-based `pico_sd_card`): `SD_DAT0..DAT3` → `GPIO18`-`GPIO21`, `SD_CLK` → `GPIO22`, `SD_CMD` → `GPIO28`; dedicated card-detect switch dropped (presence detected in software); `R1` 10kΩ now pulls up `DAT3`. **Audio amp changed to a single on-board PAM8403 stereo Class-D amplifier** (`U3`, SOIC-16, LCSC `C5122557`), replacing both Adafruit PAM8302A modules (old `U3`/`U5`). Added `C14`–`C16` and `R13`; `C8`/`C13` are now 1µF; `C3`/`C10` are now 1µF X7R 0805 MLCCs. Speakers connect through JST-PH `J3` (L) / `J4` (R). `~MUTE` and `~SHDN` are both on `SD_Amp` (GPIO9) with a 10kΩ pull-down (`R13`), so **the amp stays muted at boot until firmware drives GPIO9 HIGH**. |
-| **0.5** | **2026-10-11** | **Native-function pin correction (new board; schematic amended, not yet manufactured)**: Re-mapped OLED I²C and microSD SPI to RP2350 native pins — `OLED_SDA`→`GPIO16`, `OLED_SCL`→`GPIO17` (SDA/SCL swap); `SD_SCK`→`GPIO18`, `SD_MISO`→`GPIO20`, `SD_CS`→`GPIO21`; `SD_MOSI` remains `GPIO19`. No additional GPIOs used. Supersedes Rev 0.4 (§3.6). |
-| **0.4** | **2026-08-15** | **Manufactured Production Release (superseded by Rev 0.5, see §3.6)**: Fully aligned documentation with production schematic and manufactured PCB (`Pico_Chiptune_Player_0.4.zip` / `netlist.ipc`). Updated complete Pico GPIO assignments: `CLOCK` on GPIO12 via 33Ω R2, `BDIR` on GPIO10, `~RESET` on GPIO11 with R3 10kΩ pull-down, `BC1` on GPIO8, `SD_Amp` on GPIO9, `SW_PLAY` on GPIO14, `SW_NEXT` on GPIO13, and `SW_PREV` on GPIO15. Documented PAM8302A breakout module header topology (`U3`), 8-capacitor decoupling arrangement (`C1..C8`), and verified all LCSC component part numbers. |
+| **0.7** | **2026-10-19** | **Bare RP2354A + USB-C 5V/3A 3-Stage Power Sequencer + 4-Mode 74HCT4053D Stereo/Mono Matrix (`stereo-mod`)**: Replaced the `Raspberry Pi Pico 2` module (`A1`) with a bare **RP2354A** (`U5`, QFN-60 with 2 MB internal stacked QSPI NOR flash, exposing all 30 Bank-0 GPIOs `GPIO0..29`), 12 MHz crystal (`Y1`, `C20`, `C21`, `R16`), 3.3 µH internal 1.1V core buck inductor (`L1`, `C22`..`C30`), and `BOOTSEL` (`SW4`, `R20`) / `RESET` (`SW5`, `R19`) tactile switches. Added a 16-pin **USB-C 5V/3A receptacle** (`J1`) with independent 5.1 kΩ 1% pull-downs (`R21`, `R22`) on `CC1`/`CC2`, `USBLC6-2SC6` (`D1`) ESD protection, 27 Ω series resistors (`R17`, `R18`), and **3-stage power sequencing**: Stage 1 `AMS1117-3.3` (`U6`, `C17`..`C19`) immediately powers `+3.3V`/`+1V1`; Stage 2 RC delay (`R23` 47 kΩ + `C31` 100 nF) + `Q2` (`2N7002`) + `Q1` (`AO3401A` P-MOSFET with `R28` 100 kΩ & `C32` 10 nF soft-start) switches `+5V` on only after `+3.3V` is stable; Stage 3 `SD_Amp` (`GPIO9` + `R13` 10 kΩ pull-down) un-mutes `U3` (`PAM8403`) after coupling caps settle. Added a **4-mode hardware stereo/mono analog mixing matrix** (`U8`, `U9`: `2× 74HCT4053D` on `B.Cu`, `C33`, `C34`, `R14`, `R15` 470 Ω `-3 dB` center attenuators) driven by `GPIO23` (`MUX_PAN`), `GPIO24` (`MUX_B_CEN`), `GPIO25` (`MUX_C_CEN`), and `GPIO29` (`MUX_MONO`) (`R24`..`R27` 10 kΩ pull-downs), supporting Dual-PSG Split (`0000`), ABC Stereo (`0011`), ACB Stereo (`0101`), and True Mono (`1000`). |
+| **0.6** | **2026-10-11** | **Dual-PSG stereo variant**: Added second YM2149F (`U4`) on `GPIO26`/`GPIO27`, 4-bit SDIO microSD (`J2`), and on-board PAM8403 stereo Class-D amplifier (`U3`, `J3`, `J4`). |
+| **0.5** | **2026-10-11** | **Native-function pin correction**: Re-mapped OLED I²C (`GPIO16`/`17`) and microSD (`GPIO18`..`22`) to RP2350 native peripheral pins. |
+| **0.4** | **2026-08-15** | **Manufactured Production Release (Single-PSG + Pico 2)**. |
 | 0.2 | 2026-08-12 | Intermediate documentation revision. |
 | 0.1 | 2026-08-08 | Initial hardware documentation release. |
- 
+
 ---
- 
+
 ## 6. License & Non-Commercial Notice
- 
+
 Copyright (c) 2026 Terence Ang <terenceang@mac.com> / MotionFxDesign.
- 
+
 This hardware project and documentation are licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)**.
- 
+
 > **NOT FOR COMMERCIAL USE**  
 > You are free to share, copy, modify, and build upon this hardware design for personal, hobby, educational, and non-commercial purposes with attribution. Commercial manufacture, sale, or distribution for profit is strictly prohibited without prior written permission from the author.
-

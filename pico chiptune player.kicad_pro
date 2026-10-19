@@ -84,10 +84,6 @@
         [
           "courtyards_overlap|122822353|116805000|01ab2ca5-4057-4cf2-aa07-d1d66f7095ec|4df3074d-f5ce-4dcf-849e-638acca7e552",
           ""
-        ],
-        [
-          "silk_over_copper|113620000|76710000|b02a3976-8c94-408a-a2b9-2dd9dbd4d63e|4610c9e5-85d1-4734-a3bf-e546770a1c49",
-          ""
         ]
       ],
       "meta": {
@@ -191,7 +187,6 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
-          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -203,7 +198,6 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
-          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -215,7 +209,6 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
-          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -270,7 +263,7 @@
       "internal_id": "",
       "mfg": "",
       "mpn": "",
-      "sch_revision": "0.2"
+      "sch_revision": "0.7"
     },
     "layer_pairs": [],
     "layer_presets": [],
@@ -548,8 +541,8 @@
     "meta": {
       "version": 5
     },
-    "net_colors": {},
-    "netclass_assignments": {},
+    "net_colors": null,
+    "netclass_assignments": null,
     "netclass_patterns": []
   },
   "pcbnew": {
