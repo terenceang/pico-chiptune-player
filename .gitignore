@@ -70,6 +70,7 @@ drc_report.json
 .gemini/
 .claude/
 .antigravity/
+tools/
 
 # ==============================================================================
 # OS Generated Files
