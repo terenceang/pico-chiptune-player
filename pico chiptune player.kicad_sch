@@ -10,7 +10,7 @@
 		(rev "0.6")
 		(company "MotionFxDesign")
 		(comment 1 "Terence Ang / MotionFxDesign")
-		(comment 2 "Hardware AY-3-8910 / YM2149 Chiptune Player")
+		(comment 2 "Hardware Dual YM2149F Chiptune Player")
 	)
 	(lib_symbols
 		(symbol "AY-3-8910:AY-3-8910"
@@ -8190,7 +8190,7 @@
 				)
 			)
 		)
-		(property "Value" "AY-3-8910"
+		(property "Value" "YM2149F"
 			(at 167.64 33.02 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8222,7 +8222,7 @@
 				)
 			)
 		)
-		(property "Description" "AY-3-8910 3-voice Programmable Sound Generator (PSG), 40-pin DIP"
+		(property "Description" "YM2149F 3-voice Programmable Sound Generator (PSG), 40-pin DIP"
 			(at 167.64 60.96 0)
 			(hide yes)
 			(show_name no)

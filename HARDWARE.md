@@ -3,7 +3,7 @@
 **Title:** Pico Chiptune Player  
 **Author:** Terence Ang <terenceang@mac.com> / MotionFxDesign  
 **Company:** MotionFxDesign  
-**Status:** Schematic SSOT — Rev 0.6 (dual-PSG stereo variant; supersedes Rev 0.5)  
+**Status:** Schematic SSOT — Rev 0.6 (dual-YM2149F stereo variant; supersedes Rev 0.5)  
 **Version / Rev:** 0.6  
 **Date:** 2026-10-11  
 **License:** Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) — NOT FOR COMMERCIAL USE  
@@ -13,18 +13,18 @@
 
 ## 1. Overview
 
-The **Pico Chiptune Player** is a dedicated hardware chiptune music player powered by a **Raspberry Pi Pico 2 (RP2350)** microcontroller driving **two** real **General Instrument AY-3-8910** (or **Yamaha YM2149F**) 3-voice Programmable Sound Generators (PSGs) — **6 voices total**, mixed as **stereo** (one PSG per channel).
+The **Pico Chiptune Player** is a dedicated hardware chiptune music player powered by a **Raspberry Pi Pico 2 (RP2350)** microcontroller driving **two** real **Yamaha YM2149F** 3-voice Programmable Sound Generators (PSGs), register-compatible with the General Instrument AY-3-8910 — **6 voices total**, mixed as **stereo** (one PSG per channel).
 
 ### Key Features & Subsystems
 - **Microcontroller:** Raspberry Pi Pico 2 (RP2350) microcontroller running the chiptune player firmware, file parser, and UI.
-- **Sound Generators:** 2× AY-3-8910 / YM2149F 40-pin DIP PSG (`U1`, `U4`). The 8-bit parallel bus (`DA0..DA7`), master clock (`CLOCK`), active-low reset (`~RESET`) and `BC2` are shared; `BDIR`/`BC1` are driven **separately per PSG** (`GPIO10`/`GPIO8` → U1, `GPIO26`/`GPIO27` → U4) so each PSG can be independently selected.
+- **Sound Generators:** 2× YM2149F 40-pin DIP PSG (`U1`, `U4`, socketed; a matched pair of AY-3-8910s is an alternative with `JP1` open, see §3.2). The 8-bit parallel bus (`DA0..DA7`), master clock (`CLOCK`), active-low reset (`~RESET`) and `BC2` are shared; `BDIR`/`BC1` are driven **separately per PSG** (`GPIO10`/`GPIO8` → U1, `GPIO26`/`GPIO27` → U4) so each PSG can be independently selected.
 - **Audio Summer & Filter (per channel):** 3-channel passive resistive summing networks (`R4`,`R5`,`R7` = 1kΩ + `R8` = 1kΩ load for U1; `R9`,`R10`,`R11` = 1kΩ + `R12` = 1kΩ load for U4) with high-cut low-pass filtering (`C4`, `C9` = 100nF) and AC output coupling (`C3`, `C10` = 1µF X7R MLCC).
 - **Audio Amplifier (stereo):** One on-board **PAM8403 3W+3W filterless Class-D stereo amplifier** (`U3`, SOIC-16) fed by the left (`AMP_INL`) and right (`AMP_INR`) mixers. Its `~MUTE` and `~SHDN` pins are both driven by `SD_Amp` (GPIO9), with a 10kΩ pull-down (`R13`) so the amp stays muted until firmware enables it.
 - **Speaker Output:** Two JST-PH 2-pin connectors (`J3` left, `J4` right) carrying the bridge-tied (BTL) `OUT+` / `OUT-` pair for each 4–8Ω speaker.
 - **Display:** 0.96" 128x64 I2C OLED display module (`U2`) with bulk and high-frequency decoupling (`C6` = 10µF, `C7` = 100nF).
 - **Storage:** Full 4-bit SDIO microSD card socket (`J2`), driven by the RP2350 PIO-based `pico_sd_card` driver (Pico SDK / pico-extras). Card presence is detected **in software** (no card-detect switch). A single external pull-up `R1` = 10kΩ sits on `DAT3`; the firmware enables the RP2350 internal pull-ups on `CMD`/`DAT0`–`DAT3`.
 - **Navigation Controls:** 3 tactile pushbuttons (`SW1` Play/Pause, `SW2` Next Track, `SW3` Previous Track).
-- **Clock Divider Select:** Solder jumper `JP1` to select YM2149 internal ÷2 clock division (shared by both PSGs).
+- **Clock Divider Select:** Solder jumper `JP1` to select the YM2149F internal ÷2 clock division (`/SEL`, pin 26), shared by both PSGs.
 
 ---
 
@@ -52,7 +52,7 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
             | Amp Shutdown Control: SD_Amp (GPIO9)
             v
   +--------------------+
-  | AY-3-8910 / YM2149 | <--- JP1 (YM2149 /SEL ÷2 Clock Mode Jumper)
+  | 2× YM2149F (U1,U4) | <--- JP1 (/SEL ÷2 Clock Mode Jumper, both PSGs)
   +---------+----------+
             |
             | ANALOG_A/B/C (U1)          ANALOG_A2/B2/C2 (U4)
@@ -83,21 +83,21 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 
 | Pico Pin | Pin Name / GPIO | Net Name | Connected To | Signal Description |
 | :--- | :--- | :--- | :--- | :--- |
-| **Pin 1** | **GPIO0** | `DA0` | AY-3-8910 (U1) Pin 37 | PSG 8-Bit Data Bus Bit 0 |
-| **Pin 2** | **GPIO1** | `DA1` | AY-3-8910 (U1) Pin 36 | PSG 8-Bit Data Bus Bit 1 |
+| **Pin 1** | **GPIO0** | `DA0` | YM2149F (U1) Pin 37 | PSG 8-Bit Data Bus Bit 0 |
+| **Pin 2** | **GPIO1** | `DA1` | YM2149F (U1) Pin 36 | PSG 8-Bit Data Bus Bit 1 |
 | **Pin 3** | **GND** | `GND` | Ground Plane | System Ground |
-| **Pin 4** | **GPIO2** | `DA2` | AY-3-8910 (U1) Pin 35 | PSG 8-Bit Data Bus Bit 2 |
-| **Pin 5** | **GPIO3** | `DA3` | AY-3-8910 (U1) Pin 34 | PSG 8-Bit Data Bus Bit 3 |
-| **Pin 6** | **GPIO4** | `DA4` | AY-3-8910 (U1) Pin 33 | PSG 8-Bit Data Bus Bit 4 |
-| **Pin 7** | **GPIO5** | `DA5` | AY-3-8910 (U1) Pin 32 | PSG 8-Bit Data Bus Bit 5 |
+| **Pin 4** | **GPIO2** | `DA2` | YM2149F (U1) Pin 35 | PSG 8-Bit Data Bus Bit 2 |
+| **Pin 5** | **GPIO3** | `DA3` | YM2149F (U1) Pin 34 | PSG 8-Bit Data Bus Bit 3 |
+| **Pin 6** | **GPIO4** | `DA4` | YM2149F (U1) Pin 33 | PSG 8-Bit Data Bus Bit 4 |
+| **Pin 7** | **GPIO5** | `DA5` | YM2149F (U1) Pin 32 | PSG 8-Bit Data Bus Bit 5 |
 | **Pin 8** | **GND** | `GND` | Ground Plane | System Ground |
-| **Pin 9** | **GPIO6** | `DA6` | AY-3-8910 (U1) Pin 31 | PSG 8-Bit Data Bus Bit 6 |
-| **Pin 10** | **GPIO7** | `DA7` | AY-3-8910 (U1) Pin 30 | PSG 8-Bit Data Bus Bit 7 |
-| **Pin 11** | **GPIO8** | `BC1` | AY-3-8910 (U1) Pin 29 | Bus Control 1 (Address Latch / Data Write) |
+| **Pin 9** | **GPIO6** | `DA6` | YM2149F (U1) Pin 31 | PSG 8-Bit Data Bus Bit 6 |
+| **Pin 10** | **GPIO7** | `DA7` | YM2149F (U1) Pin 30 | PSG 8-Bit Data Bus Bit 7 |
+| **Pin 11** | **GPIO8** | `BC1` | YM2149F (U1) Pin 29 | Bus Control 1 (Address Latch / Data Write) |
 | **Pin 12** | **GPIO9** | `SD_Amp` | PAM8403 (U3) Pins 5 `~MUTE` & 12 `~SHDN`, R13 | Audio Amplifier Enable (High = Play, Low = Mute/Shutdown; 10kΩ R13 pull-down holds it muted at boot) |
 | **Pin 13** | **GND** | `GND` | Ground Plane | System Ground |
-| **Pin 14** | **GPIO10** | `BDIR` | AY-3-8910 (U1) Pin 27 | Bus Direction Control |
-| **Pin 15** | **GPIO11** | `~RESET` | AY-3-8910 (U1) Pin 23, R3 | PSG Active-Low Reset (with 10kΩ pull-down R3 to GND) |
+| **Pin 14** | **GPIO10** | `BDIR` | YM2149F (U1) Pin 27 | Bus Direction Control |
+| **Pin 15** | **GPIO11** | `~RESET` | YM2149F (U1 + U4) Pin 23, R3 | PSG Active-Low Reset (with 10kΩ pull-down R3 to GND) |
 | **Pin 16** | **GPIO12** | `Net-(A1-GPIO12)` | Resistor R2 Pin 2 (33Ω) | PSG Master Clock Output (series damped to U1 Pin 22 `CLOCK`) |
 | **Pin 17** | **GPIO13** | `SW_NEXT` | Tact Switch SW2 Pin 1 | Next Track Button (Active Low, Internal Pull-up) |
 | **Pin 18** | **GND** | `GND` | Ground Plane | System Ground |
@@ -113,8 +113,8 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 | **Pin 28** | **GND** | `GND` | Ground Plane | System Ground |
 | **Pin 29** | **GPIO22** | `SD_CLK` | MicroSD (J2) Pin 5 | SDIO Clock (CLK) |
 | **Pin 30** | **RUN** | `N/C` | — | Reset input (Unconnected) |
-| **Pin 31** | **GPIO26_ADC0** | `BDIR2` | AY-3-8910 (U4) Pin 27 | PSG2 Bus Direction Control |
-| **Pin 32** | **GPIO27_ADC1** | `BC1_2` | AY-3-8910 (U4) Pin 29 | PSG2 Bus Control 1 (Address Latch / Data Write) |
+| **Pin 31** | **GPIO26_ADC0** | `BDIR2` | YM2149F (U4) Pin 27 | PSG2 Bus Direction Control |
+| **Pin 32** | **GPIO27_ADC1** | `BC1_2` | YM2149F (U4) Pin 29 | PSG2 Bus Control 1 (Address Latch / Data Write) |
 | **Pin 33** | **AGND** | `N/C` | — | Analog ground (Unconnected) |
 | **Pin 34** | **GPIO28_ADC2** | `SD_CMD` | MicroSD (J2) Pin 3 | SDIO Command (CMD) |
 | **Pin 35** | **ADC_VREF** | `N/C` | — | ADC reference (Unconnected) |
@@ -126,7 +126,7 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 
 ---
 
-### 3.2 AY-3-8910 / YM2149 Sound Generator (U1) Pinout
+### 3.2 YM2149F Sound Generator (U1) Pinout
 
 | Pin | Symbol | Net Name | Connected To | Notes / Function |
 | :--- | :--- | :--- | :--- | :--- |
@@ -141,7 +141,7 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 | **23** | `~RESET` | `~RESET` | Pico GPIO11, R3 (10kΩ to GND) | Active-Low Hardware Reset (Boot pull-down holds PSG in reset) |
 | **24** | `A9` | `GND` | Ground Plane | Fixed Address Decoding Bit 9 (Tied to GND = 0) |
 | **25** | `A8` | `+5V` | +5V Rail | Fixed Address Decoding Bit 8 (Tied to +5V = 1) |
-| **26** | `~{CS/Test_2}` | `NET-(JP1-A)` | Solder Jumper JP1 Pin 1 | YM2149 Clock Select (/SEL): Open = 1x Clock; Bridged to GND = ÷2 Clock |
+| **26** | `/SEL` (`~{CS/Test_2}` in symbol) | `/JP1_SEL` | Solder Jumper JP1 Pin 1, U4 Pin 26 | YM2149F Clock Select (/SEL): Open = 1x Clock; Bridged to GND = ÷2 Clock |
 | **27** | `BDIR` | `BDIR` | Pico GPIO10 | Bus Direction Control Line |
 | **28** | `BC2` | `+5V` | +5V Rail | Bus Control 2 (Tied permanently HIGH to +5V) |
 | **29** | `BC1` | `BC1` | Pico GPIO8 | Bus Control 1 Line |
@@ -157,7 +157,7 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 | **39** | `TEST1` | `NC` | Unconnected | Test pin (Unconnected) |
 | **40** | `VCC` | `+5V` | +5V Rail | Main +5V Power Supply (Decoupled by C1 10µF bulk + C2 100nF MLCC) |
 
-#### AY-3-8910 Bus State Decoding Table (`BC2` Tied HIGH to +5V)
+#### YM2149F / AY-3-8910 Bus State Decoding Table (`BC2` Tied HIGH to +5V)
 
 | `BDIR` (GPIO10) | `BC1` (GPIO8) | Bus State | Operation Description |
 | :---: | :---: | :--- | :--- |
@@ -166,7 +166,7 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 | **1** | **0** | **WRITE** | Pico writes data on `DA[7:0]` into currently addressed register. |
 | **1** | **1** | **LATCH ADDRESS** | Pico selects target PSG register address (0x00..0x0F) on `DA[7:0]`. |
 
-#### Duplicate PSG — Yamaha YM2149F (U4)
+#### Second PSG — Yamaha YM2149F (U4)
 
 `U4` is the second PSG and is electrically identical to `U1` **except** that its `BDIR` and `BC1` are driven from a second GPIO pair. All other connections (`DA0..DA7`, `CLOCK`, `~RESET`, `A8`→+5V, `A9`→GND, `BC2`→+5V, `/SEL`→`JP1`, power/decoupling) are shared with `U1`.
 
@@ -174,7 +174,7 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 | :--- | :--- | :--- | :--- | :--- |
 | **3** | `ANALOG_B` | `ANALOG_B2` | Resistor R10 (1kΩ) | Channel B Analog Audio Output (right) |
 | **4** | `ANALOG_A` | `ANALOG_A2` | Resistor R9 (1kΩ) | Channel A Analog Audio Output (right) |
-| **26** | `~{CS/Test_2}` | `/JP1_SEL` | Solder Jumper JP1 Pin 1 | YM2149 Clock Select (/SEL), shared with U1 |
+| **26** | `/SEL` | `/JP1_SEL` | Solder Jumper JP1 Pin 1 | YM2149F Clock Select (/SEL), shared with U1 |
 | **27** | `BDIR` | `/BDIR2` | Pico GPIO26 (Pin 31) | Bus Direction Control Line (PSG2) |
 | **29** | `BC1` | `/BC1_2` | Pico GPIO27 (Pin 32) | Bus Control 1 Line (PSG2) |
 | **30..37**| `DA7..DA0` | `DA7..DA0` | Pico GPIO7..GPIO0 | Shared 8-Bit Data Bus (with U1) |
@@ -182,6 +182,8 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 | **40** | `VCC` | `+5V` | +5V Rail | Main +5V Supply (Decoupled by C11 10µF bulk + C12 100nF MLCC) |
 
 > **Shared-bus note:** Only the currently selected PSG (the one whose `BDIR`/`BC1` pair is driven out of the inactive state) responds; the other PSG's bus stays High-Z. `U1` uses `GPIO10`/`GPIO8`; `U4` uses `GPIO26`/`GPIO27`.
+
+> **PSG fit / `JP1`:** `CLOCK` and `/SEL` (`JP1`) are common to both sockets, so both PSGs must divide the clock the same way. Fit **two YM2149F** (`JP1` open = full clock, bridged = ÷2 on both), or a matched pair of AY-3-8910s with `JP1` **open** (on the AY-3-8910, pin 26 is a test pin and there is no divider). Never fit one of each with `JP1` bridged: the YM2149F would run at half clock and the left and right channels would play an octave apart.
 
 ---
 
@@ -216,7 +218,7 @@ The **Pico Chiptune Player** is a dedicated hardware chiptune music player power
 | **`SW2` Pin 2** | `2` | `GND` | Ground Plane | Ground Return |
 | **`SW3` Pin 1** | `1` | `SW_PREV` | Pico GPIO15 (Pin 20) | Previous Track Navigation Button (Internal Pull-Up) |
 | **`SW3` Pin 2** | `2` | `GND` | Ground Plane | Ground Return |
-| **`JP1` Pin 1** | `A` | `NET-(JP1-A)` | AY-3-8910 (U1) Pin 26 | YM2149 /SEL Clock Divider Select Pin |
+| **`JP1` Pin 1** | `A` | `/JP1_SEL` | YM2149F U1 Pin 26 + U4 Pin 26 | YM2149F /SEL Clock Divider Select (both PSGs) |
 | **`JP1` Pin 2** | `B` | `GND` | Ground Plane | Ground Return (Bridge pads to enable ÷2 divider) |
 
 ---
@@ -344,10 +346,10 @@ This Rev 0.5 pinout (the current SSOT, now applied in §3.1) restores native har
 | **`C16`** | `1uF` | `Capacitor_SMD:C_0805` | 1 | `C28323` | MLCC 0805 PAM8403 `VREF` Bypass Cap |
 | **`J2`** | `MicroSD` | `Terence:MicroSD` | 1 | `C479742` | TF-1115 MicroSD Card Socket (4-bit SDIO) |
 | **`J3`, `J4`** | `Speaker_L`, `Speaker_R` | `Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical` | 2 | `C131337` | JST-PH 2-pin Speaker Connectors (Left / Right) |
-| **`JP1`** | `Clk Div` | `Jumper:SolderJumper-2_P1.3mm_Open` | 1 | — | 2-Pole Solder Jumper (YM2149 /SEL Clock Divider Mode) |
+| **`JP1`** | `Clk Div` | `Jumper:SolderJumper-2_P1.3mm_Open` | 1 | — | 2-Pole Solder Jumper (YM2149F /SEL Clock Divider Mode, both PSGs) |
 | **`R1`** | `10K` | `Resistor_SMD:R_0805` | 1 | `C17414` | MicroSD SDIO `DAT3` Pull-Up Resistor (+3.3V) |
 | **`R2`** | `33` | `Resistor_SMD:R_0805` | 1 | `C17634` | PSG Master Clock (GPIO12) Series Damping Resistor |
-| **`R3`** | `10K` | `Resistor_SMD:R_0805` | 1 | `C17414` | AY-3-8910 `~RESET` (GPIO11) Boot Pull-Down Resistor (GND) |
+| **`R3`** | `10K` | `Resistor_SMD:R_0805` | 1 | `C17414` | YM2149F `~RESET` (GPIO11, both PSGs) Boot Pull-Down Resistor (GND) |
 | **`R4`** | `1k` | `Resistor_SMD:R_0805` | 1 | `C17513` | Channel A Audio Mixer Summer Resistor |
 | **`R5`** | `1k` | `Resistor_SMD:R_0805` | 1 | `C17513` | Channel B Audio Mixer Summer Resistor |
 | **`R7`** | `1k` | `Resistor_SMD:R_0805` | 1 | `C17513` | Channel C Audio Mixer Summer Resistor |
@@ -360,10 +362,10 @@ This Rev 0.5 pinout (the current SSOT, now applied in §3.1) restores native har
 | **`SW1`**| `SW_PUSH_6mm` | `Button_Switch_THT:SW_PUSH_6mm` | 1 | `C17513` | 6x6mm Pushbutton Tactile Switch (Play / Pause, GPIO14) |
 | **`SW2`**| `SW_PUSH_6mm` | `Button_Switch_THT:SW_PUSH_6mm` | 1 | `C114217` | 6x6mm Pushbutton Tactile Switch (Next Track, GPIO13) |
 | **`SW3`**| `SW_PUSH_6mm` | `Button_Switch_THT:SW_PUSH_6mm` | 1 | `C12740` | 6x6mm Pushbutton Tactile Switch (Previous Track, GPIO15) |
-| **`U1`** | `AY-3-8910` | `Package_DIP:DIP-40_W15.24mm` | 1 | — | 3-Voice Programmable Sound Generator IC (DIP-40 Socket) |
+| **`U1`** | `YM2149F` | `Package_DIP:DIP-40_W15.24mm` | 1 | — | Yamaha 3-Voice Programmable Sound Generator IC (DIP-40 Socket, left) |
 | **`U2`** | `0.96"OLED_I2C` | `TModules:OLED 0.96 I2C` | 1 | — | 4-Pin 0.96" SSD1306 I2C OLED Display Module |
 | **`U3`** | `PAM8403` | `Package_SO:SOIC-16_3.9x9.9mm_P1.27mm` | 1 | `C5122557` | PAM8403 3W+3W Filterless Class-D Stereo Audio Amplifier (Slkor) |
-| **`U4`** | `AY-3-8910` | `Package_DIP:DIP-40_W15.24mm` | 1 | — | Second 3-Voice Programmable Sound Generator IC (DIP-40 Socket, right) |
+| **`U4`** | `YM2149F` | `Package_DIP:DIP-40_W15.24mm` | 1 | — | Second Yamaha 3-Voice Programmable Sound Generator IC (DIP-40 Socket, right) |
 | **`H1`-`H4`** | `MountingHole_3mm` | `MountingHole:MountingHole_3mm` | 4 | — | 3mm NPTH Corner Mounting Holes (M3) |
 
 ---
@@ -372,7 +374,7 @@ This Rev 0.5 pinout (the current SSOT, now applied in §3.1) restores native har
 
 | Rev | Date | Notes |
 | :--- | :--- | :--- |
-| **0.6** | **2026-10-11** | **Dual-PSG stereo variant**: Added a second AY-3-8910/YM2149F (`U4`) sharing the `DA0..DA7`/`CLOCK`/`~RESET`/`BC2` bus, driven by a dedicated `BDIR`/`BC1` pair on `GPIO26`/`GPIO27` (6 voices total). Added an independent right-channel passive mixer (`R9`-`R12`, `C9`, `C10`) for true stereo, plus decoupling (`C11`, `C12`). Board resized to 118 × 92 mm with rounded corners, adding four 3 mm NPTH (`H1`-`H4`) corner mounting holes. ERC clean; routed PCB with 0 unconnected items. **microSD changed from SPI to 4-bit SDIO** (PIO-based `pico_sd_card`): `SD_DAT0..DAT3` → `GPIO18`-`GPIO21`, `SD_CLK` → `GPIO22`, `SD_CMD` → `GPIO28`; dedicated card-detect switch dropped (presence detected in software); `R1` 10kΩ now pulls up `DAT3`. **Audio amp changed to a single on-board PAM8403 stereo Class-D amplifier** (`U3`, SOIC-16, LCSC `C5122557`), replacing both Adafruit PAM8302A modules (old `U3`/`U5`). Added `C14`–`C16` and `R13`; `C8`/`C13` are now 1µF; `C3`/`C10` are now 1µF X7R 0805 MLCCs. Speakers connect through JST-PH `J3` (L) / `J4` (R). `~MUTE` and `~SHDN` are both on `SD_Amp` (GPIO9) with a 10kΩ pull-down (`R13`), so **the amp stays muted at boot until firmware drives GPIO9 HIGH**. |
+| **0.6** | **2026-10-11** | **Dual-PSG stereo variant**: Both PSGs (`U1`, `U4`) specified as **YM2149F** so `JP1` (`/SEL`) divides the clock on both channels consistently; a matched AY-3-8910 pair remains an alternative with `JP1` open. Added a second PSG (`U4`) sharing the `DA0..DA7`/`CLOCK`/`~RESET`/`BC2` bus, driven by a dedicated `BDIR`/`BC1` pair on `GPIO26`/`GPIO27` (6 voices total). Added an independent right-channel passive mixer (`R9`-`R12`, `C9`, `C10`) for true stereo, plus decoupling (`C11`, `C12`). Board resized to 118 × 92 mm with rounded corners, adding four 3 mm NPTH (`H1`-`H4`) corner mounting holes. ERC clean; routed PCB with 0 unconnected items. **microSD changed from SPI to 4-bit SDIO** (PIO-based `pico_sd_card`): `SD_DAT0..DAT3` → `GPIO18`-`GPIO21`, `SD_CLK` → `GPIO22`, `SD_CMD` → `GPIO28`; dedicated card-detect switch dropped (presence detected in software); `R1` 10kΩ now pulls up `DAT3`. **Audio amp changed to a single on-board PAM8403 stereo Class-D amplifier** (`U3`, SOIC-16, LCSC `C5122557`), replacing both Adafruit PAM8302A modules (old `U3`/`U5`). Added `C14`–`C16` and `R13`; `C8`/`C13` are now 1µF; `C3`/`C10` are now 1µF X7R 0805 MLCCs. Speakers connect through JST-PH `J3` (L) / `J4` (R). `~MUTE` and `~SHDN` are both on `SD_Amp` (GPIO9) with a 10kΩ pull-down (`R13`), so **the amp stays muted at boot until firmware drives GPIO9 HIGH**. |
 | **0.5** | **2026-10-11** | **Native-function pin correction (new board; schematic amended, not yet manufactured)**: Re-mapped OLED I²C and microSD SPI to RP2350 native pins — `OLED_SDA`→`GPIO16`, `OLED_SCL`→`GPIO17` (SDA/SCL swap); `SD_SCK`→`GPIO18`, `SD_MISO`→`GPIO20`, `SD_CS`→`GPIO21`; `SD_MOSI` remains `GPIO19`. No additional GPIOs used. Supersedes Rev 0.4 (§3.6). |
 | **0.4** | **2026-08-15** | **Manufactured Production Release (superseded by Rev 0.5, see §3.6)**: Fully aligned documentation with production schematic and manufactured PCB (`Pico_Chiptune_Player_0.4.zip` / `netlist.ipc`). Updated complete Pico GPIO assignments: `CLOCK` on GPIO12 via 33Ω R2, `BDIR` on GPIO10, `~RESET` on GPIO11 with R3 10kΩ pull-down, `BC1` on GPIO8, `SD_Amp` on GPIO9, `SW_PLAY` on GPIO14, `SW_NEXT` on GPIO13, and `SW_PREV` on GPIO15. Documented PAM8302A breakout module header topology (`U3`), 8-capacitor decoupling arrangement (`C1..C8`), and verified all LCSC component part numbers. |
 | 0.2 | 2026-08-12 | Intermediate documentation revision. |
